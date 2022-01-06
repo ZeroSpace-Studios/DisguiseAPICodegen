@@ -39,4 +39,4 @@ jobs:
 workflows:
   Generate:
     jobs:
-      - generate-python
+      - generate
