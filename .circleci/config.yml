@@ -24,11 +24,11 @@ jobs:
           name: "Commit"
           command: |
                     git config credential.helper cache
-                    git config user.email "<some verified email>"
-                    git config user.name "Github Bot"
+                    git config user.email "ci@zerospace.co"
+                    git config user.name "CircleCI"
                     git add .
                     git commit -m "Automated Build [skip ci]"
-                    git push
+                    git push -u origin main
 
   generate-go:
     docker:
@@ -45,11 +45,11 @@ jobs:
           name: "Commit"
           command: |
                     git config credential.helper cache
-                    git config user.email "<some verified email>"
-                    git config user.name "Github Bot"
+                    git config user.email "ci@zerospace.co"
+                    git config user.name "CircleCI"
                     git add .
                     git commit -m "Automated Build [skip ci]"
-                    git push
+                    git push -u origin main
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
