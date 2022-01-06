@@ -57,3 +57,4 @@ workflows:
   Generate:
     jobs:
       - generate-python
+      - generate-go
