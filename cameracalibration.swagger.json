@@ -1,0 +1,316 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "d3 API",
+    "version": "1.4.0"
+  },
+  "basePath": "/api/v1",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/cameracalibration/addobservation": {
+      "post": {
+        "summary": "Add Observation",
+        "operationId": "CameraCalibration_AddObservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AddObservationResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1AddObservationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    },
+    "/cameracalibration/enableobservation": {
+      "post": {
+        "summary": "Enable Observation",
+        "operationId": "CameraCalibration_EnableObservation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1EnableObservationResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1EnableObservationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    },
+    "/cameracalibration/mrsets": {
+      "get": {
+        "summary": "List MR sets",
+        "operationId": "CameraCalibration_ListMRSets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ListMRSetsResponse"
+            }
+          }
+        },
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    },
+    "/cameracalibration/mrsets/{mrsetuid}": {
+      "get": {
+        "summary": "Get single MR set",
+        "operationId": "CameraCalibration_GetMRSet",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetMRSetResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "mrsetuid",
+            "description": "MR Set UID",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    },
+    "/cameracalibration/observationprogress": {
+      "get": {
+        "summary": "Get Observation progress state",
+        "operationId": "CameraCalibration_GetObservationProgress",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetObservationProgressResponse"
+            }
+          }
+        },
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    },
+    "/cameracalibration/resetallobservations": {
+      "post": {
+        "summary": "Reset Observations",
+        "operationId": "CameraCalibration_ResetAllObservations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1ResetAllObservationsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1ResetAllObservationsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "v1AddObservationRequest": {
+      "type": "object",
+      "properties": {
+        "cameraUid": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Camera UID"
+        }
+      }
+    },
+    "v1AddObservationResponse": {
+      "type": "object"
+    },
+    "v1CameraInfo": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1ObservationInfo"
+          }
+        }
+      }
+    },
+    "v1EnableObservationRequest": {
+      "type": "object",
+      "properties": {
+        "observationUid": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Observation UID"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1EnableObservationResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1Float3": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "format": "float"
+        },
+        "y": {
+          "type": "number",
+          "format": "float"
+        },
+        "z": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "v1GetMRSetResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/v1MRSetInfo"
+        }
+      }
+    },
+    "v1GetObservationProgressResponse": {
+      "type": "object",
+      "properties": {
+        "inProgress": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1ListMRSetsResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1MRSetInfo"
+          }
+        }
+      }
+    },
+    "v1MRSetInfo": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "targetCamera": {
+          "$ref": "#/definitions/v1CameraInfo"
+        }
+      }
+    },
+    "v1ObservationInfo": {
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "description": {
+          "type": "string"
+        },
+        "trackedPos": {
+          "$ref": "#/definitions/v1Float3"
+        },
+        "trackedRot": {
+          "$ref": "#/definitions/v1Float3"
+        },
+        "trackedZoom": {
+          "type": "number",
+          "format": "float"
+        },
+        "trackedFocus": {
+          "type": "number",
+          "format": "float"
+        },
+        "isEnabled": {
+          "type": "boolean"
+        },
+        "isPrimary": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1ResetAllObservationsRequest": {
+      "type": "object",
+      "properties": {
+        "cameraUid": {
+          "type": "string",
+          "format": "uint64",
+          "title": "Camera UID"
+        }
+      }
+    },
+    "v1ResetAllObservationsResponse": {
+      "type": "object"
+    }
+  }
+}
