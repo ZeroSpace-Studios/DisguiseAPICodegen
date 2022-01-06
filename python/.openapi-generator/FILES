@@ -1,6 +1,5 @@
 .gitignore
 .gitlab-ci.yml
-.openapi-generator-ignore
 .travis.yml
 README.md
 docs/CameraCalibrationApi.md
@@ -43,16 +42,4 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_camera_calibration_api.py
-test/test_v1_add_observation_request.py
-test/test_v1_camera_info.py
-test/test_v1_enable_observation_request.py
-test/test_v1_enable_observation_response.py
-test/test_v1_float3.py
-test/test_v1_get_mr_set_response.py
-test/test_v1_get_observation_progress_response.py
-test/test_v1_list_mr_sets_response.py
-test/test_v1_mr_set_info.py
-test/test_v1_observation_info.py
-test/test_v1_reset_all_observations_request.py
 tox.ini

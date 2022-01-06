@@ -1,0 +1,418 @@
+openapi: 3.0.1
+info:
+  title: d3 API
+  version: 1.4.0
+servers:
+- url: /api/v1
+paths:
+  /cameracalibration/addobservation:
+    post:
+      operationId: CameraCalibration_AddObservation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AddObservationRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AddObservationResponse'
+          description: A successful response.
+      summary: Add Observation
+      tags:
+      - CameraCalibration
+      x-codegen-request-body-name: body
+  /cameracalibration/enableobservation:
+    post:
+      operationId: CameraCalibration_EnableObservation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1EnableObservationRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1EnableObservationResponse'
+          description: A successful response.
+      summary: Enable Observation
+      tags:
+      - CameraCalibration
+      x-codegen-request-body-name: body
+  /cameracalibration/mrsets:
+    get:
+      operationId: CameraCalibration_ListMRSets
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ListMRSetsResponse'
+          description: A successful response.
+      summary: List MR sets
+      tags:
+      - CameraCalibration
+  /cameracalibration/mrsets/{mrsetuid}:
+    get:
+      operationId: CameraCalibration_GetMRSet
+      parameters:
+      - description: MR Set UID
+        in: path
+        name: mrsetuid
+        required: true
+        schema:
+          format: uint64
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetMRSetResponse'
+          description: A successful response.
+      summary: Get single MR set
+      tags:
+      - CameraCalibration
+  /cameracalibration/observationprogress:
+    get:
+      operationId: CameraCalibration_GetObservationProgress
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetObservationProgressResponse'
+          description: A successful response.
+      summary: Get Observation progress state
+      tags:
+      - CameraCalibration
+  /cameracalibration/resetallobservations:
+    post:
+      operationId: CameraCalibration_ResetAllObservations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ResetAllObservationsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ResetAllObservationsResponse'
+          description: A successful response.
+      summary: Reset Observations
+      tags:
+      - CameraCalibration
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    v1AddObservationRequest:
+      properties:
+        cameraUid:
+          format: uint64
+          title: Camera UID
+          type: string
+      type: object
+    v1AddObservationResponse:
+      type: object
+    v1CameraInfo:
+      example:
+        uid: uid
+        observations:
+        - uid: uid
+          isPrimary: true
+          isEnabled: true
+          description: description
+          trackedFocus: 5.637377
+          trackedPos:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+          trackedZoom: 5.962134
+          trackedRot:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+        - uid: uid
+          isPrimary: true
+          isEnabled: true
+          description: description
+          trackedFocus: 5.637377
+          trackedPos:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+          trackedZoom: 5.962134
+          trackedRot:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+        name: name
+      properties:
+        uid:
+          format: uint64
+          type: string
+        name:
+          type: string
+        observations:
+          items:
+            $ref: '#/components/schemas/v1ObservationInfo'
+          type: array
+      type: object
+    v1EnableObservationRequest:
+      properties:
+        observationUid:
+          format: uint64
+          title: Observation UID
+          type: string
+        enabled:
+          type: boolean
+      type: object
+    v1EnableObservationResponse:
+      example:
+        result: true
+      properties:
+        result:
+          type: boolean
+      type: object
+    v1Float3:
+      example:
+        x: 0.8008282
+        y: 6.0274563
+        z: 1.4658129
+      properties:
+        x:
+          format: float
+          type: number
+        y:
+          format: float
+          type: number
+        z:
+          format: float
+          type: number
+      type: object
+    v1GetMRSetResponse:
+      example:
+        result:
+          uid: uid
+          name: name
+          targetCamera:
+            uid: uid
+            observations:
+            - uid: uid
+              isPrimary: true
+              isEnabled: true
+              description: description
+              trackedFocus: 5.637377
+              trackedPos:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              trackedZoom: 5.962134
+              trackedRot:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+            - uid: uid
+              isPrimary: true
+              isEnabled: true
+              description: description
+              trackedFocus: 5.637377
+              trackedPos:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              trackedZoom: 5.962134
+              trackedRot:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+            name: name
+      properties:
+        result:
+          $ref: '#/components/schemas/v1MRSetInfo'
+      type: object
+    v1GetObservationProgressResponse:
+      example:
+        inProgress: true
+      properties:
+        inProgress:
+          type: boolean
+      type: object
+    v1ListMRSetsResponse:
+      example:
+        result:
+        - uid: uid
+          name: name
+          targetCamera:
+            uid: uid
+            observations:
+            - uid: uid
+              isPrimary: true
+              isEnabled: true
+              description: description
+              trackedFocus: 5.637377
+              trackedPos:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              trackedZoom: 5.962134
+              trackedRot:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+            - uid: uid
+              isPrimary: true
+              isEnabled: true
+              description: description
+              trackedFocus: 5.637377
+              trackedPos:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              trackedZoom: 5.962134
+              trackedRot:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+            name: name
+        - uid: uid
+          name: name
+          targetCamera:
+            uid: uid
+            observations:
+            - uid: uid
+              isPrimary: true
+              isEnabled: true
+              description: description
+              trackedFocus: 5.637377
+              trackedPos:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              trackedZoom: 5.962134
+              trackedRot:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+            - uid: uid
+              isPrimary: true
+              isEnabled: true
+              description: description
+              trackedFocus: 5.637377
+              trackedPos:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              trackedZoom: 5.962134
+              trackedRot:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+            name: name
+      properties:
+        result:
+          items:
+            $ref: '#/components/schemas/v1MRSetInfo'
+          type: array
+      type: object
+    v1MRSetInfo:
+      example:
+        uid: uid
+        name: name
+        targetCamera:
+          uid: uid
+          observations:
+          - uid: uid
+            isPrimary: true
+            isEnabled: true
+            description: description
+            trackedFocus: 5.637377
+            trackedPos:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+            trackedZoom: 5.962134
+            trackedRot:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+          - uid: uid
+            isPrimary: true
+            isEnabled: true
+            description: description
+            trackedFocus: 5.637377
+            trackedPos:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+            trackedZoom: 5.962134
+            trackedRot:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+          name: name
+      properties:
+        uid:
+          format: uint64
+          type: string
+        name:
+          type: string
+        targetCamera:
+          $ref: '#/components/schemas/v1CameraInfo'
+      type: object
+    v1ObservationInfo:
+      example:
+        uid: uid
+        isPrimary: true
+        isEnabled: true
+        description: description
+        trackedFocus: 5.637377
+        trackedPos:
+          x: 0.8008282
+          y: 6.0274563
+          z: 1.4658129
+        trackedZoom: 5.962134
+        trackedRot:
+          x: 0.8008282
+          y: 6.0274563
+          z: 1.4658129
+      properties:
+        uid:
+          format: uint64
+          type: string
+        description:
+          type: string
+        trackedPos:
+          $ref: '#/components/schemas/v1Float3'
+        trackedRot:
+          $ref: '#/components/schemas/v1Float3'
+        trackedZoom:
+          format: float
+          type: number
+        trackedFocus:
+          format: float
+          type: number
+        isEnabled:
+          type: boolean
+        isPrimary:
+          type: boolean
+      type: object
+    v1ResetAllObservationsRequest:
+      properties:
+        cameraUid:
+          format: uint64
+          title: Camera UID
+          type: string
+      type: object
+    v1ResetAllObservationsResponse:
+      type: object
+x-original-swagger-version: "2.0"
