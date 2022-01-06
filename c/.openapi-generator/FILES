@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 CMakeLists.txt
 README.md
 api/CameraCalibrationAPI.c
@@ -52,14 +51,3 @@ src/apiKey.c
 src/binary.c
 src/list.c
 uncrustify-rules.cfg
-unit-test/test_v1_add_observation_request.c
-unit-test/test_v1_camera_info.c
-unit-test/test_v1_enable_observation_request.c
-unit-test/test_v1_enable_observation_response.c
-unit-test/test_v1_float3.c
-unit-test/test_v1_get_mr_set_response.c
-unit-test/test_v1_get_observation_progress_response.c
-unit-test/test_v1_list_mr_sets_response.c
-unit-test/test_v1_mr_set_info.c
-unit-test/test_v1_observation_info.c
-unit-test/test_v1_reset_all_observations_request.c
