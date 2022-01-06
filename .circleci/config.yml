@@ -5,7 +5,7 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  generate-python:
+  generate:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -19,28 +19,11 @@ jobs:
           command: apt update -y && apt install -y openjdk-11-jre
       - run:
           name: "Generate Code"
-          command: java -jar ./openapi-generator-cli.jar generate -i ./cameracalibration.swagger.json -g python -o ./python
-      - run:
-          name: "Commit"
           command: |
-                    git config credential.helper cache
-                    git config user.email "ci@zerospace.co"
-                    git config user.name "CircleCI"
-                    git add .
-                    git commit -m "Automated Build [skip ci]"
-                    git push -u origin main
-
-  generate-go:
-    docker:
-      - image: golang
-    steps:
-      - checkout
-      - run:
-          name: "Install Dependencies"
-          command: apt update -y && apt install -y openjdk-11-jre
-      - run:
-          name: "Generate Code"
-          command: java -jar ./openapi-generator-cli.jar generate -i ./cameracalibration.swagger.json -g go -o ./go
+                    java -jar ./openapi-generator-cli.jar generate -i ./cameracalibration.swagger.json -g python -o ./python
+                    java -jar ./openapi-generator-cli.jar generate -i ./cameracalibration.swagger.json -g go -o ./go
+                    java -jar ./openapi-generator-cli.jar generate -i ./cameracalibration.swagger.json -g c -o ./c
+                    java -jar ./openapi-generator-cli.jar generate -i ./cameracalibration.swagger.json -g cpp-ue4 -o ./ue
       - run:
           name: "Commit"
           command: |
@@ -58,3 +41,5 @@ workflows:
     jobs:
       - generate-python
       - generate-go
+          requires:
+            - generate-python
