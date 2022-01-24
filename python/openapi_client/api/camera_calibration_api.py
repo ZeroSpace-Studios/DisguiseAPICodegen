@@ -21,13 +21,13 @@ from openapi_client.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types
 )
-from openapi_client.model.v1_add_observation_request import V1AddObservationRequest
-from openapi_client.model.v1_enable_observation_request import V1EnableObservationRequest
-from openapi_client.model.v1_enable_observation_response import V1EnableObservationResponse
-from openapi_client.model.v1_get_mr_set_response import V1GetMRSetResponse
-from openapi_client.model.v1_get_observation_progress_response import V1GetObservationProgressResponse
-from openapi_client.model.v1_list_mr_sets_response import V1ListMRSetsResponse
-from openapi_client.model.v1_reset_all_observations_request import V1ResetAllObservationsRequest
+from openapi_client.model.cameracalibration_add_observation_request import CameracalibrationAddObservationRequest
+from openapi_client.model.cameracalibration_enable_observation_request import CameracalibrationEnableObservationRequest
+from openapi_client.model.cameracalibration_enable_observation_response import CameracalibrationEnableObservationResponse
+from openapi_client.model.cameracalibration_get_mr_set_response import CameracalibrationGetMRSetResponse
+from openapi_client.model.cameracalibration_get_observation_progress_response import CameracalibrationGetObservationProgressResponse
+from openapi_client.model.cameracalibration_list_mr_sets_response import CameracalibrationListMRSetsResponse
+from openapi_client.model.cameracalibration_reset_all_observations_request import CameracalibrationResetAllObservationsRequest
 
 
 class CameraCalibrationApi(object):
@@ -71,7 +71,7 @@ class CameraCalibrationApi(object):
                 },
                 'openapi_types': {
                     'body':
-                        (V1AddObservationRequest,),
+                        (CameracalibrationAddObservationRequest,),
                 },
                 'attribute_map': {
                 },
@@ -93,7 +93,7 @@ class CameraCalibrationApi(object):
         )
         self.camera_calibration_enable_observation_endpoint = _Endpoint(
             settings={
-                'response_type': (V1EnableObservationResponse,),
+                'response_type': (CameracalibrationEnableObservationResponse,),
                 'auth': [],
                 'endpoint_path': '/cameracalibration/enableobservation',
                 'operation_id': 'camera_calibration_enable_observation',
@@ -121,7 +121,7 @@ class CameraCalibrationApi(object):
                 },
                 'openapi_types': {
                     'body':
-                        (V1EnableObservationRequest,),
+                        (CameracalibrationEnableObservationRequest,),
                 },
                 'attribute_map': {
                 },
@@ -143,7 +143,7 @@ class CameraCalibrationApi(object):
         )
         self.camera_calibration_get_mr_set_endpoint = _Endpoint(
             settings={
-                'response_type': (V1GetMRSetResponse,),
+                'response_type': (CameracalibrationGetMRSetResponse,),
                 'auth': [],
                 'endpoint_path': '/cameracalibration/mrsets/{mrsetuid}',
                 'operation_id': 'camera_calibration_get_mr_set',
@@ -192,7 +192,7 @@ class CameraCalibrationApi(object):
         )
         self.camera_calibration_get_observation_progress_endpoint = _Endpoint(
             settings={
-                'response_type': (V1GetObservationProgressResponse,),
+                'response_type': (CameracalibrationGetObservationProgressResponse,),
                 'auth': [],
                 'endpoint_path': '/cameracalibration/observationprogress',
                 'operation_id': 'camera_calibration_get_observation_progress',
@@ -234,7 +234,7 @@ class CameraCalibrationApi(object):
         )
         self.camera_calibration_list_mr_sets_endpoint = _Endpoint(
             settings={
-                'response_type': (V1ListMRSetsResponse,),
+                'response_type': (CameracalibrationListMRSetsResponse,),
                 'auth': [],
                 'endpoint_path': '/cameracalibration/mrsets',
                 'operation_id': 'camera_calibration_list_mr_sets',
@@ -304,7 +304,7 @@ class CameraCalibrationApi(object):
                 },
                 'openapi_types': {
                     'body':
-                        (V1ResetAllObservationsRequest,),
+                        (CameracalibrationResetAllObservationsRequest,),
                 },
                 'attribute_map': {
                 },
@@ -339,7 +339,7 @@ class CameraCalibrationApi(object):
         >>> result = thread.get()
 
         Args:
-            body (V1AddObservationRequest):
+            body (CameracalibrationAddObservationRequest):
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -404,7 +404,7 @@ class CameraCalibrationApi(object):
         >>> result = thread.get()
 
         Args:
-            body (V1EnableObservationRequest):
+            body (CameracalibrationEnableObservationRequest):
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status
@@ -428,7 +428,7 @@ class CameraCalibrationApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            V1EnableObservationResponse
+            CameracalibrationEnableObservationResponse
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -493,7 +493,7 @@ class CameraCalibrationApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            V1GetMRSetResponse
+            CameracalibrationGetMRSetResponse
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -555,7 +555,7 @@ class CameraCalibrationApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            V1GetObservationProgressResponse
+            CameracalibrationGetObservationProgressResponse
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -615,7 +615,7 @@ class CameraCalibrationApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            V1ListMRSetsResponse
+            CameracalibrationListMRSetsResponse
                 If the method is called asynchronously, returns the request
                 thread.
         """
@@ -654,7 +654,7 @@ class CameraCalibrationApi(object):
         >>> result = thread.get()
 
         Args:
-            body (V1ResetAllObservationsRequest):
+            body (CameracalibrationResetAllObservationsRequest):
 
         Keyword Args:
             _return_http_data_only (bool): response data without head status

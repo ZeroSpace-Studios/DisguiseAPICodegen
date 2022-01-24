@@ -16,14 +16,14 @@ Method | HTTP request | Description
 ```c
 // Add Observation
 //
-object_t* CameraCalibrationAPI_cameraCalibrationAddObservation(apiClient_t *apiClient, v1_add_observation_request_t * body);
+object_t* CameraCalibrationAPI_cameraCalibrationAddObservation(apiClient_t *apiClient, cameracalibration_add_observation_request_t * body);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**body** | **[v1_add_observation_request_t](v1_add_observation_request.md) \*** |  | 
+**body** | **[cameracalibration_add_observation_request_t](cameracalibration_add_observation_request.md) \*** |  | 
 
 ### Return type
 
@@ -45,18 +45,18 @@ No authorization required
 ```c
 // Enable Observation
 //
-v1_enable_observation_response_t* CameraCalibrationAPI_cameraCalibrationEnableObservation(apiClient_t *apiClient, v1_enable_observation_request_t * body);
+cameracalibration_enable_observation_response_t* CameraCalibrationAPI_cameraCalibrationEnableObservation(apiClient_t *apiClient, cameracalibration_enable_observation_request_t * body);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**body** | **[v1_enable_observation_request_t](v1_enable_observation_request.md) \*** |  | 
+**body** | **[cameracalibration_enable_observation_request_t](cameracalibration_enable_observation_request.md) \*** |  | 
 
 ### Return type
 
-[v1_enable_observation_response_t](v1_enable_observation_response.md) *
+[cameracalibration_enable_observation_response_t](cameracalibration_enable_observation_response.md) *
 
 
 ### Authorization
@@ -74,7 +74,7 @@ No authorization required
 ```c
 // Get single MR set
 //
-v1_get_mr_set_response_t* CameraCalibrationAPI_cameraCalibrationGetMRSet(apiClient_t *apiClient, char * mrsetuid);
+cameracalibration_get_mr_set_response_t* CameraCalibrationAPI_cameraCalibrationGetMRSet(apiClient_t *apiClient, char * mrsetuid);
 ```
 
 ### Parameters
@@ -85,7 +85,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[v1_get_mr_set_response_t](v1_get_mr_set_response.md) *
+[cameracalibration_get_mr_set_response_t](cameracalibration_get_mr_set_response.md) *
 
 
 ### Authorization
@@ -103,7 +103,7 @@ No authorization required
 ```c
 // Get Observation progress state
 //
-v1_get_observation_progress_response_t* CameraCalibrationAPI_cameraCalibrationGetObservationProgress(apiClient_t *apiClient);
+cameracalibration_get_observation_progress_response_t* CameraCalibrationAPI_cameraCalibrationGetObservationProgress(apiClient_t *apiClient);
 ```
 
 ### Parameters
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[v1_get_observation_progress_response_t](v1_get_observation_progress_response.md) *
+[cameracalibration_get_observation_progress_response_t](cameracalibration_get_observation_progress_response.md) *
 
 
 ### Authorization
@@ -131,7 +131,7 @@ No authorization required
 ```c
 // List MR sets
 //
-v1_list_mr_sets_response_t* CameraCalibrationAPI_cameraCalibrationListMRSets(apiClient_t *apiClient);
+cameracalibration_list_mr_sets_response_t* CameraCalibrationAPI_cameraCalibrationListMRSets(apiClient_t *apiClient);
 ```
 
 ### Parameters
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[v1_list_mr_sets_response_t](v1_list_mr_sets_response.md) *
+[cameracalibration_list_mr_sets_response_t](cameracalibration_list_mr_sets_response.md) *
 
 
 ### Authorization
@@ -159,14 +159,14 @@ No authorization required
 ```c
 // Reset Observations
 //
-object_t* CameraCalibrationAPI_cameraCalibrationResetAllObservations(apiClient_t *apiClient, v1_reset_all_observations_request_t * body);
+object_t* CameraCalibrationAPI_cameraCalibrationResetAllObservations(apiClient_t *apiClient, cameracalibration_reset_all_observations_request_t * body);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**body** | **[v1_reset_all_observations_request_t](v1_reset_all_observations_request.md) \*** |  | 
+**body** | **[cameracalibration_reset_all_observations_request_t](cameracalibration_reset_all_observations_request.md) \*** |  | 
 
 ### Return type
 

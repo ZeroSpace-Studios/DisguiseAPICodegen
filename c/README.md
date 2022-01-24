@@ -70,21 +70,88 @@ Category | Method | HTTP request | Description
 *CameraCalibrationAPI* | [**CameraCalibrationAPI_cameraCalibrationGetObservationProgress**](docs/CameraCalibrationAPI.md#CameraCalibrationAPI_cameraCalibrationGetObservationProgress) | **GET** /cameracalibration/observationprogress | Get Observation progress state
 *CameraCalibrationAPI* | [**CameraCalibrationAPI_cameraCalibrationListMRSets**](docs/CameraCalibrationAPI.md#CameraCalibrationAPI_cameraCalibrationListMRSets) | **GET** /cameracalibration/mrsets | List MR sets
 *CameraCalibrationAPI* | [**CameraCalibrationAPI_cameraCalibrationResetAllObservations**](docs/CameraCalibrationAPI.md#CameraCalibrationAPI_cameraCalibrationResetAllObservations) | **POST** /cameracalibration/resetallobservations | Reset Observations
+*ContentAPI* | [**ContentAPI_contentGetMediaMetadata**](docs/ContentAPI.md#ContentAPI_contentGetMediaMetadata) | **GET** /content/mediametadata/{uid} | Get single media meta data
+*ContentAPI* | [**ContentAPI_contentListMediaMetadata**](docs/ContentAPI.md#ContentAPI_contentListMediaMetadata) | **GET** /content/mediametadata | List media meta data
+*IndirectionsAPI* | [**IndirectionsAPI_indirectionsGetIndirection**](docs/IndirectionsAPI.md#IndirectionsAPI_indirectionsGetIndirection) | **GET** /indirections/{uid} | Get single indirection
+*IndirectionsAPI* | [**IndirectionsAPI_indirectionsListIndirections**](docs/IndirectionsAPI.md#IndirectionsAPI_indirectionsListIndirections) | **GET** /indirections | List all indirections
+*IndirectionsAPI* | [**IndirectionsAPI_indirectionsSetIndirections**](docs/IndirectionsAPI.md#IndirectionsAPI_indirectionsSetIndirections) | **POST** /indirections/set | Update one or more indirections
+*IndirectionsAPI* | [**IndirectionsAPI_indirectionsSetIndirections2**](docs/IndirectionsAPI.md#IndirectionsAPI_indirectionsSetIndirections2) | **PUT** /indirections | Update one or more indirections
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamFailoverRenderMachine**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamFailoverRenderMachine) | **POST** /renderstream/failovermachine/{name} | Fail over a single RenderstreamMachine, and all its workload instances
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamFailoverRenderMachine2**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamFailoverRenderMachine2) | **PUT** /renderstream/failovermachine/{name} | Fail over a single RenderstreamMachine, and all its workload instances
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamFailoverWorkloadInstance**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamFailoverWorkloadInstance) | **POST** /renderstream/failoverinstance/{workloadid}/{instanceindex} | Fail over a single workload instance
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamFailoverWorkloadInstance2**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamFailoverWorkloadInstance2) | **PUT** /renderstream/failoverinstance/{workloadid}/{instanceindex} | Fail over a single workload instance
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamGetCluster**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamGetCluster) | **GET** /renderstream/clusters/{name} | Get single ClusterPool
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamGetRenderMachine**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamGetRenderMachine) | **GET** /renderstream/machines/{name} | Get single RenderstreamMachine
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamGetWorkload**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamGetWorkload) | **GET** /renderstream/workloads/{id} | Get single Workload
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamGetWorkloadInstance**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamGetWorkloadInstance) | **GET** /renderstream/workloadinstances/{workloadid}/{instanceindex} | Get single Workload Instance
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamListClusters**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamListClusters) | **GET** /renderstream/clusters | List all ClusterPools
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamListRenderMachines**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamListRenderMachines) | **GET** /renderstream/machines | List all RS machines (both current render machines and understudies)
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamListWorkloads**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamListWorkloads) | **GET** /renderstream/workloads | List all RS Workloads
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamStartWorkload**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamStartWorkload) | **POST** /renderstream/workloads/{id}/start | Start a workload
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamStopWorkload**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamStopWorkload) | **POST** /renderstream/workloads/{id}/stop | Stop a workload
+*RenderstreamAPI* | [**RenderstreamAPI_renderstreamSyncWorkload**](docs/RenderstreamAPI.md#RenderstreamAPI_renderstreamSyncWorkload) | **POST** /renderstream/workloads/{id}/sync | Sync a workload
+*ResourcesAPI* | [**ResourcesAPI_resourcesGetResource**](docs/ResourcesAPI.md#ResourcesAPI_resourcesGetResource) | **GET** /resources/{uid} | Get single resource
+*ResourcesAPI* | [**ResourcesAPI_resourcesListResources**](docs/ResourcesAPI.md#ResourcesAPI_resourcesListResources) | **GET** /resources | List resources by type
+*ThumbnailsAPI* | [**ThumbnailsAPI_thumbnailsGetThumbnail**](docs/ThumbnailsAPI.md#ThumbnailsAPI_thumbnailsGetThumbnail) | **GET** /thumbnail/{uid} | Get thumbnail for a resource
 
 
 ## Documentation for Models
 
- - [v1_add_observation_request_t](docs/v1_add_observation_request.md)
- - [v1_camera_info_t](docs/v1_camera_info.md)
- - [v1_enable_observation_request_t](docs/v1_enable_observation_request.md)
- - [v1_enable_observation_response_t](docs/v1_enable_observation_response.md)
- - [v1_float3_t](docs/v1_float3.md)
- - [v1_get_mr_set_response_t](docs/v1_get_mr_set_response.md)
- - [v1_get_observation_progress_response_t](docs/v1_get_observation_progress_response.md)
- - [v1_list_mr_sets_response_t](docs/v1_list_mr_sets_response.md)
- - [v1_mr_set_info_t](docs/v1_mr_set_info.md)
- - [v1_observation_info_t](docs/v1_observation_info.md)
- - [v1_reset_all_observations_request_t](docs/v1_reset_all_observations_request.md)
+ - [cameracalibration_add_observation_request_t](docs/cameracalibration_add_observation_request.md)
+ - [cameracalibration_camera_info_t](docs/cameracalibration_camera_info.md)
+ - [cameracalibration_enable_observation_request_t](docs/cameracalibration_enable_observation_request.md)
+ - [cameracalibration_enable_observation_response_t](docs/cameracalibration_enable_observation_response.md)
+ - [cameracalibration_float3_t](docs/cameracalibration_float3.md)
+ - [cameracalibration_get_mr_set_response_t](docs/cameracalibration_get_mr_set_response.md)
+ - [cameracalibration_get_observation_progress_response_t](docs/cameracalibration_get_observation_progress_response.md)
+ - [cameracalibration_list_mr_sets_response_t](docs/cameracalibration_list_mr_sets_response.md)
+ - [cameracalibration_mr_set_info_t](docs/cameracalibration_mr_set_info.md)
+ - [cameracalibration_observation_info_t](docs/cameracalibration_observation_info.md)
+ - [cameracalibration_reset_all_observations_request_t](docs/cameracalibration_reset_all_observations_request.md)
+ - [content_audio_metadata_t](docs/content_audio_metadata.md)
+ - [content_get_media_metadata_response_t](docs/content_get_media_metadata_response.md)
+ - [content_image_metadata_t](docs/content_image_metadata.md)
+ - [content_image_sequence_metadata_t](docs/content_image_sequence_metadata.md)
+ - [content_list_media_metadata_response_t](docs/content_list_media_metadata_response.md)
+ - [content_media_metadata_t](docs/content_media_metadata.md)
+ - [content_mesh_metadata_t](docs/content_mesh_metadata.md)
+ - [content_resolution_t](docs/content_resolution.md)
+ - [content_vector3_t](docs/content_vector3.md)
+ - [content_video_metadata_t](docs/content_video_metadata.md)
+ - [indirections_get_indirection_response_t](docs/indirections_get_indirection_response.md)
+ - [indirections_indirection_t](docs/indirections_indirection.md)
+ - [indirections_list_indirection_t](docs/indirections_list_indirection.md)
+ - [indirections_list_indirections_response_t](docs/indirections_list_indirections_response.md)
+ - [indirections_manual_indirection_t](docs/indirections_manual_indirection.md)
+ - [indirections_set_indirections_request_t](docs/indirections_set_indirections_request.md)
+ - [indirections_set_indirections_response_t](docs/indirections_set_indirections_response.md)
+ - [render_machine_info_status_t](docs/render_machine_info_status.md)
+ - [renderstream_adapter_info_t](docs/renderstream_adapter_info.md)
+ - [renderstream_asset_info_t](docs/renderstream_asset_info.md)
+ - [renderstream_clipping_region_t](docs/renderstream_clipping_region.md)
+ - [renderstream_cluster_info_t](docs/renderstream_cluster_info.md)
+ - [renderstream_failover_info_t](docs/renderstream_failover_info.md)
+ - [renderstream_failover_render_machine_response_t](docs/renderstream_failover_render_machine_response.md)
+ - [renderstream_failover_workload_instance_response_t](docs/renderstream_failover_workload_instance_response.md)
+ - [renderstream_get_cluster_response_t](docs/renderstream_get_cluster_response.md)
+ - [renderstream_get_render_machine_response_t](docs/renderstream_get_render_machine_response.md)
+ - [renderstream_get_workload_instance_response_t](docs/renderstream_get_workload_instance_response.md)
+ - [renderstream_get_workload_response_t](docs/renderstream_get_workload_response.md)
+ - [renderstream_list_clusters_response_t](docs/renderstream_list_clusters_response.md)
+ - [renderstream_list_render_machines_response_t](docs/renderstream_list_render_machines_response.md)
+ - [renderstream_list_workloads_response_t](docs/renderstream_list_workloads_response.md)
+ - [renderstream_render_machine_info_t](docs/renderstream_render_machine_info.md)
+ - [renderstream_stream_info_t](docs/renderstream_stream_info.md)
+ - [renderstream_workload_info_t](docs/renderstream_workload_info.md)
+ - [renderstream_workload_instance_info_t](docs/renderstream_workload_instance_info.md)
+ - [resources_get_resource_response_t](docs/resources_get_resource_response.md)
+ - [resources_list_resources_response_t](docs/resources_list_resources_response.md)
+ - [resources_resource_info_t](docs/resources_resource_info.md)
+ - [set_indirections_request_assignment_t](docs/set_indirections_request_assignment.md)
+ - [set_indirections_response_failed_assignment_t](docs/set_indirections_response_failed_assignment.md)
+ - [stream_info_stream_status_t](docs/stream_info_stream_status.md)
+ - [thumbnails_get_thumbnail_response_t](docs/thumbnails_get_thumbnail_response.md)
+ - [workload_instance_info_workload_instance_status_t](docs/workload_instance_info_workload_instance_status.md)
 
 
 ## Documentation for Authorization

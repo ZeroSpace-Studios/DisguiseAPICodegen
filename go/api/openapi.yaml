@@ -12,14 +12,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/v1AddObservationRequest'
+              $ref: '#/components/schemas/cameracalibrationAddObservationRequest'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v1AddObservationResponse'
+                $ref: '#/components/schemas/cameracalibrationAddObservationResponse'
           description: A successful response.
       summary: Add Observation
       tags:
@@ -32,14 +32,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/v1EnableObservationRequest'
+              $ref: '#/components/schemas/cameracalibrationEnableObservationRequest'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v1EnableObservationResponse'
+                $ref: '#/components/schemas/cameracalibrationEnableObservationResponse'
           description: A successful response.
       summary: Enable Observation
       tags:
@@ -53,7 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v1ListMRSetsResponse'
+                $ref: '#/components/schemas/cameracalibrationListMRSetsResponse'
           description: A successful response.
       summary: List MR sets
       tags:
@@ -74,7 +74,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v1GetMRSetResponse'
+                $ref: '#/components/schemas/cameracalibrationGetMRSetResponse'
           description: A successful response.
       summary: Get single MR set
       tags:
@@ -87,7 +87,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v1GetObservationProgressResponse'
+                $ref: '#/components/schemas/cameracalibrationGetObservationProgressResponse'
           description: A successful response.
       summary: Get Observation progress state
       tags:
@@ -99,31 +99,502 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/v1ResetAllObservationsRequest'
+              $ref: '#/components/schemas/cameracalibrationResetAllObservationsRequest'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v1ResetAllObservationsResponse'
+                $ref: '#/components/schemas/cameracalibrationResetAllObservationsResponse'
           description: A successful response.
       summary: Reset Observations
       tags:
       - CameraCalibration
       x-codegen-request-body-name: body
+  /indirections:
+    get:
+      operationId: Indirections_ListIndirections
+      parameters:
+      - description: type of resource.
+        in: query
+        name: resourceType
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/indirectionsListIndirectionsResponse'
+          description: A successful response.
+      summary: List all indirections
+      tags:
+      - Indirections
+    put:
+      deprecated: true
+      operationId: Indirections_SetIndirections2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/indirectionsSetIndirectionsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/indirectionsSetIndirectionsResponse'
+          description: A successful response.
+      summary: Update one or more indirections
+      tags:
+      - Indirections
+      x-codegen-request-body-name: body
+  /indirections/set:
+    post:
+      operationId: Indirections_SetIndirections
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/indirectionsSetIndirectionsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/indirectionsSetIndirectionsResponse'
+          description: A successful response.
+      summary: Update one or more indirections
+      tags:
+      - Indirections
+      x-codegen-request-body-name: body
+  /indirections/{uid}:
+    get:
+      operationId: Indirections_GetIndirection
+      parameters:
+      - description: uid of indirection
+        in: path
+        name: uid
+        required: true
+        schema:
+          format: uint64
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/indirectionsGetIndirectionResponse'
+          description: A successful response.
+      summary: Get single indirection
+      tags:
+      - Indirections
+  /content/mediametadata:
+    get:
+      operationId: Content_ListMediaMetadata
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contentListMediaMetadataResponse'
+          description: A successful response.
+      summary: List media meta data
+      tags:
+      - Content
+  /content/mediametadata/{uid}:
+    get:
+      operationId: Content_GetMediaMetadata
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          format: uint64
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contentGetMediaMetadataResponse'
+          description: A successful response.
+      summary: Get single media meta data
+      tags:
+      - Content
+  /renderstream/clusters:
+    get:
+      operationId: Renderstream_ListClusters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamListClustersResponse'
+          description: A successful response.
+      summary: List all ClusterPools
+      tags:
+      - Renderstream
+  /renderstream/clusters/{name}:
+    get:
+      operationId: Renderstream_GetCluster
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamGetClusterResponse'
+          description: A successful response.
+      summary: Get single ClusterPool
+      tags:
+      - Renderstream
+  /renderstream/failoverinstance/{workloadid}/{instanceindex}:
+    post:
+      operationId: Renderstream_FailoverWorkloadInstance
+      parameters:
+      - description: ID of the workload this instance belongs to
+        in: path
+        name: workloadid
+        required: true
+        schema:
+          format: uint64
+          type: string
+      - description: Index into the Workload's list of IDs
+        in: path
+        name: instanceindex
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamFailoverWorkloadInstanceResponse'
+          description: A successful response.
+      summary: Fail over a single workload instance
+      tags:
+      - Renderstream
+    put:
+      deprecated: true
+      operationId: Renderstream_FailoverWorkloadInstance2
+      parameters:
+      - description: ID of the workload this instance belongs to
+        in: path
+        name: workloadid
+        required: true
+        schema:
+          format: uint64
+          type: string
+      - description: Index into the Workload's list of IDs
+        in: path
+        name: instanceindex
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamFailoverWorkloadInstanceResponse'
+          description: A successful response.
+      summary: Fail over a single workload instance
+      tags:
+      - Renderstream
+  /renderstream/failovermachine/{name}:
+    post:
+      operationId: Renderstream_FailoverRenderMachine
+      parameters:
+      - description: Name of the render machine to fail over
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamFailoverRenderMachineResponse'
+          description: A successful response.
+      summary: Fail over a single RenderstreamMachine, and all its workload instances
+      tags:
+      - Renderstream
+    put:
+      deprecated: true
+      operationId: Renderstream_FailoverRenderMachine2
+      parameters:
+      - description: Name of the render machine to fail over
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamFailoverRenderMachineResponse'
+          description: A successful response.
+      summary: Fail over a single RenderstreamMachine, and all its workload instances
+      tags:
+      - Renderstream
+  /renderstream/machines:
+    get:
+      operationId: Renderstream_ListRenderMachines
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamListRenderMachinesResponse'
+          description: A successful response.
+      summary: List all RS machines (both current render machines and understudies)
+      tags:
+      - Renderstream
+  /renderstream/machines/{name}:
+    get:
+      operationId: Renderstream_GetRenderMachine
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamGetRenderMachineResponse'
+          description: A successful response.
+      summary: Get single RenderstreamMachine
+      tags:
+      - Renderstream
+  /renderstream/workloadinstances/{workloadid}/{instanceindex}:
+    get:
+      operationId: Renderstream_GetWorkloadInstance
+      parameters:
+      - description: ID of the workload this instance belongs to
+        in: path
+        name: workloadid
+        required: true
+        schema:
+          format: uint64
+          type: string
+      - description: Index into the Workload's list of IDs
+        in: path
+        name: instanceindex
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamGetWorkloadInstanceResponse'
+          description: A successful response.
+      summary: Get single Workload Instance
+      tags:
+      - Renderstream
+  /renderstream/workloads:
+    get:
+      operationId: Renderstream_ListWorkloads
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamListWorkloadsResponse'
+          description: A successful response.
+      summary: List all RS Workloads
+      tags:
+      - Renderstream
+  /renderstream/workloads/{id}:
+    get:
+      operationId: Renderstream_GetWorkload
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: uint64
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamGetWorkloadResponse'
+          description: A successful response.
+      summary: Get single Workload
+      tags:
+      - Renderstream
+  /renderstream/workloads/{id}/start:
+    post:
+      operationId: Renderstream_StartWorkload
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: uint64
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamStartWorkloadResponse'
+          description: A successful response.
+      summary: Start a workload
+      tags:
+      - Renderstream
+  /renderstream/workloads/{id}/stop:
+    post:
+      operationId: Renderstream_StopWorkload
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: uint64
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamStopWorkloadResponse'
+          description: A successful response.
+      summary: Stop a workload
+      tags:
+      - Renderstream
+  /renderstream/workloads/{id}/sync:
+    post:
+      operationId: Renderstream_SyncWorkload
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: uint64
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamSyncWorkloadResponse'
+          description: A successful response.
+      summary: Sync a workload
+      tags:
+      - Renderstream
+  /resources:
+    get:
+      operationId: Resources_ListResources
+      parameters:
+      - description: resource type name.
+        in: query
+        name: type
+        schema:
+          type: string
+      - description: search substring to look for in the resource name.
+        in: query
+        name: search
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/resourcesListResourcesResponse'
+          description: A successful response.
+      summary: List resources by type
+      tags:
+      - Resources
+  /resources/{uid}:
+    get:
+      operationId: Resources_GetResource
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          format: uint64
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/resourcesGetResourceResponse'
+          description: A successful response.
+      summary: Get single resource
+      tags:
+      - Resources
+  /thumbnail/{uid}:
+    get:
+      operationId: Thumbnails_GetThumbnail
+      parameters:
+      - description: unique resource id
+        in: path
+        name: uid
+        required: true
+        schema:
+          format: uint64
+          type: string
+      - description: width of thumbnail.
+        in: query
+        name: width
+        schema:
+          format: int64
+          type: integer
+      - description: height of thumbnail.
+        in: query
+        name: height
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/thumbnailsGetThumbnailResponse'
+          description: A successful response.
+      summary: Get thumbnail for a resource
+      tags:
+      - Thumbnails
 components:
   schemas:
-    v1AddObservationRequest:
+    cameracalibrationAddObservationRequest:
       properties:
         cameraUid:
           format: uint64
           title: Camera UID
           type: string
       type: object
-    v1AddObservationResponse:
+    cameracalibrationAddObservationResponse:
       type: object
-    v1CameraInfo:
+    cameracalibrationCameraInfo:
       example:
         uid: uid
         observations:
@@ -164,10 +635,10 @@ components:
           type: string
         observations:
           items:
-            $ref: '#/components/schemas/v1ObservationInfo'
+            $ref: '#/components/schemas/cameracalibrationObservationInfo'
           type: array
       type: object
-    v1EnableObservationRequest:
+    cameracalibrationEnableObservationRequest:
       properties:
         observationUid:
           format: uint64
@@ -176,14 +647,14 @@ components:
         enabled:
           type: boolean
       type: object
-    v1EnableObservationResponse:
+    cameracalibrationEnableObservationResponse:
       example:
         result: true
       properties:
         result:
           type: boolean
       type: object
-    v1Float3:
+    cameracalibrationFloat3:
       example:
         x: 0.8008282
         y: 6.0274563
@@ -199,7 +670,7 @@ components:
           format: float
           type: number
       type: object
-    v1GetMRSetResponse:
+    cameracalibrationGetMRSetResponse:
       example:
         result:
           uid: uid
@@ -238,16 +709,16 @@ components:
             name: name
       properties:
         result:
-          $ref: '#/components/schemas/v1MRSetInfo'
+          $ref: '#/components/schemas/cameracalibrationMRSetInfo'
       type: object
-    v1GetObservationProgressResponse:
+    cameracalibrationGetObservationProgressResponse:
       example:
         inProgress: true
       properties:
         inProgress:
           type: boolean
       type: object
-    v1ListMRSetsResponse:
+    cameracalibrationListMRSetsResponse:
       example:
         result:
         - uid: uid
@@ -321,10 +792,10 @@ components:
       properties:
         result:
           items:
-            $ref: '#/components/schemas/v1MRSetInfo'
+            $ref: '#/components/schemas/cameracalibrationMRSetInfo'
           type: array
       type: object
-    v1MRSetInfo:
+    cameracalibrationMRSetInfo:
       example:
         uid: uid
         name: name
@@ -367,9 +838,9 @@ components:
         name:
           type: string
         targetCamera:
-          $ref: '#/components/schemas/v1CameraInfo'
+          $ref: '#/components/schemas/cameracalibrationCameraInfo'
       type: object
-    v1ObservationInfo:
+    cameracalibrationObservationInfo:
       example:
         uid: uid
         isPrimary: true
@@ -392,9 +863,9 @@ components:
         description:
           type: string
         trackedPos:
-          $ref: '#/components/schemas/v1Float3'
+          $ref: '#/components/schemas/cameracalibrationFloat3'
         trackedRot:
-          $ref: '#/components/schemas/v1Float3'
+          $ref: '#/components/schemas/cameracalibrationFloat3'
         trackedZoom:
           format: float
           type: number
@@ -406,13 +877,1941 @@ components:
         isPrimary:
           type: boolean
       type: object
-    v1ResetAllObservationsRequest:
+    cameracalibrationResetAllObservationsRequest:
       properties:
         cameraUid:
           format: uint64
           title: Camera UID
           type: string
       type: object
-    v1ResetAllObservationsResponse:
+    cameracalibrationResetAllObservationsResponse:
+      type: object
+    SetIndirectionsRequestAssignment:
+      properties:
+        uid:
+          format: uint64
+          type: string
+        resourceIndex:
+          format: int64
+          title: oneof field. index of resource for list indirection (0 based)
+          type: integer
+        resourceUid:
+          format: uint64
+          title: oneof field. uid of resource for manual indirection
+          type: string
+      type: object
+    SetIndirectionsResponseFailedAssignment:
+      example:
+        uid: uid
+        resourceUid: resourceUid
+        error: error
+        resourceIndex: 0
+      properties:
+        uid:
+          format: uint64
+          title: uid of indirection
+          type: string
+        resourceIndex:
+          format: int64
+          title: oneof field. index of resource for list indirection (0 based)
+          type: integer
+        resourceUid:
+          format: uint64
+          title: oneof field. uid of resource for manual indirection
+          type: string
+        error:
+          title: reason for failure
+          type: string
+      type: object
+    indirectionsGetIndirectionResponse:
+      example:
+        result:
+          uid: uid
+          listIndirection:
+            resourceUids:
+            - resourceUids
+            - resourceUids
+            resourceIndex: 0
+          name: name
+          manualIndirection:
+            resourceUid: resourceUid
+          resourceType: resourceType
+      properties:
+        result:
+          $ref: '#/components/schemas/indirectionsIndirection'
+      type: object
+    indirectionsIndirection:
+      example:
+        uid: uid
+        listIndirection:
+          resourceUids:
+          - resourceUids
+          - resourceUids
+          resourceIndex: 0
+        name: name
+        manualIndirection:
+          resourceUid: resourceUid
+        resourceType: resourceType
+      properties:
+        uid:
+          format: uint64
+          title: uid of indirection
+          type: string
+        resourceType:
+          title: resource type that indirection can be assigned to
+          type: string
+        name:
+          title: unqualified name in d3
+          type: string
+        manualIndirection:
+          $ref: '#/components/schemas/indirectionsManualIndirection'
+        listIndirection:
+          $ref: '#/components/schemas/indirectionsListIndirection'
+      type: object
+    indirectionsListIndirection:
+      example:
+        resourceUids:
+        - resourceUids
+        - resourceUids
+        resourceIndex: 0
+      properties:
+        resourceIndex:
+          format: int64
+          title: index of selected resource
+          type: integer
+        resourceUids:
+          items:
+            format: uint64
+            type: string
+          title: uids of selectable resources
+          type: array
+      type: object
+    indirectionsListIndirectionsResponse:
+      example:
+        result:
+        - uid: uid
+          listIndirection:
+            resourceUids:
+            - resourceUids
+            - resourceUids
+            resourceIndex: 0
+          name: name
+          manualIndirection:
+            resourceUid: resourceUid
+          resourceType: resourceType
+        - uid: uid
+          listIndirection:
+            resourceUids:
+            - resourceUids
+            - resourceUids
+            resourceIndex: 0
+          name: name
+          manualIndirection:
+            resourceUid: resourceUid
+          resourceType: resourceType
+      properties:
+        result:
+          items:
+            $ref: '#/components/schemas/indirectionsIndirection'
+          type: array
+      type: object
+    indirectionsManualIndirection:
+      example:
+        resourceUid: resourceUid
+      properties:
+        resourceUid:
+          format: uint64
+          title: uid of selected resource. pass 0 if you want to set ManualIndirection
+            to None
+          type: string
+      type: object
+    indirectionsSetIndirectionsRequest:
+      properties:
+        assignments:
+          items:
+            $ref: '#/components/schemas/SetIndirectionsRequestAssignment'
+          title: list of indirection assignments
+          type: array
+      type: object
+    indirectionsSetIndirectionsResponse:
+      example:
+        failedAssignments:
+        - uid: uid
+          resourceUid: resourceUid
+          error: error
+          resourceIndex: 0
+        - uid: uid
+          resourceUid: resourceUid
+          error: error
+          resourceIndex: 0
+      properties:
+        failedAssignments:
+          items:
+            $ref: '#/components/schemas/SetIndirectionsResponseFailedAssignment'
+          title: indirection assignments which failed
+          type: array
+      type: object
+    contentAudioMetadata:
+      example:
+        codecInfo: codecInfo
+        nChannels: 9
+        nSamples: 3
+        codecName: codecName
+        sampleRate: 7
+      properties:
+        sampleRate:
+          format: int64
+          type: integer
+        nChannels:
+          format: int64
+          type: integer
+        nSamples:
+          format: int64
+          type: integer
+        codecName:
+          type: string
+        codecInfo:
+          type: string
+      type: object
+    contentGetMediaMetadataResponse:
+      example:
+        result:
+          uid: uid
+          audioMetadata:
+            codecInfo: codecInfo
+            nChannels: 9
+            nSamples: 3
+            codecName: codecName
+            sampleRate: 7
+          meshMetadata:
+            extentsMin:
+              x: 7.386282
+              y: 1.2315135
+              z: 1.0246457
+            extentsMax:
+              x: 7.386282
+              y: 1.2315135
+              z: 1.0246457
+            nTriangles: 4
+            centroid:
+              x: 7.386282
+              y: 1.2315135
+              z: 1.0246457
+            nVertices: 2
+          videoMetadata:
+            hasAudio: true
+            audioBigEndian: true
+            imageSequenceMetadata:
+              nFrames: 5
+              imageMetadata:
+                codec: codec
+                bitsPerPixel: 1
+                resolution:
+                  width: 0
+                  height: 6
+                hasAlpha: true
+              fps: 5.962134
+            audioSampleRate: 2.302136
+      properties:
+        result:
+          $ref: '#/components/schemas/contentMediaMetadata'
+      type: object
+    contentImageMetadata:
+      example:
+        codec: codec
+        bitsPerPixel: 1
+        resolution:
+          width: 0
+          height: 6
+        hasAlpha: true
+      properties:
+        resolution:
+          $ref: '#/components/schemas/contentResolution'
+        bitsPerPixel:
+          format: int64
+          type: integer
+        codec:
+          type: string
+        hasAlpha:
+          type: boolean
+      type: object
+    contentImageSequenceMetadata:
+      example:
+        nFrames: 5
+        imageMetadata:
+          codec: codec
+          bitsPerPixel: 1
+          resolution:
+            width: 0
+            height: 6
+          hasAlpha: true
+        fps: 5.962134
+      properties:
+        imageMetadata:
+          $ref: '#/components/schemas/contentImageMetadata'
+        fps:
+          format: float
+          type: number
+        nFrames:
+          format: int64
+          type: integer
+      type: object
+    contentListMediaMetadataResponse:
+      example:
+        result:
+        - uid: uid
+          audioMetadata:
+            codecInfo: codecInfo
+            nChannels: 9
+            nSamples: 3
+            codecName: codecName
+            sampleRate: 7
+          meshMetadata:
+            extentsMin:
+              x: 7.386282
+              y: 1.2315135
+              z: 1.0246457
+            extentsMax:
+              x: 7.386282
+              y: 1.2315135
+              z: 1.0246457
+            nTriangles: 4
+            centroid:
+              x: 7.386282
+              y: 1.2315135
+              z: 1.0246457
+            nVertices: 2
+          videoMetadata:
+            hasAudio: true
+            audioBigEndian: true
+            imageSequenceMetadata:
+              nFrames: 5
+              imageMetadata:
+                codec: codec
+                bitsPerPixel: 1
+                resolution:
+                  width: 0
+                  height: 6
+                hasAlpha: true
+              fps: 5.962134
+            audioSampleRate: 2.302136
+        - uid: uid
+          audioMetadata:
+            codecInfo: codecInfo
+            nChannels: 9
+            nSamples: 3
+            codecName: codecName
+            sampleRate: 7
+          meshMetadata:
+            extentsMin:
+              x: 7.386282
+              y: 1.2315135
+              z: 1.0246457
+            extentsMax:
+              x: 7.386282
+              y: 1.2315135
+              z: 1.0246457
+            nTriangles: 4
+            centroid:
+              x: 7.386282
+              y: 1.2315135
+              z: 1.0246457
+            nVertices: 2
+          videoMetadata:
+            hasAudio: true
+            audioBigEndian: true
+            imageSequenceMetadata:
+              nFrames: 5
+              imageMetadata:
+                codec: codec
+                bitsPerPixel: 1
+                resolution:
+                  width: 0
+                  height: 6
+                hasAlpha: true
+              fps: 5.962134
+            audioSampleRate: 2.302136
+      properties:
+        result:
+          items:
+            $ref: '#/components/schemas/contentMediaMetadata'
+          type: array
+      type: object
+    contentMediaMetadata:
+      example:
+        uid: uid
+        audioMetadata:
+          codecInfo: codecInfo
+          nChannels: 9
+          nSamples: 3
+          codecName: codecName
+          sampleRate: 7
+        meshMetadata:
+          extentsMin:
+            x: 7.386282
+            y: 1.2315135
+            z: 1.0246457
+          extentsMax:
+            x: 7.386282
+            y: 1.2315135
+            z: 1.0246457
+          nTriangles: 4
+          centroid:
+            x: 7.386282
+            y: 1.2315135
+            z: 1.0246457
+          nVertices: 2
+        videoMetadata:
+          hasAudio: true
+          audioBigEndian: true
+          imageSequenceMetadata:
+            nFrames: 5
+            imageMetadata:
+              codec: codec
+              bitsPerPixel: 1
+              resolution:
+                width: 0
+                height: 6
+              hasAlpha: true
+            fps: 5.962134
+          audioSampleRate: 2.302136
+      properties:
+        uid:
+          format: uint64
+          type: string
+        videoMetadata:
+          $ref: '#/components/schemas/contentVideoMetadata'
+        audioMetadata:
+          $ref: '#/components/schemas/contentAudioMetadata'
+        meshMetadata:
+          $ref: '#/components/schemas/contentMeshMetadata'
+      type: object
+    contentMeshMetadata:
+      example:
+        extentsMin:
+          x: 7.386282
+          y: 1.2315135
+          z: 1.0246457
+        extentsMax:
+          x: 7.386282
+          y: 1.2315135
+          z: 1.0246457
+        nTriangles: 4
+        centroid:
+          x: 7.386282
+          y: 1.2315135
+          z: 1.0246457
+        nVertices: 2
+      properties:
+        nVertices:
+          format: int64
+          type: integer
+        nTriangles:
+          format: int64
+          type: integer
+        centroid:
+          $ref: '#/components/schemas/contentVector3'
+        extentsMin:
+          $ref: '#/components/schemas/contentVector3'
+        extentsMax:
+          $ref: '#/components/schemas/contentVector3'
+      type: object
+    contentResolution:
+      example:
+        width: 0
+        height: 6
+      properties:
+        width:
+          format: int64
+          type: integer
+        height:
+          format: int64
+          type: integer
+      type: object
+    contentVector3:
+      example:
+        x: 7.386282
+        y: 1.2315135
+        z: 1.0246457
+      properties:
+        x:
+          format: float
+          type: number
+        y:
+          format: float
+          type: number
+        z:
+          format: float
+          type: number
+      type: object
+    contentVideoMetadata:
+      example:
+        hasAudio: true
+        audioBigEndian: true
+        imageSequenceMetadata:
+          nFrames: 5
+          imageMetadata:
+            codec: codec
+            bitsPerPixel: 1
+            resolution:
+              width: 0
+              height: 6
+            hasAlpha: true
+          fps: 5.962134
+        audioSampleRate: 2.302136
+      properties:
+        imageSequenceMetadata:
+          $ref: '#/components/schemas/contentImageSequenceMetadata'
+        hasAudio:
+          type: boolean
+        audioBigEndian:
+          type: boolean
+        audioSampleRate:
+          format: float
+          type: number
+      type: object
+    RenderMachineInfoStatus:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - OFFLINE
+      - OK
+      - STANDBY
+      - FAILED
+      type: string
+    StreamInfoStreamStatus:
+      default: None
+      enum:
+      - None
+      - Good
+      - DroppingFrames
+      - BadStream
+      - NoStream
+      - Offline
+      type: string
+    WorkloadInstanceInfoWorkloadInstanceStatus:
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - CRASHED
+      - ERROR
+      - STOPPING
+      - STOPPED
+      - LAUNCHING
+      - STARTING
+      - READY
+      - STANDBY
+      - RUNNING
+      type: string
+    renderstreamAdapterInfo:
+      example:
+        name: name
+        ipAddress: ipAddress
+        subnetMask: subnetMask
+      properties:
+        name:
+          title: Adapter name
+          type: string
+        ipAddress:
+          title: IP Address
+          type: string
+        subnetMask:
+          title: Subnet mask
+          type: string
+      type: object
+    renderstreamAssetInfo:
+      example:
+        name: name
+        contentSourceMachineName: contentSourceMachineName
+      properties:
+        name:
+          title: Asset name
+          type: string
+        contentSourceMachineName:
+          title: Single Content Source machine
+          type: string
+      title: NB name is the only field shared between RenderStreamAsset and RenderStream::AssetInfo
+      type: object
+    renderstreamClippingRegion:
+      example:
+        top: 5.962134
+        left: 6.0274563
+        bottom: 5.637377
+        right: 1.4658129
+      properties:
+        left:
+          format: float
+          type: number
+        right:
+          format: float
+          type: number
+        top:
+          format: float
+          type: number
+        bottom:
+          format: float
+          type: number
+      type: object
+    renderstreamClusterInfo:
+      example:
+        renderMachines:
+        - assets:
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          loadFactor: 0.8008282
+          preferredAdapter: preferredAdapter
+          statusString: statusString
+          networkAdapters:
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          streams:
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          name: name
+          online: true
+        - assets:
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          loadFactor: 0.8008282
+          preferredAdapter: preferredAdapter
+          statusString: statusString
+          networkAdapters:
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          streams:
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          name: name
+          online: true
+        understudies:
+        - assets:
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          loadFactor: 0.8008282
+          preferredAdapter: preferredAdapter
+          statusString: statusString
+          networkAdapters:
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          streams:
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          name: name
+          online: true
+        - assets:
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          loadFactor: 0.8008282
+          preferredAdapter: preferredAdapter
+          statusString: statusString
+          networkAdapters:
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          streams:
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          name: name
+          online: true
+        contentSourceMachine:
+          assets:
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          loadFactor: 0.8008282
+          preferredAdapter: preferredAdapter
+          statusString: statusString
+          networkAdapters:
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          streams:
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          name: name
+          online: true
+        name: name
+      properties:
+        name:
+          title: Unique cluster name
+          type: string
+        renderMachines:
+          items:
+            $ref: '#/components/schemas/renderstreamRenderMachineInfo'
+          title: List of render machines currently in use
+          type: array
+        contentSourceMachine:
+          $ref: '#/components/schemas/renderstreamRenderMachineInfo'
+        understudies:
+          items:
+            $ref: '#/components/schemas/renderstreamRenderMachineInfo'
+          title: List of render machines currently acting as understudies
+          type: array
+      type: object
+    renderstreamFailoverInfo:
+      example:
+        coveringMachineName: coveringMachineName
+        failedInstanceIndex: 0
+        errorString: errorString
+        coveringInstanceIndex: 6
+        workloadID: workloadID
+        streams:
+        - clipping:
+            top: 5.962134
+            left: 6.0274563
+            bottom: 5.637377
+            right: 1.4658129
+          workloadID: workloadID
+          name: name
+          machineName: machineName
+          receivingLocally: true
+        - clipping:
+            top: 5.962134
+            left: 6.0274563
+            bottom: 5.637377
+            right: 1.4658129
+          workloadID: workloadID
+          name: name
+          machineName: machineName
+          receivingLocally: true
+      properties:
+        workloadID:
+          format: uint64
+          type: string
+        failedInstanceIndex:
+          format: int64
+          type: integer
+        coveringInstanceIndex:
+          format: int64
+          type: integer
+        coveringMachineName:
+          type: string
+        errorString:
+          type: string
+        streams:
+          items:
+            $ref: '#/components/schemas/renderstreamStreamInfo'
+          title: Failed-over streams
+          type: array
+      type: object
+    renderstreamFailoverRenderMachineResponse:
+      example:
+        failoverMappings:
+        - coveringMachineName: coveringMachineName
+          failedInstanceIndex: 0
+          errorString: errorString
+          coveringInstanceIndex: 6
+          workloadID: workloadID
+          streams:
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+        - coveringMachineName: coveringMachineName
+          failedInstanceIndex: 0
+          errorString: errorString
+          coveringInstanceIndex: 6
+          workloadID: workloadID
+          streams:
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+        allInstancesFailedover: true
+      properties:
+        allInstancesFailedover:
+          title: Whether or not failover occurred successfully for every instance
+          type: boolean
+        failoverMappings:
+          items:
+            $ref: '#/components/schemas/renderstreamFailoverInfo'
+          title: Information about the understudies taking over
+          type: array
+      type: object
+    renderstreamFailoverWorkloadInstanceResponse:
+      example:
+        failoverMapping:
+          coveringMachineName: coveringMachineName
+          failedInstanceIndex: 0
+          errorString: errorString
+          coveringInstanceIndex: 6
+          workloadID: workloadID
+          streams:
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+      properties:
+        failoverMapping:
+          $ref: '#/components/schemas/renderstreamFailoverInfo'
+      type: object
+    renderstreamGetClusterResponse:
+      example:
+        result:
+          renderMachines:
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          understudies:
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          contentSourceMachine:
+            assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          name: name
+      properties:
+        result:
+          $ref: '#/components/schemas/renderstreamClusterInfo'
+      type: object
+    renderstreamGetRenderMachineResponse:
+      example:
+        result:
+          assets:
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          loadFactor: 0.8008282
+          preferredAdapter: preferredAdapter
+          statusString: statusString
+          networkAdapters:
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          streams:
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          name: name
+          online: true
+      properties:
+        result:
+          $ref: '#/components/schemas/renderstreamRenderMachineInfo'
+      type: object
+    renderstreamGetWorkloadInstanceResponse:
+      example:
+        result:
+          instanceid: 0
+          workloadid: workloadid
+          droppingFrames: true
+          droppingInputFrames: true
+          processRunning: true
+      properties:
+        result:
+          $ref: '#/components/schemas/renderstreamWorkloadInstanceInfo'
+      type: object
+    renderstreamGetWorkloadResponse:
+      example:
+        result:
+          instances:
+          - instanceid: 0
+            workloadid: workloadid
+            droppingFrames: true
+            droppingInputFrames: true
+            processRunning: true
+          - instanceid: 0
+            workloadid: workloadid
+            droppingFrames: true
+            droppingInputFrames: true
+            processRunning: true
+          layerUID: layerUID
+          locationDescription: locationDescription
+          engineSync: true
+          id: id
+          asset:
+            name: name
+            contentSourceMachineName: contentSourceMachineName
+          friendlyName: friendlyName
+      properties:
+        result:
+          $ref: '#/components/schemas/renderstreamWorkloadInfo'
+      type: object
+    renderstreamListClustersResponse:
+      example:
+        clusters:
+        - renderMachines:
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          understudies:
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          contentSourceMachine:
+            assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          name: name
+        - renderMachines:
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          understudies:
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          - assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          contentSourceMachine:
+            assets:
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            - name: name
+              contentSourceMachineName: contentSourceMachineName
+            loadFactor: 0.8008282
+            preferredAdapter: preferredAdapter
+            statusString: statusString
+            networkAdapters:
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            - name: name
+              ipAddress: ipAddress
+              subnetMask: subnetMask
+            streams:
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            - clipping:
+                top: 5.962134
+                left: 6.0274563
+                bottom: 5.637377
+                right: 1.4658129
+              workloadID: workloadID
+              name: name
+              machineName: machineName
+              receivingLocally: true
+            name: name
+            online: true
+          name: name
+      properties:
+        clusters:
+          items:
+            $ref: '#/components/schemas/renderstreamClusterInfo'
+          type: array
+      type: object
+    renderstreamListRenderMachinesResponse:
+      example:
+        machines:
+        - assets:
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          loadFactor: 0.8008282
+          preferredAdapter: preferredAdapter
+          statusString: statusString
+          networkAdapters:
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          streams:
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          name: name
+          online: true
+        - assets:
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          - name: name
+            contentSourceMachineName: contentSourceMachineName
+          loadFactor: 0.8008282
+          preferredAdapter: preferredAdapter
+          statusString: statusString
+          networkAdapters:
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          - name: name
+            ipAddress: ipAddress
+            subnetMask: subnetMask
+          streams:
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          - clipping:
+              top: 5.962134
+              left: 6.0274563
+              bottom: 5.637377
+              right: 1.4658129
+            workloadID: workloadID
+            name: name
+            machineName: machineName
+            receivingLocally: true
+          name: name
+          online: true
+      properties:
+        machines:
+          items:
+            $ref: '#/components/schemas/renderstreamRenderMachineInfo'
+          type: array
+      type: object
+    renderstreamListWorkloadsResponse:
+      example:
+        workloads:
+        - instances:
+          - instanceid: 0
+            workloadid: workloadid
+            droppingFrames: true
+            droppingInputFrames: true
+            processRunning: true
+          - instanceid: 0
+            workloadid: workloadid
+            droppingFrames: true
+            droppingInputFrames: true
+            processRunning: true
+          layerUID: layerUID
+          locationDescription: locationDescription
+          engineSync: true
+          id: id
+          asset:
+            name: name
+            contentSourceMachineName: contentSourceMachineName
+          friendlyName: friendlyName
+        - instances:
+          - instanceid: 0
+            workloadid: workloadid
+            droppingFrames: true
+            droppingInputFrames: true
+            processRunning: true
+          - instanceid: 0
+            workloadid: workloadid
+            droppingFrames: true
+            droppingInputFrames: true
+            processRunning: true
+          layerUID: layerUID
+          locationDescription: locationDescription
+          engineSync: true
+          id: id
+          asset:
+            name: name
+            contentSourceMachineName: contentSourceMachineName
+          friendlyName: friendlyName
+      properties:
+        workloads:
+          items:
+            $ref: '#/components/schemas/renderstreamWorkloadInfo'
+          type: array
+      type: object
+    renderstreamRenderMachineInfo:
+      example:
+        assets:
+        - name: name
+          contentSourceMachineName: contentSourceMachineName
+        - name: name
+          contentSourceMachineName: contentSourceMachineName
+        loadFactor: 0.8008282
+        preferredAdapter: preferredAdapter
+        statusString: statusString
+        networkAdapters:
+        - name: name
+          ipAddress: ipAddress
+          subnetMask: subnetMask
+        - name: name
+          ipAddress: ipAddress
+          subnetMask: subnetMask
+        streams:
+        - clipping:
+            top: 5.962134
+            left: 6.0274563
+            bottom: 5.637377
+            right: 1.4658129
+          workloadID: workloadID
+          name: name
+          machineName: machineName
+          receivingLocally: true
+        - clipping:
+            top: 5.962134
+            left: 6.0274563
+            bottom: 5.637377
+            right: 1.4658129
+          workloadID: workloadID
+          name: name
+          machineName: machineName
+          receivingLocally: true
+        name: name
+        online: true
+      properties:
+        name:
+          title: Unique machine name
+          type: string
+        statusString:
+          title: Machine status as a human readable string
+          type: string
+        status:
+          $ref: '#/components/schemas/RenderMachineInfoStatus'
+        online:
+          title: Whether the machine is online or not
+          type: boolean
+        loadFactor:
+          format: float
+          title: Load factor relative to other render nodes
+          type: number
+        preferredAdapter:
+          title: Preferred synchronisation adapter
+          type: string
+        networkAdapters:
+          items:
+            $ref: '#/components/schemas/renderstreamAdapterInfo'
+          title: Available network adapters
+          type: array
+        streams:
+          items:
+            $ref: '#/components/schemas/renderstreamStreamInfo'
+          title: Running streams
+          type: array
+        assets:
+          items:
+            $ref: '#/components/schemas/renderstreamAssetInfo'
+          title: Available assets
+          type: array
+      type: object
+    renderstreamStartWorkloadResponse:
+      type: object
+    renderstreamStopWorkloadResponse:
+      type: object
+    renderstreamStreamInfo:
+      example:
+        clipping:
+          top: 5.962134
+          left: 6.0274563
+          bottom: 5.637377
+          right: 1.4658129
+        workloadID: workloadID
+        name: name
+        machineName: machineName
+        receivingLocally: true
+      properties:
+        name:
+          title: Stream name
+          type: string
+        workloadID:
+          format: uint64
+          title: Workload that this stream forms part of
+          type: string
+        machineName:
+          title: Source machine of the Stream
+          type: string
+        status:
+          $ref: '#/components/schemas/StreamInfoStreamStatus'
+        receivingLocally:
+          title: Did the stream receive frames locally in the last 0.5s
+          type: boolean
+        clipping:
+          $ref: '#/components/schemas/renderstreamClippingRegion'
+      type: object
+    renderstreamSyncWorkloadResponse:
+      type: object
+    renderstreamWorkloadInfo:
+      example:
+        instances:
+        - instanceid: 0
+          workloadid: workloadid
+          droppingFrames: true
+          droppingInputFrames: true
+          processRunning: true
+        - instanceid: 0
+          workloadid: workloadid
+          droppingFrames: true
+          droppingInputFrames: true
+          processRunning: true
+        layerUID: layerUID
+        locationDescription: locationDescription
+        engineSync: true
+        id: id
+        asset:
+          name: name
+          contentSourceMachineName: contentSourceMachineName
+        friendlyName: friendlyName
+      properties:
+        id:
+          format: uint64
+          title: UID of the workload; matches that of the RenderStreamCluster
+          type: string
+        friendlyName:
+          title: '''Friendly'' human readable unique name'
+          type: string
+        asset:
+          $ref: '#/components/schemas/renderstreamAssetInfo'
+        status:
+          $ref: '#/components/schemas/WorkloadInstanceInfoWorkloadInstanceStatus'
+        instances:
+          items:
+            $ref: '#/components/schemas/renderstreamWorkloadInstanceInfo'
+          title: Rendering instances, including understudies
+          type: array
+        engineSync:
+          title: Is engine synchronisation enabled?
+          type: boolean
+        layerUID:
+          description: The UID of the Layer the workload is started from.
+          format: uint64
+          type: string
+        locationDescription:
+          description: Description of the location of the workload.
+          type: string
+      type: object
+    renderstreamWorkloadInstanceInfo:
+      example:
+        instanceid: 0
+        workloadid: workloadid
+        droppingFrames: true
+        droppingInputFrames: true
+        processRunning: true
+      properties:
+        workloadid:
+          format: uint64
+          title: ID of the workload this instance belongs to
+          type: string
+        instanceid:
+          format: int64
+          title: ID in the workload's array of instances
+          type: integer
+        processRunning:
+          title: Is the process running
+          type: boolean
+        droppingFrames:
+          title: Is the process dropping frames
+          type: boolean
+        status:
+          $ref: '#/components/schemas/WorkloadInstanceInfoWorkloadInstanceStatus'
+        droppingInputFrames:
+          title: Is the process dropping input frames
+          type: boolean
+      type: object
+    resourcesGetResourceResponse:
+      example:
+        result:
+          uid: uid
+          path: path
+          name: name
+          type: type
+      properties:
+        result:
+          $ref: '#/components/schemas/resourcesResourceInfo'
+      type: object
+    resourcesListResourcesResponse:
+      example:
+        result:
+        - uid: uid
+          path: path
+          name: name
+          type: type
+        - uid: uid
+          path: path
+          name: name
+          type: type
+      properties:
+        result:
+          items:
+            $ref: '#/components/schemas/resourcesResourceInfo'
+          type: array
+      type: object
+    resourcesResourceInfo:
+      example:
+        uid: uid
+        path: path
+        name: name
+        type: type
+      properties:
+        uid:
+          format: uint64
+          title: unique identifier; treat as string in javascript
+          type: string
+        name:
+          title: unqualified name in d3
+          type: string
+        path:
+          title: internal resource path e.g /object/videoclip/someVideo.mov
+          type: string
+        type:
+          title: internal type name
+          type: string
+      type: object
+    thumbnailsGetThumbnailResponse:
+      example:
+        path: path
+      properties:
+        path:
+          title: path of thumbnail
+          type: string
       type: object
 x-original-swagger-version: "2.0"

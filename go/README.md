@@ -84,21 +84,88 @@ Class | Method | HTTP request | Description
 *CameraCalibrationApi* | [**CameraCalibrationGetObservationProgress**](docs/CameraCalibrationApi.md#cameracalibrationgetobservationprogress) | **Get** /cameracalibration/observationprogress | Get Observation progress state
 *CameraCalibrationApi* | [**CameraCalibrationListMRSets**](docs/CameraCalibrationApi.md#cameracalibrationlistmrsets) | **Get** /cameracalibration/mrsets | List MR sets
 *CameraCalibrationApi* | [**CameraCalibrationResetAllObservations**](docs/CameraCalibrationApi.md#cameracalibrationresetallobservations) | **Post** /cameracalibration/resetallobservations | Reset Observations
+*ContentApi* | [**ContentGetMediaMetadata**](docs/ContentApi.md#contentgetmediametadata) | **Get** /content/mediametadata/{uid} | Get single media meta data
+*ContentApi* | [**ContentListMediaMetadata**](docs/ContentApi.md#contentlistmediametadata) | **Get** /content/mediametadata | List media meta data
+*IndirectionsApi* | [**IndirectionsGetIndirection**](docs/IndirectionsApi.md#indirectionsgetindirection) | **Get** /indirections/{uid} | Get single indirection
+*IndirectionsApi* | [**IndirectionsListIndirections**](docs/IndirectionsApi.md#indirectionslistindirections) | **Get** /indirections | List all indirections
+*IndirectionsApi* | [**IndirectionsSetIndirections**](docs/IndirectionsApi.md#indirectionssetindirections) | **Post** /indirections/set | Update one or more indirections
+*IndirectionsApi* | [**IndirectionsSetIndirections2**](docs/IndirectionsApi.md#indirectionssetindirections2) | **Put** /indirections | Update one or more indirections
+*RenderstreamApi* | [**RenderstreamFailoverRenderMachine**](docs/RenderstreamApi.md#renderstreamfailoverrendermachine) | **Post** /renderstream/failovermachine/{name} | Fail over a single RenderstreamMachine, and all its workload instances
+*RenderstreamApi* | [**RenderstreamFailoverRenderMachine2**](docs/RenderstreamApi.md#renderstreamfailoverrendermachine2) | **Put** /renderstream/failovermachine/{name} | Fail over a single RenderstreamMachine, and all its workload instances
+*RenderstreamApi* | [**RenderstreamFailoverWorkloadInstance**](docs/RenderstreamApi.md#renderstreamfailoverworkloadinstance) | **Post** /renderstream/failoverinstance/{workloadid}/{instanceindex} | Fail over a single workload instance
+*RenderstreamApi* | [**RenderstreamFailoverWorkloadInstance2**](docs/RenderstreamApi.md#renderstreamfailoverworkloadinstance2) | **Put** /renderstream/failoverinstance/{workloadid}/{instanceindex} | Fail over a single workload instance
+*RenderstreamApi* | [**RenderstreamGetCluster**](docs/RenderstreamApi.md#renderstreamgetcluster) | **Get** /renderstream/clusters/{name} | Get single ClusterPool
+*RenderstreamApi* | [**RenderstreamGetRenderMachine**](docs/RenderstreamApi.md#renderstreamgetrendermachine) | **Get** /renderstream/machines/{name} | Get single RenderstreamMachine
+*RenderstreamApi* | [**RenderstreamGetWorkload**](docs/RenderstreamApi.md#renderstreamgetworkload) | **Get** /renderstream/workloads/{id} | Get single Workload
+*RenderstreamApi* | [**RenderstreamGetWorkloadInstance**](docs/RenderstreamApi.md#renderstreamgetworkloadinstance) | **Get** /renderstream/workloadinstances/{workloadid}/{instanceindex} | Get single Workload Instance
+*RenderstreamApi* | [**RenderstreamListClusters**](docs/RenderstreamApi.md#renderstreamlistclusters) | **Get** /renderstream/clusters | List all ClusterPools
+*RenderstreamApi* | [**RenderstreamListRenderMachines**](docs/RenderstreamApi.md#renderstreamlistrendermachines) | **Get** /renderstream/machines | List all RS machines (both current render machines and understudies)
+*RenderstreamApi* | [**RenderstreamListWorkloads**](docs/RenderstreamApi.md#renderstreamlistworkloads) | **Get** /renderstream/workloads | List all RS Workloads
+*RenderstreamApi* | [**RenderstreamStartWorkload**](docs/RenderstreamApi.md#renderstreamstartworkload) | **Post** /renderstream/workloads/{id}/start | Start a workload
+*RenderstreamApi* | [**RenderstreamStopWorkload**](docs/RenderstreamApi.md#renderstreamstopworkload) | **Post** /renderstream/workloads/{id}/stop | Stop a workload
+*RenderstreamApi* | [**RenderstreamSyncWorkload**](docs/RenderstreamApi.md#renderstreamsyncworkload) | **Post** /renderstream/workloads/{id}/sync | Sync a workload
+*ResourcesApi* | [**ResourcesGetResource**](docs/ResourcesApi.md#resourcesgetresource) | **Get** /resources/{uid} | Get single resource
+*ResourcesApi* | [**ResourcesListResources**](docs/ResourcesApi.md#resourceslistresources) | **Get** /resources | List resources by type
+*ThumbnailsApi* | [**ThumbnailsGetThumbnail**](docs/ThumbnailsApi.md#thumbnailsgetthumbnail) | **Get** /thumbnail/{uid} | Get thumbnail for a resource
 
 
 ## Documentation For Models
 
- - [V1AddObservationRequest](docs/V1AddObservationRequest.md)
- - [V1CameraInfo](docs/V1CameraInfo.md)
- - [V1EnableObservationRequest](docs/V1EnableObservationRequest.md)
- - [V1EnableObservationResponse](docs/V1EnableObservationResponse.md)
- - [V1Float3](docs/V1Float3.md)
- - [V1GetMRSetResponse](docs/V1GetMRSetResponse.md)
- - [V1GetObservationProgressResponse](docs/V1GetObservationProgressResponse.md)
- - [V1ListMRSetsResponse](docs/V1ListMRSetsResponse.md)
- - [V1MRSetInfo](docs/V1MRSetInfo.md)
- - [V1ObservationInfo](docs/V1ObservationInfo.md)
- - [V1ResetAllObservationsRequest](docs/V1ResetAllObservationsRequest.md)
+ - [CameracalibrationAddObservationRequest](docs/CameracalibrationAddObservationRequest.md)
+ - [CameracalibrationCameraInfo](docs/CameracalibrationCameraInfo.md)
+ - [CameracalibrationEnableObservationRequest](docs/CameracalibrationEnableObservationRequest.md)
+ - [CameracalibrationEnableObservationResponse](docs/CameracalibrationEnableObservationResponse.md)
+ - [CameracalibrationFloat3](docs/CameracalibrationFloat3.md)
+ - [CameracalibrationGetMRSetResponse](docs/CameracalibrationGetMRSetResponse.md)
+ - [CameracalibrationGetObservationProgressResponse](docs/CameracalibrationGetObservationProgressResponse.md)
+ - [CameracalibrationListMRSetsResponse](docs/CameracalibrationListMRSetsResponse.md)
+ - [CameracalibrationMRSetInfo](docs/CameracalibrationMRSetInfo.md)
+ - [CameracalibrationObservationInfo](docs/CameracalibrationObservationInfo.md)
+ - [CameracalibrationResetAllObservationsRequest](docs/CameracalibrationResetAllObservationsRequest.md)
+ - [ContentAudioMetadata](docs/ContentAudioMetadata.md)
+ - [ContentGetMediaMetadataResponse](docs/ContentGetMediaMetadataResponse.md)
+ - [ContentImageMetadata](docs/ContentImageMetadata.md)
+ - [ContentImageSequenceMetadata](docs/ContentImageSequenceMetadata.md)
+ - [ContentListMediaMetadataResponse](docs/ContentListMediaMetadataResponse.md)
+ - [ContentMediaMetadata](docs/ContentMediaMetadata.md)
+ - [ContentMeshMetadata](docs/ContentMeshMetadata.md)
+ - [ContentResolution](docs/ContentResolution.md)
+ - [ContentVector3](docs/ContentVector3.md)
+ - [ContentVideoMetadata](docs/ContentVideoMetadata.md)
+ - [IndirectionsGetIndirectionResponse](docs/IndirectionsGetIndirectionResponse.md)
+ - [IndirectionsIndirection](docs/IndirectionsIndirection.md)
+ - [IndirectionsListIndirection](docs/IndirectionsListIndirection.md)
+ - [IndirectionsListIndirectionsResponse](docs/IndirectionsListIndirectionsResponse.md)
+ - [IndirectionsManualIndirection](docs/IndirectionsManualIndirection.md)
+ - [IndirectionsSetIndirectionsRequest](docs/IndirectionsSetIndirectionsRequest.md)
+ - [IndirectionsSetIndirectionsResponse](docs/IndirectionsSetIndirectionsResponse.md)
+ - [RenderMachineInfoStatus](docs/RenderMachineInfoStatus.md)
+ - [RenderstreamAdapterInfo](docs/RenderstreamAdapterInfo.md)
+ - [RenderstreamAssetInfo](docs/RenderstreamAssetInfo.md)
+ - [RenderstreamClippingRegion](docs/RenderstreamClippingRegion.md)
+ - [RenderstreamClusterInfo](docs/RenderstreamClusterInfo.md)
+ - [RenderstreamFailoverInfo](docs/RenderstreamFailoverInfo.md)
+ - [RenderstreamFailoverRenderMachineResponse](docs/RenderstreamFailoverRenderMachineResponse.md)
+ - [RenderstreamFailoverWorkloadInstanceResponse](docs/RenderstreamFailoverWorkloadInstanceResponse.md)
+ - [RenderstreamGetClusterResponse](docs/RenderstreamGetClusterResponse.md)
+ - [RenderstreamGetRenderMachineResponse](docs/RenderstreamGetRenderMachineResponse.md)
+ - [RenderstreamGetWorkloadInstanceResponse](docs/RenderstreamGetWorkloadInstanceResponse.md)
+ - [RenderstreamGetWorkloadResponse](docs/RenderstreamGetWorkloadResponse.md)
+ - [RenderstreamListClustersResponse](docs/RenderstreamListClustersResponse.md)
+ - [RenderstreamListRenderMachinesResponse](docs/RenderstreamListRenderMachinesResponse.md)
+ - [RenderstreamListWorkloadsResponse](docs/RenderstreamListWorkloadsResponse.md)
+ - [RenderstreamRenderMachineInfo](docs/RenderstreamRenderMachineInfo.md)
+ - [RenderstreamStreamInfo](docs/RenderstreamStreamInfo.md)
+ - [RenderstreamWorkloadInfo](docs/RenderstreamWorkloadInfo.md)
+ - [RenderstreamWorkloadInstanceInfo](docs/RenderstreamWorkloadInstanceInfo.md)
+ - [ResourcesGetResourceResponse](docs/ResourcesGetResourceResponse.md)
+ - [ResourcesListResourcesResponse](docs/ResourcesListResourcesResponse.md)
+ - [ResourcesResourceInfo](docs/ResourcesResourceInfo.md)
+ - [SetIndirectionsRequestAssignment](docs/SetIndirectionsRequestAssignment.md)
+ - [SetIndirectionsResponseFailedAssignment](docs/SetIndirectionsResponseFailedAssignment.md)
+ - [StreamInfoStreamStatus](docs/StreamInfoStreamStatus.md)
+ - [ThumbnailsGetThumbnailResponse](docs/ThumbnailsGetThumbnailResponse.md)
+ - [WorkloadInstanceInfoWorkloadInstanceStatus](docs/WorkloadInstanceInfoWorkloadInstanceStatus.md)
 
 
 ## Documentation For Authorization

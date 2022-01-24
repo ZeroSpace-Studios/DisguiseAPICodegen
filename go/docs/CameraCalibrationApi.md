@@ -32,7 +32,7 @@ import (
 )
 
 func main() {
-    body := *openapiclient.NewV1AddObservationRequest() // V1AddObservationRequest | 
+    body := *openapiclient.NewCameracalibrationAddObservationRequest() // CameracalibrationAddObservationRequest | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -57,7 +57,7 @@ Other parameters are passed through a pointer to a apiCameraCalibrationAddObserv
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**V1AddObservationRequest**](V1AddObservationRequest.md) |  | 
+ **body** | [**CameracalibrationAddObservationRequest**](CameracalibrationAddObservationRequest.md) |  | 
 
 ### Return type
 
@@ -79,7 +79,7 @@ No authorization required
 
 ## CameraCalibrationEnableObservation
 
-> V1EnableObservationResponse CameraCalibrationEnableObservation(ctx).Body(body).Execute()
+> CameracalibrationEnableObservationResponse CameraCalibrationEnableObservation(ctx).Body(body).Execute()
 
 Enable Observation
 
@@ -96,7 +96,7 @@ import (
 )
 
 func main() {
-    body := *openapiclient.NewV1EnableObservationRequest() // V1EnableObservationRequest | 
+    body := *openapiclient.NewCameracalibrationEnableObservationRequest() // CameracalibrationEnableObservationRequest | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -105,7 +105,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `CameraCalibrationApi.CameraCalibrationEnableObservation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CameraCalibrationEnableObservation`: V1EnableObservationResponse
+    // response from `CameraCalibrationEnableObservation`: CameracalibrationEnableObservationResponse
     fmt.Fprintf(os.Stdout, "Response from `CameraCalibrationApi.CameraCalibrationEnableObservation`: %v\n", resp)
 }
 ```
@@ -121,11 +121,11 @@ Other parameters are passed through a pointer to a apiCameraCalibrationEnableObs
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**V1EnableObservationRequest**](V1EnableObservationRequest.md) |  | 
+ **body** | [**CameracalibrationEnableObservationRequest**](CameracalibrationEnableObservationRequest.md) |  | 
 
 ### Return type
 
-[**V1EnableObservationResponse**](V1EnableObservationResponse.md)
+[**CameracalibrationEnableObservationResponse**](CameracalibrationEnableObservationResponse.md)
 
 ### Authorization
 
@@ -143,7 +143,7 @@ No authorization required
 
 ## CameraCalibrationGetMRSet
 
-> V1GetMRSetResponse CameraCalibrationGetMRSet(ctx, mrsetuid).Execute()
+> CameracalibrationGetMRSetResponse CameraCalibrationGetMRSet(ctx, mrsetuid).Execute()
 
 Get single MR set
 
@@ -169,7 +169,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `CameraCalibrationApi.CameraCalibrationGetMRSet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CameraCalibrationGetMRSet`: V1GetMRSetResponse
+    // response from `CameraCalibrationGetMRSet`: CameracalibrationGetMRSetResponse
     fmt.Fprintf(os.Stdout, "Response from `CameraCalibrationApi.CameraCalibrationGetMRSet`: %v\n", resp)
 }
 ```
@@ -193,7 +193,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1GetMRSetResponse**](V1GetMRSetResponse.md)
+[**CameracalibrationGetMRSetResponse**](CameracalibrationGetMRSetResponse.md)
 
 ### Authorization
 
@@ -211,7 +211,7 @@ No authorization required
 
 ## CameraCalibrationGetObservationProgress
 
-> V1GetObservationProgressResponse CameraCalibrationGetObservationProgress(ctx).Execute()
+> CameracalibrationGetObservationProgressResponse CameraCalibrationGetObservationProgress(ctx).Execute()
 
 Get Observation progress state
 
@@ -236,7 +236,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `CameraCalibrationApi.CameraCalibrationGetObservationProgress``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CameraCalibrationGetObservationProgress`: V1GetObservationProgressResponse
+    // response from `CameraCalibrationGetObservationProgress`: CameracalibrationGetObservationProgressResponse
     fmt.Fprintf(os.Stdout, "Response from `CameraCalibrationApi.CameraCalibrationGetObservationProgress`: %v\n", resp)
 }
 ```
@@ -252,7 +252,7 @@ Other parameters are passed through a pointer to a apiCameraCalibrationGetObserv
 
 ### Return type
 
-[**V1GetObservationProgressResponse**](V1GetObservationProgressResponse.md)
+[**CameracalibrationGetObservationProgressResponse**](CameracalibrationGetObservationProgressResponse.md)
 
 ### Authorization
 
@@ -270,7 +270,7 @@ No authorization required
 
 ## CameraCalibrationListMRSets
 
-> V1ListMRSetsResponse CameraCalibrationListMRSets(ctx).Execute()
+> CameracalibrationListMRSetsResponse CameraCalibrationListMRSets(ctx).Execute()
 
 List MR sets
 
@@ -295,7 +295,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `CameraCalibrationApi.CameraCalibrationListMRSets``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CameraCalibrationListMRSets`: V1ListMRSetsResponse
+    // response from `CameraCalibrationListMRSets`: CameracalibrationListMRSetsResponse
     fmt.Fprintf(os.Stdout, "Response from `CameraCalibrationApi.CameraCalibrationListMRSets`: %v\n", resp)
 }
 ```
@@ -311,7 +311,7 @@ Other parameters are passed through a pointer to a apiCameraCalibrationListMRSet
 
 ### Return type
 
-[**V1ListMRSetsResponse**](V1ListMRSetsResponse.md)
+[**CameracalibrationListMRSetsResponse**](CameracalibrationListMRSetsResponse.md)
 
 ### Authorization
 
@@ -346,7 +346,7 @@ import (
 )
 
 func main() {
-    body := *openapiclient.NewV1ResetAllObservationsRequest() // V1ResetAllObservationsRequest | 
+    body := *openapiclient.NewCameracalibrationResetAllObservationsRequest() // CameracalibrationResetAllObservationsRequest | 
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -371,7 +371,7 @@ Other parameters are passed through a pointer to a apiCameraCalibrationResetAllO
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**V1ResetAllObservationsRequest**](V1ResetAllObservationsRequest.md) |  | 
+ **body** | [**CameracalibrationResetAllObservationsRequest**](CameracalibrationResetAllObservationsRequest.md) |  | 
 
 ### Return type
 

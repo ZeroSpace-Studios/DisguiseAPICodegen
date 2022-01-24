@@ -24,7 +24,7 @@ Add Observation
 import time
 import openapi_client
 from openapi_client.api import camera_calibration_api
-from openapi_client.model.v1_add_observation_request import V1AddObservationRequest
+from openapi_client.model.cameracalibration_add_observation_request import CameracalibrationAddObservationRequest
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -37,9 +37,9 @@ configuration = openapi_client.Configuration(
 with openapi_client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = camera_calibration_api.CameraCalibrationApi(api_client)
-    body = V1AddObservationRequest(
+    body = CameracalibrationAddObservationRequest(
         camera_uid="camera_uid_example",
-    ) # V1AddObservationRequest | 
+    ) # CameracalibrationAddObservationRequest | 
 
     # example passing only required values which don't have defaults set
     try:
@@ -55,7 +55,7 @@ with openapi_client.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**V1AddObservationRequest**](V1AddObservationRequest.md)|  |
+ **body** | [**CameracalibrationAddObservationRequest**](CameracalibrationAddObservationRequest.md)|  |
 
 ### Return type
 
@@ -80,7 +80,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **camera_calibration_enable_observation**
-> V1EnableObservationResponse camera_calibration_enable_observation(body)
+> CameracalibrationEnableObservationResponse camera_calibration_enable_observation(body)
 
 Enable Observation
 
@@ -91,8 +91,8 @@ Enable Observation
 import time
 import openapi_client
 from openapi_client.api import camera_calibration_api
-from openapi_client.model.v1_enable_observation_response import V1EnableObservationResponse
-from openapi_client.model.v1_enable_observation_request import V1EnableObservationRequest
+from openapi_client.model.cameracalibration_enable_observation_request import CameracalibrationEnableObservationRequest
+from openapi_client.model.cameracalibration_enable_observation_response import CameracalibrationEnableObservationResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -105,10 +105,10 @@ configuration = openapi_client.Configuration(
 with openapi_client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = camera_calibration_api.CameraCalibrationApi(api_client)
-    body = V1EnableObservationRequest(
+    body = CameracalibrationEnableObservationRequest(
         observation_uid="observation_uid_example",
         enabled=True,
-    ) # V1EnableObservationRequest | 
+    ) # CameracalibrationEnableObservationRequest | 
 
     # example passing only required values which don't have defaults set
     try:
@@ -124,11 +124,11 @@ with openapi_client.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**V1EnableObservationRequest**](V1EnableObservationRequest.md)|  |
+ **body** | [**CameracalibrationEnableObservationRequest**](CameracalibrationEnableObservationRequest.md)|  |
 
 ### Return type
 
-[**V1EnableObservationResponse**](V1EnableObservationResponse.md)
+[**CameracalibrationEnableObservationResponse**](CameracalibrationEnableObservationResponse.md)
 
 ### Authorization
 
@@ -149,7 +149,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **camera_calibration_get_mr_set**
-> V1GetMRSetResponse camera_calibration_get_mr_set(mrsetuid)
+> CameracalibrationGetMRSetResponse camera_calibration_get_mr_set(mrsetuid)
 
 Get single MR set
 
@@ -160,7 +160,7 @@ Get single MR set
 import time
 import openapi_client
 from openapi_client.api import camera_calibration_api
-from openapi_client.model.v1_get_mr_set_response import V1GetMRSetResponse
+from openapi_client.model.cameracalibration_get_mr_set_response import CameracalibrationGetMRSetResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -193,7 +193,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1GetMRSetResponse**](V1GetMRSetResponse.md)
+[**CameracalibrationGetMRSetResponse**](CameracalibrationGetMRSetResponse.md)
 
 ### Authorization
 
@@ -214,7 +214,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **camera_calibration_get_observation_progress**
-> V1GetObservationProgressResponse camera_calibration_get_observation_progress()
+> CameracalibrationGetObservationProgressResponse camera_calibration_get_observation_progress()
 
 Get Observation progress state
 
@@ -225,7 +225,7 @@ Get Observation progress state
 import time
 import openapi_client
 from openapi_client.api import camera_calibration_api
-from openapi_client.model.v1_get_observation_progress_response import V1GetObservationProgressResponse
+from openapi_client.model.cameracalibration_get_observation_progress_response import CameracalibrationGetObservationProgressResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -254,7 +254,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**V1GetObservationProgressResponse**](V1GetObservationProgressResponse.md)
+[**CameracalibrationGetObservationProgressResponse**](CameracalibrationGetObservationProgressResponse.md)
 
 ### Authorization
 
@@ -275,7 +275,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **camera_calibration_list_mr_sets**
-> V1ListMRSetsResponse camera_calibration_list_mr_sets()
+> CameracalibrationListMRSetsResponse camera_calibration_list_mr_sets()
 
 List MR sets
 
@@ -286,7 +286,7 @@ List MR sets
 import time
 import openapi_client
 from openapi_client.api import camera_calibration_api
-from openapi_client.model.v1_list_mr_sets_response import V1ListMRSetsResponse
+from openapi_client.model.cameracalibration_list_mr_sets_response import CameracalibrationListMRSetsResponse
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -315,7 +315,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**V1ListMRSetsResponse**](V1ListMRSetsResponse.md)
+[**CameracalibrationListMRSetsResponse**](CameracalibrationListMRSetsResponse.md)
 
 ### Authorization
 
@@ -347,7 +347,7 @@ Reset Observations
 import time
 import openapi_client
 from openapi_client.api import camera_calibration_api
-from openapi_client.model.v1_reset_all_observations_request import V1ResetAllObservationsRequest
+from openapi_client.model.cameracalibration_reset_all_observations_request import CameracalibrationResetAllObservationsRequest
 from pprint import pprint
 # Defining the host is optional and defaults to http://localhost/api/v1
 # See configuration.py for a list of all supported configuration parameters.
@@ -360,9 +360,9 @@ configuration = openapi_client.Configuration(
 with openapi_client.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = camera_calibration_api.CameraCalibrationApi(api_client)
-    body = V1ResetAllObservationsRequest(
+    body = CameracalibrationResetAllObservationsRequest(
         camera_uid="camera_uid_example",
-    ) # V1ResetAllObservationsRequest | 
+    ) # CameracalibrationResetAllObservationsRequest | 
 
     # example passing only required values which don't have defaults set
     try:
@@ -378,7 +378,7 @@ with openapi_client.ApiClient() as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**V1ResetAllObservationsRequest**](V1ResetAllObservationsRequest.md)|  |
+ **body** | [**CameracalibrationResetAllObservationsRequest**](CameracalibrationResetAllObservationsRequest.md)|  |
 
 ### Return type
 

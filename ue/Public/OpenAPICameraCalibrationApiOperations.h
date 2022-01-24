@@ -15,13 +15,13 @@
 #include "OpenAPIBaseModel.h"
 #include "OpenAPICameraCalibrationApi.h"
 
-#include "OpenAPIV1AddObservationRequest.h"
-#include "OpenAPIV1EnableObservationRequest.h"
-#include "OpenAPIV1EnableObservationResponse.h"
-#include "OpenAPIV1GetMRSetResponse.h"
-#include "OpenAPIV1GetObservationProgressResponse.h"
-#include "OpenAPIV1ListMRSetsResponse.h"
-#include "OpenAPIV1ResetAllObservationsRequest.h"
+#include "OpenAPICameracalibrationAddObservationRequest.h"
+#include "OpenAPICameracalibrationEnableObservationRequest.h"
+#include "OpenAPICameracalibrationEnableObservationResponse.h"
+#include "OpenAPICameracalibrationGetMRSetResponse.h"
+#include "OpenAPICameracalibrationGetObservationProgressResponse.h"
+#include "OpenAPICameracalibrationListMRSetsResponse.h"
+#include "OpenAPICameracalibrationResetAllObservationsRequest.h"
 
 namespace OpenAPI
 {
@@ -36,7 +36,7 @@ public:
 	void SetupHttpRequest(const FHttpRequestRef& HttpRequest) const final;
 	FString ComputePath() const final;
 
-	OpenAPIV1AddObservationRequest Body;
+	OpenAPICameracalibrationAddObservationRequest Body;
 };
 
 class OPENAPI_API OpenAPICameraCalibrationApi::CameraCalibrationAddObservationResponse : public Response
@@ -59,7 +59,7 @@ public:
 	void SetupHttpRequest(const FHttpRequestRef& HttpRequest) const final;
 	FString ComputePath() const final;
 
-	OpenAPIV1EnableObservationRequest Body;
+	OpenAPICameracalibrationEnableObservationRequest Body;
 };
 
 class OPENAPI_API OpenAPICameraCalibrationApi::CameraCalibrationEnableObservationResponse : public Response
@@ -69,7 +69,7 @@ public:
 	void SetHttpResponseCode(EHttpResponseCodes::Type InHttpResponseCode) final;
 	bool FromJson(const TSharedPtr<FJsonValue>& JsonValue) final;
 
-    OpenAPIV1EnableObservationResponse Content;
+    OpenAPICameracalibrationEnableObservationResponse Content;
 };
 
 /* Get single MR set
@@ -93,7 +93,7 @@ public:
 	void SetHttpResponseCode(EHttpResponseCodes::Type InHttpResponseCode) final;
 	bool FromJson(const TSharedPtr<FJsonValue>& JsonValue) final;
 
-    OpenAPIV1GetMRSetResponse Content;
+    OpenAPICameracalibrationGetMRSetResponse Content;
 };
 
 /* Get Observation progress state
@@ -115,7 +115,7 @@ public:
 	void SetHttpResponseCode(EHttpResponseCodes::Type InHttpResponseCode) final;
 	bool FromJson(const TSharedPtr<FJsonValue>& JsonValue) final;
 
-    OpenAPIV1GetObservationProgressResponse Content;
+    OpenAPICameracalibrationGetObservationProgressResponse Content;
 };
 
 /* List MR sets
@@ -137,7 +137,7 @@ public:
 	void SetHttpResponseCode(EHttpResponseCodes::Type InHttpResponseCode) final;
 	bool FromJson(const TSharedPtr<FJsonValue>& JsonValue) final;
 
-    OpenAPIV1ListMRSetsResponse Content;
+    OpenAPICameracalibrationListMRSetsResponse Content;
 };
 
 /* Reset Observations
@@ -150,7 +150,7 @@ public:
 	void SetupHttpRequest(const FHttpRequestRef& HttpRequest) const final;
 	FString ComputePath() const final;
 
-	OpenAPIV1ResetAllObservationsRequest Body;
+	OpenAPICameracalibrationResetAllObservationsRequest Body;
 };
 
 class OPENAPI_API OpenAPICameraCalibrationApi::CameraCalibrationResetAllObservationsResponse : public Response

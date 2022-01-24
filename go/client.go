@@ -50,6 +50,16 @@ type APIClient struct {
 	// API Services
 
 	CameraCalibrationApi *CameraCalibrationApiService
+
+	ContentApi *ContentApiService
+
+	IndirectionsApi *IndirectionsApiService
+
+	RenderstreamApi *RenderstreamApiService
+
+	ResourcesApi *ResourcesApiService
+
+	ThumbnailsApi *ThumbnailsApiService
 }
 
 type service struct {
@@ -69,6 +79,11 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.CameraCalibrationApi = (*CameraCalibrationApiService)(&c.common)
+	c.ContentApi = (*ContentApiService)(&c.common)
+	c.IndirectionsApi = (*IndirectionsApiService)(&c.common)
+	c.RenderstreamApi = (*RenderstreamApiService)(&c.common)
+	c.ResourcesApi = (*ResourcesApiService)(&c.common)
+	c.ThumbnailsApi = (*ThumbnailsApiService)(&c.common)
 
 	return c
 }

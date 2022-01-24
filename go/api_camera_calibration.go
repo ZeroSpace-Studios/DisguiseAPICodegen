@@ -30,10 +30,10 @@ type CameraCalibrationApiService service
 type ApiCameraCalibrationAddObservationRequest struct {
 	ctx _context.Context
 	ApiService *CameraCalibrationApiService
-	body *V1AddObservationRequest
+	body *CameracalibrationAddObservationRequest
 }
 
-func (r ApiCameraCalibrationAddObservationRequest) Body(body V1AddObservationRequest) ApiCameraCalibrationAddObservationRequest {
+func (r ApiCameraCalibrationAddObservationRequest) Body(body CameracalibrationAddObservationRequest) ApiCameraCalibrationAddObservationRequest {
 	r.body = &body
 	return r
 }
@@ -140,15 +140,15 @@ func (a *CameraCalibrationApiService) CameraCalibrationAddObservationExecute(r A
 type ApiCameraCalibrationEnableObservationRequest struct {
 	ctx _context.Context
 	ApiService *CameraCalibrationApiService
-	body *V1EnableObservationRequest
+	body *CameracalibrationEnableObservationRequest
 }
 
-func (r ApiCameraCalibrationEnableObservationRequest) Body(body V1EnableObservationRequest) ApiCameraCalibrationEnableObservationRequest {
+func (r ApiCameraCalibrationEnableObservationRequest) Body(body CameracalibrationEnableObservationRequest) ApiCameraCalibrationEnableObservationRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiCameraCalibrationEnableObservationRequest) Execute() (V1EnableObservationResponse, *_nethttp.Response, error) {
+func (r ApiCameraCalibrationEnableObservationRequest) Execute() (CameracalibrationEnableObservationResponse, *_nethttp.Response, error) {
 	return r.ApiService.CameraCalibrationEnableObservationExecute(r)
 }
 
@@ -166,15 +166,15 @@ func (a *CameraCalibrationApiService) CameraCalibrationEnableObservation(ctx _co
 }
 
 // Execute executes the request
-//  @return V1EnableObservationResponse
-func (a *CameraCalibrationApiService) CameraCalibrationEnableObservationExecute(r ApiCameraCalibrationEnableObservationRequest) (V1EnableObservationResponse, *_nethttp.Response, error) {
+//  @return CameracalibrationEnableObservationResponse
+func (a *CameraCalibrationApiService) CameraCalibrationEnableObservationExecute(r ApiCameraCalibrationEnableObservationRequest) (CameracalibrationEnableObservationResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V1EnableObservationResponse
+		localVarReturnValue  CameracalibrationEnableObservationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CameraCalibrationApiService.CameraCalibrationEnableObservation")
@@ -254,7 +254,7 @@ type ApiCameraCalibrationGetMRSetRequest struct {
 }
 
 
-func (r ApiCameraCalibrationGetMRSetRequest) Execute() (V1GetMRSetResponse, *_nethttp.Response, error) {
+func (r ApiCameraCalibrationGetMRSetRequest) Execute() (CameracalibrationGetMRSetResponse, *_nethttp.Response, error) {
 	return r.ApiService.CameraCalibrationGetMRSetExecute(r)
 }
 
@@ -274,15 +274,15 @@ func (a *CameraCalibrationApiService) CameraCalibrationGetMRSet(ctx _context.Con
 }
 
 // Execute executes the request
-//  @return V1GetMRSetResponse
-func (a *CameraCalibrationApiService) CameraCalibrationGetMRSetExecute(r ApiCameraCalibrationGetMRSetRequest) (V1GetMRSetResponse, *_nethttp.Response, error) {
+//  @return CameracalibrationGetMRSetResponse
+func (a *CameraCalibrationApiService) CameraCalibrationGetMRSetExecute(r ApiCameraCalibrationGetMRSetRequest) (CameracalibrationGetMRSetResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V1GetMRSetResponse
+		localVarReturnValue  CameracalibrationGetMRSetResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CameraCalibrationApiService.CameraCalibrationGetMRSet")
@@ -357,7 +357,7 @@ type ApiCameraCalibrationGetObservationProgressRequest struct {
 }
 
 
-func (r ApiCameraCalibrationGetObservationProgressRequest) Execute() (V1GetObservationProgressResponse, *_nethttp.Response, error) {
+func (r ApiCameraCalibrationGetObservationProgressRequest) Execute() (CameracalibrationGetObservationProgressResponse, *_nethttp.Response, error) {
 	return r.ApiService.CameraCalibrationGetObservationProgressExecute(r)
 }
 
@@ -375,15 +375,15 @@ func (a *CameraCalibrationApiService) CameraCalibrationGetObservationProgress(ct
 }
 
 // Execute executes the request
-//  @return V1GetObservationProgressResponse
-func (a *CameraCalibrationApiService) CameraCalibrationGetObservationProgressExecute(r ApiCameraCalibrationGetObservationProgressRequest) (V1GetObservationProgressResponse, *_nethttp.Response, error) {
+//  @return CameracalibrationGetObservationProgressResponse
+func (a *CameraCalibrationApiService) CameraCalibrationGetObservationProgressExecute(r ApiCameraCalibrationGetObservationProgressRequest) (CameracalibrationGetObservationProgressResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V1GetObservationProgressResponse
+		localVarReturnValue  CameracalibrationGetObservationProgressResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CameraCalibrationApiService.CameraCalibrationGetObservationProgress")
@@ -457,7 +457,7 @@ type ApiCameraCalibrationListMRSetsRequest struct {
 }
 
 
-func (r ApiCameraCalibrationListMRSetsRequest) Execute() (V1ListMRSetsResponse, *_nethttp.Response, error) {
+func (r ApiCameraCalibrationListMRSetsRequest) Execute() (CameracalibrationListMRSetsResponse, *_nethttp.Response, error) {
 	return r.ApiService.CameraCalibrationListMRSetsExecute(r)
 }
 
@@ -475,15 +475,15 @@ func (a *CameraCalibrationApiService) CameraCalibrationListMRSets(ctx _context.C
 }
 
 // Execute executes the request
-//  @return V1ListMRSetsResponse
-func (a *CameraCalibrationApiService) CameraCalibrationListMRSetsExecute(r ApiCameraCalibrationListMRSetsRequest) (V1ListMRSetsResponse, *_nethttp.Response, error) {
+//  @return CameracalibrationListMRSetsResponse
+func (a *CameraCalibrationApiService) CameraCalibrationListMRSetsExecute(r ApiCameraCalibrationListMRSetsRequest) (CameracalibrationListMRSetsResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  V1ListMRSetsResponse
+		localVarReturnValue  CameracalibrationListMRSetsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CameraCalibrationApiService.CameraCalibrationListMRSets")
@@ -554,10 +554,10 @@ func (a *CameraCalibrationApiService) CameraCalibrationListMRSetsExecute(r ApiCa
 type ApiCameraCalibrationResetAllObservationsRequest struct {
 	ctx _context.Context
 	ApiService *CameraCalibrationApiService
-	body *V1ResetAllObservationsRequest
+	body *CameracalibrationResetAllObservationsRequest
 }
 
-func (r ApiCameraCalibrationResetAllObservationsRequest) Body(body V1ResetAllObservationsRequest) ApiCameraCalibrationResetAllObservationsRequest {
+func (r ApiCameraCalibrationResetAllObservationsRequest) Body(body CameracalibrationResetAllObservationsRequest) ApiCameraCalibrationResetAllObservationsRequest {
 	r.body = &body
 	return r
 }

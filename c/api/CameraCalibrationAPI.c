@@ -15,7 +15,7 @@
 // Add Observation
 //
 object_t*
-CameraCalibrationAPI_cameraCalibrationAddObservation(apiClient_t *apiClient, v1_add_observation_request_t * body )
+CameraCalibrationAPI_cameraCalibrationAddObservation(apiClient_t *apiClient, cameracalibration_add_observation_request_t * body )
 {
     list_t    *localVarQueryParameters = NULL;
     list_t    *localVarHeaderParameters = NULL;
@@ -37,7 +37,7 @@ CameraCalibrationAPI_cameraCalibrationAddObservation(apiClient_t *apiClient, v1_
     if (body != NULL)
     {
         //string
-        localVarSingleItemJSON_body = v1_add_observation_request_convertToJSON(body);
+        localVarSingleItemJSON_body = cameracalibration_add_observation_request_convertToJSON(body);
         localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_body);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -89,8 +89,8 @@ end:
 
 // Enable Observation
 //
-v1_enable_observation_response_t*
-CameraCalibrationAPI_cameraCalibrationEnableObservation(apiClient_t *apiClient, v1_enable_observation_request_t * body )
+cameracalibration_enable_observation_response_t*
+CameraCalibrationAPI_cameraCalibrationEnableObservation(apiClient_t *apiClient, cameracalibration_enable_observation_request_t * body )
 {
     list_t    *localVarQueryParameters = NULL;
     list_t    *localVarHeaderParameters = NULL;
@@ -112,7 +112,7 @@ CameraCalibrationAPI_cameraCalibrationEnableObservation(apiClient_t *apiClient, 
     if (body != NULL)
     {
         //string
-        localVarSingleItemJSON_body = v1_enable_observation_request_convertToJSON(body);
+        localVarSingleItemJSON_body = cameracalibration_enable_observation_request_convertToJSON(body);
         localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_body);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -132,7 +132,7 @@ CameraCalibrationAPI_cameraCalibrationEnableObservation(apiClient_t *apiClient, 
     }
     //nonprimitive not container
     cJSON *CameraCalibrationAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-    v1_enable_observation_response_t *elementToReturn = v1_enable_observation_response_parseFromJSON(CameraCalibrationAPIlocalVarJSON);
+    cameracalibration_enable_observation_response_t *elementToReturn = cameracalibration_enable_observation_response_parseFromJSON(CameraCalibrationAPIlocalVarJSON);
     cJSON_Delete(CameraCalibrationAPIlocalVarJSON);
     if(elementToReturn == NULL) {
         // return 0;
@@ -164,7 +164,7 @@ end:
 
 // Get single MR set
 //
-v1_get_mr_set_response_t*
+cameracalibration_get_mr_set_response_t*
 CameraCalibrationAPI_cameraCalibrationGetMRSet(apiClient_t *apiClient, char * mrsetuid )
 {
     list_t    *localVarQueryParameters = NULL;
@@ -207,7 +207,7 @@ CameraCalibrationAPI_cameraCalibrationGetMRSet(apiClient_t *apiClient, char * mr
     }
     //nonprimitive not container
     cJSON *CameraCalibrationAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-    v1_get_mr_set_response_t *elementToReturn = v1_get_mr_set_response_parseFromJSON(CameraCalibrationAPIlocalVarJSON);
+    cameracalibration_get_mr_set_response_t *elementToReturn = cameracalibration_get_mr_set_response_parseFromJSON(CameraCalibrationAPIlocalVarJSON);
     cJSON_Delete(CameraCalibrationAPIlocalVarJSON);
     if(elementToReturn == NULL) {
         // return 0;
@@ -235,7 +235,7 @@ end:
 
 // Get Observation progress state
 //
-v1_get_observation_progress_response_t*
+cameracalibration_get_observation_progress_response_t*
 CameraCalibrationAPI_cameraCalibrationGetObservationProgress(apiClient_t *apiClient)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -268,7 +268,7 @@ CameraCalibrationAPI_cameraCalibrationGetObservationProgress(apiClient_t *apiCli
     }
     //nonprimitive not container
     cJSON *CameraCalibrationAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-    v1_get_observation_progress_response_t *elementToReturn = v1_get_observation_progress_response_parseFromJSON(CameraCalibrationAPIlocalVarJSON);
+    cameracalibration_get_observation_progress_response_t *elementToReturn = cameracalibration_get_observation_progress_response_parseFromJSON(CameraCalibrationAPIlocalVarJSON);
     cJSON_Delete(CameraCalibrationAPIlocalVarJSON);
     if(elementToReturn == NULL) {
         // return 0;
@@ -295,7 +295,7 @@ end:
 
 // List MR sets
 //
-v1_list_mr_sets_response_t*
+cameracalibration_list_mr_sets_response_t*
 CameraCalibrationAPI_cameraCalibrationListMRSets(apiClient_t *apiClient)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -328,7 +328,7 @@ CameraCalibrationAPI_cameraCalibrationListMRSets(apiClient_t *apiClient)
     }
     //nonprimitive not container
     cJSON *CameraCalibrationAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-    v1_list_mr_sets_response_t *elementToReturn = v1_list_mr_sets_response_parseFromJSON(CameraCalibrationAPIlocalVarJSON);
+    cameracalibration_list_mr_sets_response_t *elementToReturn = cameracalibration_list_mr_sets_response_parseFromJSON(CameraCalibrationAPIlocalVarJSON);
     cJSON_Delete(CameraCalibrationAPIlocalVarJSON);
     if(elementToReturn == NULL) {
         // return 0;
@@ -356,7 +356,7 @@ end:
 // Reset Observations
 //
 object_t*
-CameraCalibrationAPI_cameraCalibrationResetAllObservations(apiClient_t *apiClient, v1_reset_all_observations_request_t * body )
+CameraCalibrationAPI_cameraCalibrationResetAllObservations(apiClient_t *apiClient, cameracalibration_reset_all_observations_request_t * body )
 {
     list_t    *localVarQueryParameters = NULL;
     list_t    *localVarHeaderParameters = NULL;
@@ -378,7 +378,7 @@ CameraCalibrationAPI_cameraCalibrationResetAllObservations(apiClient_t *apiClien
     if (body != NULL)
     {
         //string
-        localVarSingleItemJSON_body = v1_reset_all_observations_request_convertToJSON(body);
+        localVarSingleItemJSON_body = cameracalibration_reset_all_observations_request_convertToJSON(body);
         localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_body);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces

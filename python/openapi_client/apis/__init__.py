@@ -15,3 +15,8 @@
 
 # Import APIs into API package:
 from openapi_client.api.camera_calibration_api import CameraCalibrationApi
+from openapi_client.api.content_api import ContentApi
+from openapi_client.api.indirections_api import IndirectionsApi
+from openapi_client.api.renderstream_api import RenderstreamApi
+from openapi_client.api.resources_api import ResourcesApi
+from openapi_client.api.thumbnails_api import ThumbnailsApi
