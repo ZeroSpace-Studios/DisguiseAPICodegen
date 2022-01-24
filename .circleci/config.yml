@@ -20,10 +20,10 @@ jobs:
       - run:
           name: "Generate Code"
           command: |
-                    java -jar ./openapi-generator-cli.jar generate -i ./cameracalibration.swagger.json -g python -o ./python
-                    java -jar ./openapi-generator-cli.jar generate -i ./cameracalibration.swagger.json -g go -o ./go
-                    java -jar ./openapi-generator-cli.jar generate -i ./cameracalibration.swagger.json -g c -o ./c
-                    java -jar ./openapi-generator-cli.jar generate -i ./cameracalibration.swagger.json -g cpp-ue4 -o ./ue
+                    java -jar ./openapi-generator-cli.jar generate -i ./d3api.swagger.json -g python -o ./python
+                    java -jar ./openapi-generator-cli.jar generate -i ./d3api.swagger.json -g go -o ./go
+                    java -jar ./openapi-generator-cli.jar generate -i ./d3api.swagger.json -g c -o ./c
+                    java -jar ./openapi-generator-cli.jar generate -i ./d3api.swagger.json -g cpp-ue4 -o ./ue
       - run:
           name: "Commit"
           command: |

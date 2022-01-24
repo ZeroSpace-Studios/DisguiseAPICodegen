@@ -1,0 +1,1681 @@
+{
+  "swagger": "2.0", 
+  "info": {
+    "version": "1.4.0", 
+    "title": "d3 API"
+  }, 
+  "consumes": [
+    "application/json"
+  ], 
+  "produces": [
+    "application/json"
+  ], 
+  "paths": {
+    "/cameracalibration/addobservation": {
+      "post": {
+        "summary": "Add Observation", 
+        "operationId": "CameraCalibration_AddObservation", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/cameracalibrationAddObservationResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "body", 
+            "in": "body", 
+            "required": true, 
+            "schema": {
+              "$ref": "#/definitions/cameracalibrationAddObservationRequest"
+            }
+          }
+        ], 
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    }, 
+    "/cameracalibration/enableobservation": {
+      "post": {
+        "summary": "Enable Observation", 
+        "operationId": "CameraCalibration_EnableObservation", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/cameracalibrationEnableObservationResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "body", 
+            "in": "body", 
+            "required": true, 
+            "schema": {
+              "$ref": "#/definitions/cameracalibrationEnableObservationRequest"
+            }
+          }
+        ], 
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    }, 
+    "/cameracalibration/mrsets": {
+      "get": {
+        "summary": "List MR sets", 
+        "operationId": "CameraCalibration_ListMRSets", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/cameracalibrationListMRSetsResponse"
+            }
+          }
+        }, 
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    }, 
+    "/cameracalibration/mrsets/{mrsetuid}": {
+      "get": {
+        "summary": "Get single MR set", 
+        "operationId": "CameraCalibration_GetMRSet", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/cameracalibrationGetMRSetResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "mrsetuid", 
+            "description": "MR Set UID", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }
+        ], 
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    }, 
+    "/cameracalibration/observationprogress": {
+      "get": {
+        "summary": "Get Observation progress state", 
+        "operationId": "CameraCalibration_GetObservationProgress", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/cameracalibrationGetObservationProgressResponse"
+            }
+          }
+        }, 
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    }, 
+    "/cameracalibration/resetallobservations": {
+      "post": {
+        "summary": "Reset Observations", 
+        "operationId": "CameraCalibration_ResetAllObservations", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/cameracalibrationResetAllObservationsResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "body", 
+            "in": "body", 
+            "required": true, 
+            "schema": {
+              "$ref": "#/definitions/cameracalibrationResetAllObservationsRequest"
+            }
+          }
+        ], 
+        "tags": [
+          "CameraCalibration"
+        ]
+      }
+    }, 
+    "/indirections": {
+      "get": {
+        "summary": "List all indirections", 
+        "operationId": "Indirections_ListIndirections", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/indirectionsListIndirectionsResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "resourceType", 
+            "description": "type of resource.", 
+            "in": "query", 
+            "required": false, 
+            "type": "string"
+          }
+        ], 
+        "tags": [
+          "Indirections"
+        ]
+      }, 
+      "put": {
+        "summary": "Update one or more indirections", 
+        "operationId": "Indirections_SetIndirections2", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/indirectionsSetIndirectionsResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "body", 
+            "in": "body", 
+            "required": true, 
+            "schema": {
+              "$ref": "#/definitions/indirectionsSetIndirectionsRequest"
+            }
+          }
+        ], 
+        "tags": [
+          "Indirections"
+        ], 
+        "deprecated": true
+      }
+    }, 
+    "/indirections/set": {
+      "post": {
+        "summary": "Update one or more indirections", 
+        "operationId": "Indirections_SetIndirections", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/indirectionsSetIndirectionsResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "body", 
+            "in": "body", 
+            "required": true, 
+            "schema": {
+              "$ref": "#/definitions/indirectionsSetIndirectionsRequest"
+            }
+          }
+        ], 
+        "tags": [
+          "Indirections"
+        ]
+      }
+    }, 
+    "/indirections/{uid}": {
+      "get": {
+        "summary": "Get single indirection", 
+        "operationId": "Indirections_GetIndirection", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/indirectionsGetIndirectionResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "uid", 
+            "description": "uid of indirection", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }
+        ], 
+        "tags": [
+          "Indirections"
+        ]
+      }
+    }, 
+    "/content/mediametadata": {
+      "get": {
+        "summary": "List media meta data", 
+        "operationId": "Content_ListMediaMetadata", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/contentListMediaMetadataResponse"
+            }
+          }
+        }, 
+        "tags": [
+          "Content"
+        ]
+      }
+    }, 
+    "/content/mediametadata/{uid}": {
+      "get": {
+        "summary": "Get single media meta data", 
+        "operationId": "Content_GetMediaMetadata", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/contentGetMediaMetadataResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "uid", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }
+        ], 
+        "tags": [
+          "Content"
+        ]
+      }
+    }, 
+    "/renderstream/clusters": {
+      "get": {
+        "summary": "List all ClusterPools", 
+        "operationId": "Renderstream_ListClusters", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamListClustersResponse"
+            }
+          }
+        }, 
+        "tags": [
+          "Renderstream"
+        ]
+      }
+    }, 
+    "/renderstream/clusters/{name}": {
+      "get": {
+        "summary": "Get single ClusterPool", 
+        "operationId": "Renderstream_GetCluster", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamGetClusterResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "name", 
+            "in": "path", 
+            "required": true, 
+            "type": "string"
+          }
+        ], 
+        "tags": [
+          "Renderstream"
+        ]
+      }
+    }, 
+    "/renderstream/failoverinstance/{workloadid}/{instanceindex}": {
+      "post": {
+        "summary": "Fail over a single workload instance", 
+        "operationId": "Renderstream_FailoverWorkloadInstance", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamFailoverWorkloadInstanceResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "workloadid", 
+            "description": "ID of the workload this instance belongs to", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }, 
+          {
+            "name": "instanceindex", 
+            "description": "Index into the Workload's list of IDs", 
+            "in": "path", 
+            "required": true, 
+            "type": "integer", 
+            "format": "int64"
+          }
+        ], 
+        "tags": [
+          "Renderstream"
+        ]
+      }, 
+      "put": {
+        "summary": "Fail over a single workload instance", 
+        "operationId": "Renderstream_FailoverWorkloadInstance2", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamFailoverWorkloadInstanceResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "workloadid", 
+            "description": "ID of the workload this instance belongs to", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }, 
+          {
+            "name": "instanceindex", 
+            "description": "Index into the Workload's list of IDs", 
+            "in": "path", 
+            "required": true, 
+            "type": "integer", 
+            "format": "int64"
+          }
+        ], 
+        "tags": [
+          "Renderstream"
+        ], 
+        "deprecated": true
+      }
+    }, 
+    "/renderstream/failovermachine/{name}": {
+      "post": {
+        "summary": "Fail over a single RenderstreamMachine, and all its workload instances", 
+        "operationId": "Renderstream_FailoverRenderMachine", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamFailoverRenderMachineResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "name", 
+            "description": "Name of the render machine to fail over", 
+            "in": "path", 
+            "required": true, 
+            "type": "string"
+          }
+        ], 
+        "tags": [
+          "Renderstream"
+        ]
+      }, 
+      "put": {
+        "summary": "Fail over a single RenderstreamMachine, and all its workload instances", 
+        "operationId": "Renderstream_FailoverRenderMachine2", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamFailoverRenderMachineResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "name", 
+            "description": "Name of the render machine to fail over", 
+            "in": "path", 
+            "required": true, 
+            "type": "string"
+          }
+        ], 
+        "tags": [
+          "Renderstream"
+        ], 
+        "deprecated": true
+      }
+    }, 
+    "/renderstream/machines": {
+      "get": {
+        "summary": "List all RS machines (both current render machines and understudies)", 
+        "operationId": "Renderstream_ListRenderMachines", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamListRenderMachinesResponse"
+            }
+          }
+        }, 
+        "tags": [
+          "Renderstream"
+        ]
+      }
+    }, 
+    "/renderstream/machines/{name}": {
+      "get": {
+        "summary": "Get single RenderstreamMachine", 
+        "operationId": "Renderstream_GetRenderMachine", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamGetRenderMachineResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "name", 
+            "in": "path", 
+            "required": true, 
+            "type": "string"
+          }
+        ], 
+        "tags": [
+          "Renderstream"
+        ]
+      }
+    }, 
+    "/renderstream/workloadinstances/{workloadid}/{instanceindex}": {
+      "get": {
+        "summary": "Get single Workload Instance", 
+        "operationId": "Renderstream_GetWorkloadInstance", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamGetWorkloadInstanceResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "workloadid", 
+            "description": "ID of the workload this instance belongs to", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }, 
+          {
+            "name": "instanceindex", 
+            "description": "Index into the Workload's list of IDs", 
+            "in": "path", 
+            "required": true, 
+            "type": "integer", 
+            "format": "int64"
+          }
+        ], 
+        "tags": [
+          "Renderstream"
+        ]
+      }
+    }, 
+    "/renderstream/workloads": {
+      "get": {
+        "summary": "List all RS Workloads", 
+        "operationId": "Renderstream_ListWorkloads", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamListWorkloadsResponse"
+            }
+          }
+        }, 
+        "tags": [
+          "Renderstream"
+        ]
+      }
+    }, 
+    "/renderstream/workloads/{id}": {
+      "get": {
+        "summary": "Get single Workload", 
+        "operationId": "Renderstream_GetWorkload", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamGetWorkloadResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "id", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }
+        ], 
+        "tags": [
+          "Renderstream"
+        ]
+      }
+    }, 
+    "/renderstream/workloads/{id}/start": {
+      "post": {
+        "summary": "Start a workload", 
+        "operationId": "Renderstream_StartWorkload", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamStartWorkloadResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "id", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }
+        ], 
+        "tags": [
+          "Renderstream"
+        ]
+      }
+    }, 
+    "/renderstream/workloads/{id}/stop": {
+      "post": {
+        "summary": "Stop a workload", 
+        "operationId": "Renderstream_StopWorkload", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamStopWorkloadResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "id", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }
+        ], 
+        "tags": [
+          "Renderstream"
+        ]
+      }
+    }, 
+    "/renderstream/workloads/{id}/sync": {
+      "post": {
+        "summary": "Sync a workload", 
+        "operationId": "Renderstream_SyncWorkload", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/renderstreamSyncWorkloadResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "id", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }
+        ], 
+        "tags": [
+          "Renderstream"
+        ]
+      }
+    }, 
+    "/resources": {
+      "get": {
+        "summary": "List resources by type", 
+        "operationId": "Resources_ListResources", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/resourcesListResourcesResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "type", 
+            "description": "resource type name.", 
+            "in": "query", 
+            "required": false, 
+            "type": "string"
+          }, 
+          {
+            "name": "search", 
+            "description": "search substring to look for in the resource name.", 
+            "in": "query", 
+            "required": false, 
+            "type": "string"
+          }
+        ], 
+        "tags": [
+          "Resources"
+        ]
+      }
+    }, 
+    "/resources/{uid}": {
+      "get": {
+        "summary": "Get single resource", 
+        "operationId": "Resources_GetResource", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/resourcesGetResourceResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "uid", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }
+        ], 
+        "tags": [
+          "Resources"
+        ]
+      }
+    }, 
+    "/thumbnail/{uid}": {
+      "get": {
+        "summary": "Get thumbnail for a resource", 
+        "operationId": "Thumbnails_GetThumbnail", 
+        "responses": {
+          "200": {
+            "description": "A successful response.", 
+            "schema": {
+              "$ref": "#/definitions/thumbnailsGetThumbnailResponse"
+            }
+          }
+        }, 
+        "parameters": [
+          {
+            "name": "uid", 
+            "description": "unique resource id", 
+            "in": "path", 
+            "required": true, 
+            "type": "string", 
+            "format": "uint64"
+          }, 
+          {
+            "name": "width", 
+            "description": "width of thumbnail.", 
+            "in": "query", 
+            "required": false, 
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          {
+            "name": "height", 
+            "description": "height of thumbnail.", 
+            "in": "query", 
+            "required": false, 
+            "type": "integer", 
+            "format": "int64"
+          }
+        ], 
+        "tags": [
+          "Thumbnails"
+        ]
+      }
+    }
+  }, 
+  "definitions": {
+    "cameracalibrationAddObservationRequest": {
+      "type": "object", 
+      "properties": {
+        "cameraUid": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "Camera UID"
+        }
+      }
+    }, 
+    "cameracalibrationAddObservationResponse": {
+      "type": "object"
+    }, 
+    "cameracalibrationCameraInfo": {
+      "type": "object", 
+      "properties": {
+        "uid": {
+          "type": "string", 
+          "format": "uint64"
+        }, 
+        "name": {
+          "type": "string"
+        }, 
+        "observations": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/cameracalibrationObservationInfo"
+          }
+        }
+      }
+    }, 
+    "cameracalibrationEnableObservationRequest": {
+      "type": "object", 
+      "properties": {
+        "observationUid": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "Observation UID"
+        }, 
+        "enabled": {
+          "type": "boolean"
+        }
+      }
+    }, 
+    "cameracalibrationEnableObservationResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "type": "boolean"
+        }
+      }
+    }, 
+    "cameracalibrationFloat3": {
+      "type": "object", 
+      "properties": {
+        "x": {
+          "type": "number", 
+          "format": "float"
+        }, 
+        "y": {
+          "type": "number", 
+          "format": "float"
+        }, 
+        "z": {
+          "type": "number", 
+          "format": "float"
+        }
+      }
+    }, 
+    "cameracalibrationGetMRSetResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/cameracalibrationMRSetInfo"
+        }
+      }
+    }, 
+    "cameracalibrationGetObservationProgressResponse": {
+      "type": "object", 
+      "properties": {
+        "inProgress": {
+          "type": "boolean"
+        }
+      }
+    }, 
+    "cameracalibrationListMRSetsResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/cameracalibrationMRSetInfo"
+          }
+        }
+      }
+    }, 
+    "cameracalibrationMRSetInfo": {
+      "type": "object", 
+      "properties": {
+        "uid": {
+          "type": "string", 
+          "format": "uint64"
+        }, 
+        "name": {
+          "type": "string"
+        }, 
+        "targetCamera": {
+          "$ref": "#/definitions/cameracalibrationCameraInfo"
+        }
+      }
+    }, 
+    "cameracalibrationObservationInfo": {
+      "type": "object", 
+      "properties": {
+        "uid": {
+          "type": "string", 
+          "format": "uint64"
+        }, 
+        "description": {
+          "type": "string"
+        }, 
+        "trackedPos": {
+          "$ref": "#/definitions/cameracalibrationFloat3"
+        }, 
+        "trackedRot": {
+          "$ref": "#/definitions/cameracalibrationFloat3"
+        }, 
+        "trackedZoom": {
+          "type": "number", 
+          "format": "float"
+        }, 
+        "trackedFocus": {
+          "type": "number", 
+          "format": "float"
+        }, 
+        "isEnabled": {
+          "type": "boolean"
+        }, 
+        "isPrimary": {
+          "type": "boolean"
+        }
+      }
+    }, 
+    "cameracalibrationResetAllObservationsRequest": {
+      "type": "object", 
+      "properties": {
+        "cameraUid": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "Camera UID"
+        }
+      }
+    }, 
+    "cameracalibrationResetAllObservationsResponse": {
+      "type": "object"
+    }, 
+    "SetIndirectionsRequestAssignment": {
+      "type": "object", 
+      "properties": {
+        "uid": {
+          "type": "string", 
+          "format": "uint64"
+        }, 
+        "resourceIndex": {
+          "type": "integer", 
+          "format": "int64", 
+          "title": "oneof field. index of resource for list indirection (0 based)"
+        }, 
+        "resourceUid": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "oneof field. uid of resource for manual indirection"
+        }
+      }
+    }, 
+    "SetIndirectionsResponseFailedAssignment": {
+      "type": "object", 
+      "properties": {
+        "uid": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "uid of indirection"
+        }, 
+        "resourceIndex": {
+          "type": "integer", 
+          "format": "int64", 
+          "title": "oneof field. index of resource for list indirection (0 based)"
+        }, 
+        "resourceUid": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "oneof field. uid of resource for manual indirection"
+        }, 
+        "error": {
+          "type": "string", 
+          "title": "reason for failure"
+        }
+      }
+    }, 
+    "indirectionsGetIndirectionResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/indirectionsIndirection"
+        }
+      }
+    }, 
+    "indirectionsIndirection": {
+      "type": "object", 
+      "properties": {
+        "uid": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "uid of indirection"
+        }, 
+        "resourceType": {
+          "type": "string", 
+          "title": "resource type that indirection can be assigned to"
+        }, 
+        "name": {
+          "type": "string", 
+          "title": "unqualified name in d3"
+        }, 
+        "manualIndirection": {
+          "$ref": "#/definitions/indirectionsManualIndirection", 
+          "title": "oneof field"
+        }, 
+        "listIndirection": {
+          "$ref": "#/definitions/indirectionsListIndirection", 
+          "title": "oneof field"
+        }
+      }
+    }, 
+    "indirectionsListIndirection": {
+      "type": "object", 
+      "properties": {
+        "resourceIndex": {
+          "type": "integer", 
+          "format": "int64", 
+          "title": "index of selected resource"
+        }, 
+        "resourceUids": {
+          "type": "array", 
+          "items": {
+            "type": "string", 
+            "format": "uint64"
+          }, 
+          "title": "uids of selectable resources"
+        }
+      }
+    }, 
+    "indirectionsListIndirectionsResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/indirectionsIndirection"
+          }
+        }
+      }
+    }, 
+    "indirectionsManualIndirection": {
+      "type": "object", 
+      "properties": {
+        "resourceUid": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "uid of selected resource. pass 0 if you want to set ManualIndirection to None"
+        }
+      }
+    }, 
+    "indirectionsSetIndirectionsRequest": {
+      "type": "object", 
+      "properties": {
+        "assignments": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/SetIndirectionsRequestAssignment"
+          }, 
+          "title": "list of indirection assignments"
+        }
+      }
+    }, 
+    "indirectionsSetIndirectionsResponse": {
+      "type": "object", 
+      "properties": {
+        "failedAssignments": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/SetIndirectionsResponseFailedAssignment"
+          }, 
+          "title": "indirection assignments which failed"
+        }
+      }
+    }, 
+    "contentAudioMetadata": {
+      "type": "object", 
+      "properties": {
+        "sampleRate": {
+          "type": "integer", 
+          "format": "int64"
+        }, 
+        "nChannels": {
+          "type": "integer", 
+          "format": "int64"
+        }, 
+        "nSamples": {
+          "type": "integer", 
+          "format": "int64"
+        }, 
+        "codecName": {
+          "type": "string"
+        }, 
+        "codecInfo": {
+          "type": "string"
+        }
+      }
+    }, 
+    "contentGetMediaMetadataResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/contentMediaMetadata"
+        }
+      }
+    }, 
+    "contentImageMetadata": {
+      "type": "object", 
+      "properties": {
+        "resolution": {
+          "$ref": "#/definitions/contentResolution"
+        }, 
+        "bitsPerPixel": {
+          "type": "integer", 
+          "format": "int64"
+        }, 
+        "codec": {
+          "type": "string"
+        }, 
+        "hasAlpha": {
+          "type": "boolean"
+        }
+      }
+    }, 
+    "contentImageSequenceMetadata": {
+      "type": "object", 
+      "properties": {
+        "imageMetadata": {
+          "$ref": "#/definitions/contentImageMetadata"
+        }, 
+        "fps": {
+          "type": "number", 
+          "format": "float"
+        }, 
+        "nFrames": {
+          "type": "integer", 
+          "format": "int64"
+        }
+      }
+    }, 
+    "contentListMediaMetadataResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/contentMediaMetadata"
+          }
+        }
+      }
+    }, 
+    "contentMediaMetadata": {
+      "type": "object", 
+      "properties": {
+        "uid": {
+          "type": "string", 
+          "format": "uint64"
+        }, 
+        "videoMetadata": {
+          "$ref": "#/definitions/contentVideoMetadata"
+        }, 
+        "audioMetadata": {
+          "$ref": "#/definitions/contentAudioMetadata"
+        }, 
+        "meshMetadata": {
+          "$ref": "#/definitions/contentMeshMetadata"
+        }
+      }
+    }, 
+    "contentMeshMetadata": {
+      "type": "object", 
+      "properties": {
+        "nVertices": {
+          "type": "integer", 
+          "format": "int64"
+        }, 
+        "nTriangles": {
+          "type": "integer", 
+          "format": "int64"
+        }, 
+        "centroid": {
+          "$ref": "#/definitions/contentVector3"
+        }, 
+        "extentsMin": {
+          "$ref": "#/definitions/contentVector3"
+        }, 
+        "extentsMax": {
+          "$ref": "#/definitions/contentVector3"
+        }
+      }
+    }, 
+    "contentResolution": {
+      "type": "object", 
+      "properties": {
+        "width": {
+          "type": "integer", 
+          "format": "int64"
+        }, 
+        "height": {
+          "type": "integer", 
+          "format": "int64"
+        }
+      }
+    }, 
+    "contentVector3": {
+      "type": "object", 
+      "properties": {
+        "x": {
+          "type": "number", 
+          "format": "float"
+        }, 
+        "y": {
+          "type": "number", 
+          "format": "float"
+        }, 
+        "z": {
+          "type": "number", 
+          "format": "float"
+        }
+      }
+    }, 
+    "contentVideoMetadata": {
+      "type": "object", 
+      "properties": {
+        "imageSequenceMetadata": {
+          "$ref": "#/definitions/contentImageSequenceMetadata"
+        }, 
+        "hasAudio": {
+          "type": "boolean"
+        }, 
+        "audioBigEndian": {
+          "type": "boolean"
+        }, 
+        "audioSampleRate": {
+          "type": "number", 
+          "format": "float"
+        }
+      }
+    }, 
+    "RenderMachineInfoStatus": {
+      "type": "string", 
+      "enum": [
+        "UNKNOWN", 
+        "OFFLINE", 
+        "OK", 
+        "STANDBY", 
+        "FAILED"
+      ], 
+      "default": "UNKNOWN"
+    }, 
+    "StreamInfoStreamStatus": {
+      "type": "string", 
+      "enum": [
+        "None", 
+        "Good", 
+        "DroppingFrames", 
+        "BadStream", 
+        "NoStream", 
+        "Offline"
+      ], 
+      "default": "None"
+    }, 
+    "WorkloadInstanceInfoWorkloadInstanceStatus": {
+      "type": "string", 
+      "enum": [
+        "UNKNOWN", 
+        "CRASHED", 
+        "ERROR", 
+        "STOPPING", 
+        "STOPPED", 
+        "LAUNCHING", 
+        "STARTING", 
+        "READY", 
+        "STANDBY", 
+        "RUNNING"
+      ], 
+      "default": "UNKNOWN"
+    }, 
+    "renderstreamAdapterInfo": {
+      "type": "object", 
+      "properties": {
+        "name": {
+          "type": "string", 
+          "title": "Adapter name"
+        }, 
+        "ipAddress": {
+          "type": "string", 
+          "title": "IP Address"
+        }, 
+        "subnetMask": {
+          "type": "string", 
+          "title": "Subnet mask"
+        }
+      }
+    }, 
+    "renderstreamAssetInfo": {
+      "type": "object", 
+      "properties": {
+        "name": {
+          "type": "string", 
+          "title": "Asset name"
+        }, 
+        "contentSourceMachineName": {
+          "type": "string", 
+          "title": "Single Content Source machine"
+        }
+      }, 
+      "title": "NB name is the only field shared between RenderStreamAsset and RenderStream::AssetInfo"
+    }, 
+    "renderstreamClippingRegion": {
+      "type": "object", 
+      "properties": {
+        "left": {
+          "type": "number", 
+          "format": "float"
+        }, 
+        "right": {
+          "type": "number", 
+          "format": "float"
+        }, 
+        "top": {
+          "type": "number", 
+          "format": "float"
+        }, 
+        "bottom": {
+          "type": "number", 
+          "format": "float"
+        }
+      }
+    }, 
+    "renderstreamClusterInfo": {
+      "type": "object", 
+      "properties": {
+        "name": {
+          "type": "string", 
+          "title": "Unique cluster name"
+        }, 
+        "renderMachines": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/renderstreamRenderMachineInfo"
+          }, 
+          "title": "List of render machines currently in use"
+        }, 
+        "contentSourceMachine": {
+          "$ref": "#/definitions/renderstreamRenderMachineInfo", 
+          "title": "Single Content Source machine"
+        }, 
+        "understudies": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/renderstreamRenderMachineInfo"
+          }, 
+          "title": "List of render machines currently acting as understudies"
+        }
+      }
+    }, 
+    "renderstreamFailoverInfo": {
+      "type": "object", 
+      "properties": {
+        "workloadID": {
+          "type": "string", 
+          "format": "uint64"
+        }, 
+        "failedInstanceIndex": {
+          "type": "integer", 
+          "format": "int64"
+        }, 
+        "coveringInstanceIndex": {
+          "type": "integer", 
+          "format": "int64"
+        }, 
+        "coveringMachineName": {
+          "type": "string"
+        }, 
+        "errorString": {
+          "type": "string"
+        }, 
+        "streams": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/renderstreamStreamInfo"
+          }, 
+          "title": "Failed-over streams"
+        }
+      }
+    }, 
+    "renderstreamFailoverRenderMachineResponse": {
+      "type": "object", 
+      "properties": {
+        "allInstancesFailedover": {
+          "type": "boolean", 
+          "title": "Whether or not failover occurred successfully for every instance"
+        }, 
+        "failoverMappings": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/renderstreamFailoverInfo"
+          }, 
+          "title": "Information about the understudies taking over"
+        }
+      }
+    }, 
+    "renderstreamFailoverWorkloadInstanceResponse": {
+      "type": "object", 
+      "properties": {
+        "failoverMapping": {
+          "$ref": "#/definitions/renderstreamFailoverInfo", 
+          "title": "Information about which instance took over"
+        }
+      }
+    }, 
+    "renderstreamGetClusterResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/renderstreamClusterInfo"
+        }
+      }
+    }, 
+    "renderstreamGetRenderMachineResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/renderstreamRenderMachineInfo"
+        }
+      }
+    }, 
+    "renderstreamGetWorkloadInstanceResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/renderstreamWorkloadInstanceInfo"
+        }
+      }
+    }, 
+    "renderstreamGetWorkloadResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/renderstreamWorkloadInfo"
+        }
+      }
+    }, 
+    "renderstreamListClustersResponse": {
+      "type": "object", 
+      "properties": {
+        "clusters": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/renderstreamClusterInfo"
+          }
+        }
+      }
+    }, 
+    "renderstreamListRenderMachinesResponse": {
+      "type": "object", 
+      "properties": {
+        "machines": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/renderstreamRenderMachineInfo"
+          }
+        }
+      }
+    }, 
+    "renderstreamListWorkloadsResponse": {
+      "type": "object", 
+      "properties": {
+        "workloads": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/renderstreamWorkloadInfo"
+          }
+        }
+      }
+    }, 
+    "renderstreamRenderMachineInfo": {
+      "type": "object", 
+      "properties": {
+        "name": {
+          "type": "string", 
+          "title": "Unique machine name"
+        }, 
+        "statusString": {
+          "type": "string", 
+          "title": "Machine status as a human readable string"
+        }, 
+        "status": {
+          "$ref": "#/definitions/RenderMachineInfoStatus", 
+          "title": "Current status flag - more of a headline rather than a detailed description"
+        }, 
+        "online": {
+          "type": "boolean", 
+          "title": "Whether the machine is online or not"
+        }, 
+        "loadFactor": {
+          "type": "number", 
+          "format": "float", 
+          "title": "Load factor relative to other render nodes"
+        }, 
+        "preferredAdapter": {
+          "type": "string", 
+          "title": "Preferred synchronisation adapter"
+        }, 
+        "networkAdapters": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/renderstreamAdapterInfo"
+          }, 
+          "title": "Available network adapters"
+        }, 
+        "streams": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/renderstreamStreamInfo"
+          }, 
+          "title": "Running streams"
+        }, 
+        "assets": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/renderstreamAssetInfo"
+          }, 
+          "title": "Available assets"
+        }
+      }
+    }, 
+    "renderstreamStartWorkloadResponse": {
+      "type": "object"
+    }, 
+    "renderstreamStopWorkloadResponse": {
+      "type": "object"
+    }, 
+    "renderstreamStreamInfo": {
+      "type": "object", 
+      "properties": {
+        "name": {
+          "type": "string", 
+          "title": "Stream name"
+        }, 
+        "workloadID": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "Workload that this stream forms part of"
+        }, 
+        "machineName": {
+          "type": "string", 
+          "title": "Source machine of the Stream"
+        }, 
+        "status": {
+          "$ref": "#/definitions/StreamInfoStreamStatus", 
+          "title": "Status of the stream"
+        }, 
+        "receivingLocally": {
+          "type": "boolean", 
+          "title": "Did the stream receive frames locally in the last 0.5s"
+        }, 
+        "clipping": {
+          "$ref": "#/definitions/renderstreamClippingRegion", 
+          "title": "Clipping region for stream"
+        }
+      }
+    }, 
+    "renderstreamSyncWorkloadResponse": {
+      "type": "object"
+    }, 
+    "renderstreamWorkloadInfo": {
+      "type": "object", 
+      "properties": {
+        "id": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "UID of the workload; matches that of the RenderStreamCluster"
+        }, 
+        "friendlyName": {
+          "type": "string", 
+          "title": "'Friendly' human readable unique name"
+        }, 
+        "asset": {
+          "$ref": "#/definitions/renderstreamAssetInfo", 
+          "title": "Asset the workload is running"
+        }, 
+        "status": {
+          "$ref": "#/definitions/WorkloadInstanceInfoWorkloadInstanceStatus", 
+          "title": "Worst individual instance status"
+        }, 
+        "instances": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/renderstreamWorkloadInstanceInfo"
+          }, 
+          "title": "Rendering instances, including understudies"
+        }, 
+        "engineSync": {
+          "type": "boolean", 
+          "title": "Is engine synchronisation enabled?"
+        }, 
+        "layerUID": {
+          "type": "string", 
+          "format": "uint64", 
+          "description": "The UID of the Layer the workload is started from."
+        }, 
+        "locationDescription": {
+          "type": "string", 
+          "description": "Description of the location of the workload."
+        }
+      }
+    }, 
+    "renderstreamWorkloadInstanceInfo": {
+      "type": "object", 
+      "properties": {
+        "workloadid": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "ID of the workload this instance belongs to"
+        }, 
+        "instanceid": {
+          "type": "integer", 
+          "format": "int64", 
+          "title": "ID in the workload's array of instances"
+        }, 
+        "processRunning": {
+          "type": "boolean", 
+          "title": "Is the process running"
+        }, 
+        "droppingFrames": {
+          "type": "boolean", 
+          "title": "Is the process dropping frames"
+        }, 
+        "status": {
+          "$ref": "#/definitions/WorkloadInstanceInfoWorkloadInstanceStatus"
+        }, 
+        "droppingInputFrames": {
+          "type": "boolean", 
+          "title": "Is the process dropping input frames"
+        }
+      }
+    }, 
+    "resourcesGetResourceResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/resourcesResourceInfo"
+        }
+      }
+    }, 
+    "resourcesListResourcesResponse": {
+      "type": "object", 
+      "properties": {
+        "result": {
+          "type": "array", 
+          "items": {
+            "$ref": "#/definitions/resourcesResourceInfo"
+          }
+        }
+      }
+    }, 
+    "resourcesResourceInfo": {
+      "type": "object", 
+      "properties": {
+        "uid": {
+          "type": "string", 
+          "format": "uint64", 
+          "title": "unique identifier; treat as string in javascript"
+        }, 
+        "name": {
+          "type": "string", 
+          "title": "unqualified name in d3"
+        }, 
+        "path": {
+          "type": "string", 
+          "title": "internal resource path e.g /object/videoclip/someVideo.mov"
+        }, 
+        "type": {
+          "type": "string", 
+          "title": "internal type name"
+        }
+      }
+    }, 
+    "thumbnailsGetThumbnailResponse": {
+      "type": "object", 
+      "properties": {
+        "path": {
+          "type": "string", 
+          "title": "path of thumbnail"
+        }
+      }
+    }
+  }, 
+  "basePath": "/api/v1"
+}
