@@ -1,124 +1,315 @@
 openapi: 3.0.1
 info:
   title: d3 API
-  version: 1.4.0
+  version: 2.0.0
 servers:
-- url: /api/v1
+- url: /api/session
 paths:
-  /cameracalibration/addobservation:
+  /colour/cdl:
     post:
-      operationId: CameraCalibration_AddObservation
+      operationId: Colour_SetCDL
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/cameracalibrationAddObservationRequest'
+              $ref: '#/components/schemas/colourSetCDLRequest'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/cameracalibrationAddObservationResponse'
+                $ref: '#/components/schemas/d3apiEmptyResponse'
           description: A successful response.
-      summary: Add Observation
+      summary: Sets a CDL
       tags:
-      - CameraCalibration
+      - Colour
       x-codegen-request-body-name: body
-  /cameracalibration/enableobservation:
+  /colour/cdls:
+    get:
+      operationId: Colour_ListCDLs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/colourListCDLsResponse'
+          description: A successful response.
+      summary: Returns of the list of all CDLs
+      tags:
+      - Colour
+  /mixedreality/cameras:
+    get:
+      operationId: MixedReality_GetCameras
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mixedrealityGetCamerasResponse'
+          description: A successful response.
+      summary: Returns camera properties of cameras on the current stage
+      tags:
+      - MixedReality
+  /mixedreality/captureobservation:
     post:
-      operationId: CameraCalibration_EnableObservation
+      operationId: MixedReality_CaptureObservation
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/cameracalibrationEnableObservationRequest'
+              $ref: '#/components/schemas/mixedrealityCaptureObservationRequest'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/cameracalibrationEnableObservationResponse'
+                $ref: '#/components/schemas/d3apiEmptyResponse'
           description: A successful response.
-      summary: Enable Observation
+      summary: Capture an observation on the given camera
       tags:
-      - CameraCalibration
+      - MixedReality
       x-codegen-request-body-name: body
-  /cameracalibration/mrsets:
+  /mixedreality/captureprogress:
     get:
-      operationId: CameraCalibration_ListMRSets
+      operationId: MixedReality_CaptureProgress
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/cameracalibrationListMRSetsResponse'
+                $ref: '#/components/schemas/d3apiBoolResponse'
           description: A successful response.
-      summary: List MR sets
+      summary: Gets the current capture progress, only one capture can run at once
       tags:
-      - CameraCalibration
-  /cameracalibration/mrsets/{mrsetuid}:
+      - MixedReality
+  /mixedreality/deleteallobservations:
+    post:
+      operationId: MixedReality_DeleteAllObservations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mixedrealityDeleteAllObservationsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Delete all observations for a given spatial calibration
+      tags:
+      - MixedReality
+      x-codegen-request-body-name: body
+  /mixedreality/deleteobservations:
+    post:
+      operationId: MixedReality_DeleteObservations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mixedrealityDeleteObservationsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Pass a list of observation identifiers to delete
+      tags:
+      - MixedReality
+      x-codegen-request-body-name: body
+  /mixedreality/enableobservations:
+    post:
+      operationId: MixedReality_EnableObservations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mixedrealityEnableObservationsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Pass a list of observation identifiers to enable/disable
+      tags:
+      - MixedReality
+      x-codegen-request-body-name: body
+  /mixedreality/mrsets:
     get:
-      operationId: CameraCalibration_GetMRSet
+      operationId: MixedReality_GetMRSets
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mixedrealityGetMRSetsResponse'
+          description: A successful response.
+      summary: Returns mixed reality sets on the current stage
+      tags:
+      - MixedReality
+  /mixedreality/selectcamera:
+    post:
+      operationId: MixedReality_SelectCamera
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mixedrealitySelectCameraRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Sets the current camera of an MR Set
+      tags:
+      - MixedReality
+      x-codegen-request-body-name: body
+  /mixedreality/selectspatialcalibration:
+    post:
+      operationId: MixedReality_SelectSpatialCalibration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mixedrealitySelectSpatialCalibrationRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Sets the spatial calibration currently in use by a camera
+      tags:
+      - MixedReality
+      x-codegen-request-body-name: body
+  /mixedreality/spatialcalibrations:
+    get:
+      operationId: MixedReality_ListSpatialCalibrations
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mixedrealityListSpatialCalibrationsResponse'
+          description: A successful response.
+      summary: Returns a list of all spatial calibrations
+      tags:
+      - MixedReality
+  /quickcal/lineupcurrentpose:
+    post:
+      operationId: Quickcal_LineUpCurrentPose
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quickcalLineUpCurrentPoseRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Lineup the current pose for the selected projector according to the
+        selected reference points
+      tags:
+      - Quickcal
+      x-codegen-request-body-name: body
+  /quickcal/referencepoints:
+    get:
+      operationId: Quickcal_ListReferencePoints
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quickcalListReferencePointsResponse'
+          description: A successful response.
+      summary: Returns a list of all reference points
+      tags:
+      - Quickcal
+  /quickcal/resetlineup:
+    post:
+      operationId: Quickcal_ResetLineUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quickcalResetLineUpRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Resets the lineup of the selected projector
+      tags:
+      - Quickcal
+      x-codegen-request-body-name: body
+  /renderstream/assigners:
+    get:
+      operationId: RenderStream_GetAssigners
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamGetAssignersResponse'
+          description: A successful response.
+      summary: Returns the RenderStream assigners list
+      tags:
+      - RenderStream
+  /renderstream/failover:
+    post:
+      operationId: RenderStream_Failover
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/renderstreamFailoverRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Fail over a single machine
+      tags:
+      - RenderStream
+      x-codegen-request-body-name: body
+  /renderstream/layerconfig:
+    get:
+      operationId: RenderStream_GetLayerConfig
       parameters:
-      - description: MR Set UID
-        in: path
-        name: mrsetuid
-        required: true
+      - description: Unique identifier.
+        in: query
+        name: uid
         schema:
           format: uint64
           type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/cameracalibrationGetMRSetResponse'
-          description: A successful response.
-      summary: Get single MR set
-      tags:
-      - CameraCalibration
-  /cameracalibration/observationprogress:
-    get:
-      operationId: CameraCalibration_GetObservationProgress
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/cameracalibrationGetObservationProgressResponse'
-          description: A successful response.
-      summary: Get Observation progress state
-      tags:
-      - CameraCalibration
-  /cameracalibration/resetallobservations:
-    post:
-      operationId: CameraCalibration_ResetAllObservations
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/cameracalibrationResetAllObservationsRequest'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/cameracalibrationResetAllObservationsResponse'
-          description: A successful response.
-      summary: Reset Observations
-      tags:
-      - CameraCalibration
-      x-codegen-request-body-name: body
-  /indirections:
-    get:
-      operationId: Indirections_ListIndirections
-      parameters:
-      - description: type of resource.
+      - description: Unqualified name.
         in: query
-        name: resourceType
+        name: name
         schema:
           type: string
       responses:
@@ -126,535 +317,805 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/indirectionsListIndirectionsResponse'
+                $ref: '#/components/schemas/renderstreamGetLayerConfigResponse'
+          description: A successful response.
+      summary: Returns config information for the selected layer
+      tags:
+      - RenderStream
+  /renderstream/layers:
+    get:
+      operationId: RenderStream_GetLayers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamGetLayersResponse'
+          description: A successful response.
+      summary: Returns the RenderStream layer list
+      tags:
+      - RenderStream
+  /renderstream/layerstatus:
+    get:
+      operationId: RenderStream_GetLayerStatus
+      parameters:
+      - description: Unique identifier.
+        in: query
+        name: uid
+        schema:
+          format: uint64
+          type: string
+      - description: Unqualified name.
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamGetLayerStatusResponse'
+          description: A successful response.
+      summary: Returns status information for the selected layer
+      tags:
+      - RenderStream
+  /renderstream/pools:
+    get:
+      operationId: RenderStream_GetPools
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/renderstreamGetPoolsResponse'
+          description: A successful response.
+      summary: Returns the RenderStream pools list
+      tags:
+      - RenderStream
+  /renderstream/restartlayers:
+    post:
+      operationId: RenderStream_RestartLayers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/renderstreamRestartLayersRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Restarts a workload for the selected layer
+      tags:
+      - RenderStream
+      x-codegen-request-body-name: body
+  /renderstream/startlayers:
+    post:
+      operationId: RenderStream_StartLayers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/renderstreamStartLayersRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Starts a workload for the selected layer
+      tags:
+      - RenderStream
+      x-codegen-request-body-name: body
+  /renderstream/stoplayers:
+    post:
+      operationId: RenderStream_StopLayers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/renderstreamStopLayersRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Stops a workload for the selected layer
+      tags:
+      - RenderStream
+      x-codegen-request-body-name: body
+  /renderstream/synclayers:
+    post:
+      operationId: RenderStream_SyncLayers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/renderstreamSyncLayersRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Syncs a workload for the selected layer
+      tags:
+      - RenderStream
+      x-codegen-request-body-name: body
+  /sequencing/changeindirections:
+    post:
+      operationId: Sequencing_ChangeIndirections
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sequencingChangeIndirectionsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Trigger a change to one or more indirections
+      tags:
+      - Sequencing
+      x-codegen-request-body-name: body
+  /sequencing/indirectionresources:
+    get:
+      operationId: Sequencing_ListAvailableResources
+      parameters:
+      - description: Unique identifier.
+        in: query
+        name: uid
+        schema:
+          format: uint64
+          type: string
+      - description: Unqualified name.
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sequencingListAvailableResourcesResponse'
+          description: A successful response.
+      summary: Get the available resources for a given indirection
+      tags:
+      - Sequencing
+  /sequencing/indirections:
+    get:
+      operationId: Sequencing_ListIndirections
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sequencingListIndirectionsResponse'
           description: A successful response.
       summary: List all indirections
       tags:
-      - Indirections
-    put:
-      deprecated: true
-      operationId: Indirections_SetIndirections2
+      - Sequencing
+  /status/health:
+    get:
+      operationId: Status_listHealth
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/statusListHealthResponse'
+          description: A successful response.
+      summary: List all health status for the machines in the network
+      tags:
+      - Status
+  /status/notifications:
+    get:
+      operationId: Status_ListNotifications
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/statusListNotificationsResponse'
+          description: A successful response.
+      summary: List all notifications for the machines in the network
+      tags:
+      - Status
+  /status/project:
+    get:
+      operationId: Status_GetProject
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/statusGetProjectResponse'
+          description: A successful response.
+      summary: Return the project information
+      tags:
+      - Status
+  /status/session:
+    get:
+      operationId: Status_GetSession
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/statusGetSessionResponse'
+          description: A successful response.
+      summary: Return the session config
+      tags:
+      - Status
+  /transport/activetransport:
+    get:
+      operationId: Transport_GetActiveTransports
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transportGetActiveTransportResponse'
+          description: A successful response.
+      summary: Get the active transport in the project. This is the transport selected
+        in the d3State bar.
+      tags:
+      - Transport
+  /transport/annotations:
+    get:
+      operationId: Transport_ListAnnotations
+      parameters:
+      - description: UID of the Track.
+        in: query
+        name: uid
+        schema:
+          format: uint64
+          type: string
+      - description: Name of the Track.
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transportListAnnotationsResponse'
+          description: A successful response.
+      summary: List all annotations in the given Track
+      tags:
+      - Transport
+  /transport/brightness:
+    post:
+      operationId: Transport_SetBrightness
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/indirectionsSetIndirectionsRequest'
+              $ref: '#/components/schemas/transportSetBrightnessRequest'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/indirectionsSetIndirectionsResponse'
+                $ref: '#/components/schemas/d3apiEmptyResponse'
           description: A successful response.
-      summary: Update one or more indirections
+      summary: Set the brightness of the specified transport manager's current transport
       tags:
-      - Indirections
+      - Transport
       x-codegen-request-body-name: body
-  /indirections/set:
+  /transport/engaged:
     post:
-      operationId: Indirections_SetIndirections
+      operationId: Transport_SetEngaged
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/indirectionsSetIndirectionsRequest'
+              $ref: '#/components/schemas/transportSetEngagedRequest'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/indirectionsSetIndirectionsResponse'
+                $ref: '#/components/schemas/d3apiEmptyResponse'
           description: A successful response.
-      summary: Update one or more indirections
+      summary: Set the engaged status of the current transport
       tags:
-      - Indirections
+      - Transport
       x-codegen-request-body-name: body
-  /indirections/{uid}:
-    get:
-      operationId: Indirections_GetIndirection
-      parameters:
-      - description: uid of indirection
-        in: path
-        name: uid
-        required: true
-        schema:
-          format: uint64
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/indirectionsGetIndirectionResponse'
-          description: A successful response.
-      summary: Get single indirection
-      tags:
-      - Indirections
-  /content/mediametadata:
-    get:
-      operationId: Content_ListMediaMetadata
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/contentListMediaMetadataResponse'
-          description: A successful response.
-      summary: List media meta data
-      tags:
-      - Content
-  /content/mediametadata/{uid}:
-    get:
-      operationId: Content_GetMediaMetadata
-      parameters:
-      - in: path
-        name: uid
-        required: true
-        schema:
-          format: uint64
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/contentGetMediaMetadataResponse'
-          description: A successful response.
-      summary: Get single media meta data
-      tags:
-      - Content
-  /renderstream/clusters:
-    get:
-      operationId: Renderstream_ListClusters
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/renderstreamListClustersResponse'
-          description: A successful response.
-      summary: List all ClusterPools
-      tags:
-      - Renderstream
-  /renderstream/clusters/{name}:
-    get:
-      operationId: Renderstream_GetCluster
-      parameters:
-      - in: path
-        name: name
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/renderstreamGetClusterResponse'
-          description: A successful response.
-      summary: Get single ClusterPool
-      tags:
-      - Renderstream
-  /renderstream/failoverinstance/{workloadid}/{instanceindex}:
+  /transport/gotoframe:
     post:
-      operationId: Renderstream_FailoverWorkloadInstance
-      parameters:
-      - description: ID of the workload this instance belongs to
-        in: path
-        name: workloadid
+      operationId: Transport_GoToFrame
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportGoToFrameRequest'
         required: true
-        schema:
-          format: uint64
-          type: string
-      - description: Index into the Workload's list of IDs
-        in: path
-        name: instanceindex
-        required: true
-        schema:
-          format: int64
-          type: integer
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/renderstreamFailoverWorkloadInstanceResponse'
+                $ref: '#/components/schemas/d3apiEmptyResponse'
           description: A successful response.
-      summary: Fail over a single workload instance
+      summary: Jump to the specific frame
       tags:
-      - Renderstream
-    put:
-      deprecated: true
-      operationId: Renderstream_FailoverWorkloadInstance2
-      parameters:
-      - description: ID of the workload this instance belongs to
-        in: path
-        name: workloadid
-        required: true
-        schema:
-          format: uint64
-          type: string
-      - description: Index into the Workload's list of IDs
-        in: path
-        name: instanceindex
-        required: true
-        schema:
-          format: int64
-          type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/renderstreamFailoverWorkloadInstanceResponse'
-          description: A successful response.
-      summary: Fail over a single workload instance
-      tags:
-      - Renderstream
-  /renderstream/failovermachine/{name}:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/gotonextsection:
     post:
-      operationId: Renderstream_FailoverRenderMachine
-      parameters:
-      - description: Name of the render machine to fail over
-        in: path
-        name: name
+      operationId: Transport_GoToNextSection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportGoToNextSectionRequest'
         required: true
-        schema:
-          type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/renderstreamFailoverRenderMachineResponse'
+                $ref: '#/components/schemas/d3apiEmptyResponse'
           description: A successful response.
-      summary: Fail over a single RenderstreamMachine, and all its workload instances
+      summary: Jump to the next section of the current track
       tags:
-      - Renderstream
-    put:
-      deprecated: true
-      operationId: Renderstream_FailoverRenderMachine2
-      parameters:
-      - description: Name of the render machine to fail over
-        in: path
-        name: name
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/renderstreamFailoverRenderMachineResponse'
-          description: A successful response.
-      summary: Fail over a single RenderstreamMachine, and all its workload instances
-      tags:
-      - Renderstream
-  /renderstream/machines:
-    get:
-      operationId: Renderstream_ListRenderMachines
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/renderstreamListRenderMachinesResponse'
-          description: A successful response.
-      summary: List all RS machines (both current render machines and understudies)
-      tags:
-      - Renderstream
-  /renderstream/machines/{name}:
-    get:
-      operationId: Renderstream_GetRenderMachine
-      parameters:
-      - in: path
-        name: name
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/renderstreamGetRenderMachineResponse'
-          description: A successful response.
-      summary: Get single RenderstreamMachine
-      tags:
-      - Renderstream
-  /renderstream/workloadinstances/{workloadid}/{instanceindex}:
-    get:
-      operationId: Renderstream_GetWorkloadInstance
-      parameters:
-      - description: ID of the workload this instance belongs to
-        in: path
-        name: workloadid
-        required: true
-        schema:
-          format: uint64
-          type: string
-      - description: Index into the Workload's list of IDs
-        in: path
-        name: instanceindex
-        required: true
-        schema:
-          format: int64
-          type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/renderstreamGetWorkloadInstanceResponse'
-          description: A successful response.
-      summary: Get single Workload Instance
-      tags:
-      - Renderstream
-  /renderstream/workloads:
-    get:
-      operationId: Renderstream_ListWorkloads
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/renderstreamListWorkloadsResponse'
-          description: A successful response.
-      summary: List all RS Workloads
-      tags:
-      - Renderstream
-  /renderstream/workloads/{id}:
-    get:
-      operationId: Renderstream_GetWorkload
-      parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          format: uint64
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/renderstreamGetWorkloadResponse'
-          description: A successful response.
-      summary: Get single Workload
-      tags:
-      - Renderstream
-  /renderstream/workloads/{id}/start:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/gotonexttrack:
     post:
-      operationId: Renderstream_StartWorkload
-      parameters:
-      - in: path
-        name: id
+      operationId: Transport_GoToNextTrack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportGoToNextTrackRequest'
         required: true
-        schema:
-          format: uint64
-          type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/renderstreamStartWorkloadResponse'
+                $ref: '#/components/schemas/d3apiEmptyResponse'
           description: A successful response.
-      summary: Start a workload
+      summary: Jump to the start of the next track
       tags:
-      - Renderstream
-  /renderstream/workloads/{id}/stop:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/gotonote:
     post:
-      operationId: Renderstream_StopWorkload
-      parameters:
-      - in: path
-        name: id
+      operationId: Transport_GoToNote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportGoToNoteRequest'
         required: true
-        schema:
-          format: uint64
-          type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/renderstreamStopWorkloadResponse'
+                $ref: '#/components/schemas/d3apiEmptyResponse'
           description: A successful response.
-      summary: Stop a workload
+      summary: Jump to a given note on a given transport
       tags:
-      - Renderstream
-  /renderstream/workloads/{id}/sync:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/gotoprevsection:
     post:
-      operationId: Renderstream_SyncWorkload
-      parameters:
-      - in: path
-        name: id
+      operationId: Transport_GoToPrevSection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportGoToPrevSectionRequest'
         required: true
-        schema:
-          format: uint64
-          type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/renderstreamSyncWorkloadResponse'
+                $ref: '#/components/schemas/d3apiEmptyResponse'
           description: A successful response.
-      summary: Sync a workload
+      summary: Jump to the previous section of the current track
       tags:
-      - Renderstream
-  /resources:
-    get:
-      operationId: Resources_ListResources
-      parameters:
-      - description: resource type name.
-        in: query
-        name: type
-        schema:
-          type: string
-      - description: search substring to look for in the resource name.
-        in: query
-        name: search
-        schema:
-          type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/resourcesListResourcesResponse'
-          description: A successful response.
-      summary: List resources by type
-      tags:
-      - Resources
-  /resources/{uid}:
-    get:
-      operationId: Resources_GetResource
-      parameters:
-      - in: path
-        name: uid
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/gotoprevtrack:
+    post:
+      operationId: Transport_GoToPrevTrack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportGoToPrevTrackRequest'
         required: true
-        schema:
-          format: uint64
-          type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/resourcesGetResourceResponse'
+                $ref: '#/components/schemas/d3apiEmptyResponse'
           description: A successful response.
-      summary: Get single resource
+      summary: Jump to the start of the previous track
       tags:
-      - Resources
-  /thumbnail/{uid}:
-    get:
-      operationId: Thumbnails_GetThumbnail
-      parameters:
-      - description: unique resource id
-        in: path
-        name: uid
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/gotosection:
+    post:
+      operationId: Transport_GoToSection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportGoToSectionRequest'
         required: true
-        schema:
-          format: uint64
-          type: string
-      - description: width of thumbnail.
-        in: query
-        name: width
-        schema:
-          format: int64
-          type: integer
-      - description: height of thumbnail.
-        in: query
-        name: height
-        schema:
-          format: int64
-          type: integer
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/thumbnailsGetThumbnailResponse'
+                $ref: '#/components/schemas/d3apiEmptyResponse'
           description: A successful response.
-      summary: Get thumbnail for a resource
+      summary: Jump to a given section on a given transport
       tags:
-      - Thumbnails
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/gototag:
+    post:
+      operationId: Transport_GoToTag
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportGoToTagRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Jump to a given tag on a given transport
+      tags:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/gototime:
+    post:
+      operationId: Transport_GoToTime
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportGoToTimeRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Jump to the specific time
+      tags:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/gototimecode:
+    post:
+      operationId: Transport_GoToTimeCode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportGoToTimeCodeRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Jump to a given time on a given transport
+      tags:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/gototrack:
+    post:
+      operationId: Transport_GoToTrack
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportGoToTrackRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Jump to the start of the given track
+      tags:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/play:
+    post:
+      operationId: Transport_Play
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportPlayRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Play a transport (sets playmode to 'play')
+      tags:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/playloopsection:
+    post:
+      operationId: Transport_PlayLoopSection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportPlayLoopSectionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Loop a section on a transport (sets playmode to 'loop section')
+      tags:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/playsection:
+    post:
+      operationId: Transport_PlaySection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportPlaySectionRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Play a section on a transport (sets playmode to 'play to end of section')
+      tags:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/returntostart:
+    post:
+      operationId: Transport_ReturnToStart
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportReturnToStartRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Return to start of a transport
+      tags:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/setlists:
+    get:
+      operationId: Transport_ListSetLists
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transportListSetListsResponse'
+          description: A successful response.
+      summary: List all SetLists in the project
+      tags:
+      - Transport
+  /transport/stop:
+    post:
+      operationId: Transport_Stop
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportStopRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Stop a transport
+      tags:
+      - Transport
+      x-codegen-request-body-name: body
+  /transport/tracks:
+    get:
+      operationId: Transport_ListTracks
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transportListTracksResponse'
+          description: A successful response.
+      summary: List all tracks in the project
+      tags:
+      - Transport
+  /transport/volume:
+    post:
+      operationId: Transport_SetVolume
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transportSetVolumeRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d3apiEmptyResponse'
+          description: A successful response.
+      summary: Set the volume of the current transport
+      tags:
+      - Transport
+      x-codegen-request-body-name: body
 components:
   schemas:
-    cameracalibrationAddObservationRequest:
-      properties:
-        cameraUid:
-          format: uint64
-          title: Camera UID
-          type: string
-      type: object
-    cameracalibrationAddObservationResponse:
-      type: object
-    cameracalibrationCameraInfo:
+    colourCDLInfo:
       example:
+        saturation: 5.962134
         uid: uid
-        observations:
-        - uid: uid
-          isPrimary: true
-          isEnabled: true
-          description: description
-          trackedFocus: 5.637377
-          trackedPos:
-            x: 0.8008282
-            y: 6.0274563
-            z: 1.4658129
-          trackedZoom: 5.962134
-          trackedRot:
-            x: 0.8008282
-            y: 6.0274563
-            z: 1.4658129
-        - uid: uid
-          isPrimary: true
-          isEnabled: true
-          description: description
-          trackedFocus: 5.637377
-          trackedPos:
-            x: 0.8008282
-            y: 6.0274563
-            z: 1.4658129
-          trackedZoom: 5.962134
-          trackedRot:
-            x: 0.8008282
-            y: 6.0274563
-            z: 1.4658129
+        offset:
+          x: 0.8008282
+          y: 6.0274563
+          z: 1.4658129
         name: name
+        power:
+          x: 0.8008282
+          y: 6.0274563
+          z: 1.4658129
+        slope:
+          x: 0.8008282
+          y: 6.0274563
+          z: 1.4658129
       properties:
         uid:
           format: uint64
+          title: Unique identifier of CDL
           type: string
         name:
+          title: Name of CDL
           type: string
-        observations:
+        slope:
+          $ref: '#/components/schemas/d3apiVec3Float'
+        offset:
+          $ref: '#/components/schemas/d3apiVec3Float'
+        power:
+          $ref: '#/components/schemas/d3apiVec3Float'
+        saturation:
+          format: float
+          title: Saturation
+          type: number
+      type: object
+    colourListCDLsResponse:
+      example:
+        result:
+        - saturation: 5.962134
+          uid: uid
+          offset:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+          name: name
+          power:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+          slope:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+        - saturation: 5.962134
+          uid: uid
+          offset:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+          name: name
+          power:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+          slope:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
           items:
-            $ref: '#/components/schemas/cameracalibrationObservationInfo'
+            $ref: '#/components/schemas/colourCDLInfo'
+          title: List of all the CDLs in the project
           type: array
       type: object
-    cameracalibrationEnableObservationRequest:
+    colourSetCDLRequest:
       properties:
-        observationUid:
-          format: uint64
-          title: Observation UID
-          type: string
-        enabled:
-          type: boolean
+        cdl:
+          $ref: '#/components/schemas/colourCDLInfo'
       type: object
-    cameracalibrationEnableObservationResponse:
+    d3apiEmptyResponse:
       example:
-        result: true
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
       properties:
-        result:
-          type: boolean
+        status:
+          $ref: '#/components/schemas/rpcStatus'
       type: object
-    cameracalibrationFloat3:
+    d3apiVec3Float:
       example:
         x: 0.8008282
         y: 6.0274563
@@ -662,2156 +1123,2658 @@ components:
       properties:
         x:
           format: float
+          title: X
           type: number
         y:
           format: float
+          title: "Y"
           type: number
         z:
           format: float
+          title: Z
           type: number
       type: object
-    cameracalibrationGetMRSetResponse:
+    protobufAny:
+      description: |-
+        `Any` contains an arbitrary serialized protocol buffer message along with a
+        URL that describes the type of the serialized message.
+
+        Protobuf library provides support to pack/unpack Any values in the form
+        of utility functions or additional generated methods of the Any type.
+
+        Example 1: Pack and unpack a message in C++.
+
+            Foo foo = ...;
+            Any any;
+            any.PackFrom(foo);
+            ...
+            if (any.UnpackTo(&foo)) {
+              ...
+            }
+
+        Example 2: Pack and unpack a message in Java.
+
+            Foo foo = ...;
+            Any any = Any.pack(foo);
+            ...
+            if (any.is(Foo.class)) {
+              foo = any.unpack(Foo.class);
+            }
+
+         Example 3: Pack and unpack a message in Python.
+
+            foo = Foo(...)
+            any = Any()
+            any.Pack(foo)
+            ...
+            if any.Is(Foo.DESCRIPTOR):
+              any.Unpack(foo)
+              ...
+
+         Example 4: Pack and unpack a message in Go
+
+             foo := &pb.Foo{...}
+             any, err := ptypes.MarshalAny(foo)
+             ...
+             foo := &pb.Foo{}
+             if err := ptypes.UnmarshalAny(any, foo); err != nil {
+               ...
+             }
+
+        The pack methods provided by protobuf library will by default use
+        'type.googleapis.com/full.type.name' as the type URL and the unpack
+        methods only use the fully qualified type name after the last '/'
+        in the type URL, for example "foo.bar.com/x/y.z" will yield type
+        name "y.z".
+
+
+        JSON
+        ====
+        The JSON representation of an `Any` value uses the regular
+        representation of the deserialized, embedded message, with an
+        additional field `@type` which contains the type URL. Example:
+
+            package google.profile;
+            message Person {
+              string first_name = 1;
+              string last_name = 2;
+            }
+
+            {
+              "@type": "type.googleapis.com/google.profile.Person",
+              "firstName": <string>,
+              "lastName": <string>
+            }
+
+        If the embedded message type is well-known and has a custom JSON
+        representation, that representation will be embedded adding a field
+        `value` which holds the custom JSON in addition to the `@type`
+        field. Example (for message [google.protobuf.Duration][]):
+
+            {
+              "@type": "type.googleapis.com/google.protobuf.Duration",
+              "value": "1.212s"
+            }
       example:
-        result:
-          uid: uid
-          name: name
-          targetCamera:
-            uid: uid
-            observations:
-            - uid: uid
-              isPrimary: true
-              isEnabled: true
-              description: description
-              trackedFocus: 5.637377
-              trackedPos:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-              trackedZoom: 5.962134
-              trackedRot:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-            - uid: uid
-              isPrimary: true
-              isEnabled: true
-              description: description
-              trackedFocus: 5.637377
-              trackedPos:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-              trackedZoom: 5.962134
-              trackedRot:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-            name: name
+        value: value
+        type_url: type_url
       properties:
-        result:
-          $ref: '#/components/schemas/cameracalibrationMRSetInfo'
+        type_url:
+          description: |-
+            A URL/resource name whose content describes the type of the
+            serialized protocol buffer message.
+
+            For URLs which use the scheme `http`, `https`, or no scheme, the
+            following restrictions and interpretations apply:
+
+            * If no scheme is provided, `https` is assumed.
+            * The last segment of the URL's path must represent the fully
+              qualified name of the type (as in `path/google.protobuf.Duration`).
+              The name should be in a canonical form (e.g., leading "." is
+              not accepted).
+            * An HTTP GET on the URL must yield a [google.protobuf.Type][]
+              value in binary format, or produce an error.
+            * Applications are allowed to cache lookup results based on the
+              URL, or have them precompiled into a binary to avoid any
+              lookup. Therefore, binary compatibility needs to be preserved
+              on changes to types. (Use versioned type names to manage
+              breaking changes.)
+
+            Schemes other than `http`, `https` (or the empty scheme) might be
+            used with implementation specific semantics.
+          type: string
+        value:
+          description: Must be a valid serialized protocol buffer of the above specified
+            type.
+          format: byte
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
       type: object
-    cameracalibrationGetObservationProgressResponse:
+    rpcStatus:
+      description: |-
+        The `Status` type defines a logical error model that is suitable for
+        different programming environments, including REST APIs and RPC APIs. It is
+        used by [gRPC](https://github.com/grpc). Each `Status` message contains
+        three pieces of data: error code, error message, and error details.
+
+        You can find out more about this error model and how to work with it in the
+        [API Design Guide](https://cloud.google.com/apis/design/errors).
       example:
-        inProgress: true
+        code: 0
+        details:
+        - value: value
+          type_url: type_url
+        - value: value
+          type_url: type_url
+        message: message
       properties:
-        inProgress:
-          type: boolean
-      type: object
-    cameracalibrationListMRSetsResponse:
-      example:
-        result:
-        - uid: uid
-          name: name
-          targetCamera:
-            uid: uid
-            observations:
-            - uid: uid
-              isPrimary: true
-              isEnabled: true
-              description: description
-              trackedFocus: 5.637377
-              trackedPos:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-              trackedZoom: 5.962134
-              trackedRot:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-            - uid: uid
-              isPrimary: true
-              isEnabled: true
-              description: description
-              trackedFocus: 5.637377
-              trackedPos:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-              trackedZoom: 5.962134
-              trackedRot:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-            name: name
-        - uid: uid
-          name: name
-          targetCamera:
-            uid: uid
-            observations:
-            - uid: uid
-              isPrimary: true
-              isEnabled: true
-              description: description
-              trackedFocus: 5.637377
-              trackedPos:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-              trackedZoom: 5.962134
-              trackedRot:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-            - uid: uid
-              isPrimary: true
-              isEnabled: true
-              description: description
-              trackedFocus: 5.637377
-              trackedPos:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-              trackedZoom: 5.962134
-              trackedRot:
-                x: 0.8008282
-                y: 6.0274563
-                z: 1.4658129
-            name: name
-      properties:
-        result:
+        code:
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+          format: int32
+          type: integer
+        message:
+          description: |-
+            A developer-facing error message, which should be in English. Any
+            user-facing error message should be localized and sent in the
+            [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+          type: string
+        details:
+          description: |-
+            A list of messages that carry the error details.  There is a common set of
+            message types for APIs to use.
           items:
-            $ref: '#/components/schemas/cameracalibrationMRSetInfo'
+            $ref: '#/components/schemas/protobufAny'
           type: array
       type: object
-    cameracalibrationMRSetInfo:
+    d3apiBoolResponse:
       example:
-        uid: uid
-        name: name
-        targetCamera:
-          uid: uid
-          observations:
-          - uid: uid
-            isPrimary: true
-            isEnabled: true
-            description: description
-            trackedFocus: 5.637377
-            trackedPos:
-              x: 0.8008282
-              y: 6.0274563
-              z: 1.4658129
-            trackedZoom: 5.962134
-            trackedRot:
-              x: 0.8008282
-              y: 6.0274563
-              z: 1.4658129
-          - uid: uid
-            isPrimary: true
-            isEnabled: true
-            description: description
-            trackedFocus: 5.637377
-            trackedPos:
-              x: 0.8008282
-              y: 6.0274563
-              z: 1.4658129
-            trackedZoom: 5.962134
-            trackedRot:
-              x: 0.8008282
-              y: 6.0274563
-              z: 1.4658129
-          name: name
+        result: true
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          type: boolean
+      type: object
+    d3apiLocator:
       properties:
         uid:
           format: uint64
+          title: Unique identifier
           type: string
         name:
+          title: Unqualified name
           type: string
-        targetCamera:
-          $ref: '#/components/schemas/cameracalibrationCameraInfo'
       type: object
-    cameracalibrationObservationInfo:
+    mixedrealityCameraIdentityInfo:
       example:
         uid: uid
-        isPrimary: true
-        isEnabled: true
-        description: description
-        trackedFocus: 5.637377
-        trackedPos:
-          x: 0.8008282
-          y: 6.0274563
-          z: 1.4658129
-        trackedZoom: 5.962134
-        trackedRot:
-          x: 0.8008282
-          y: 6.0274563
-          z: 1.4658129
-      properties:
-        uid:
-          format: uint64
-          type: string
-        description:
-          type: string
-        trackedPos:
-          $ref: '#/components/schemas/cameracalibrationFloat3'
-        trackedRot:
-          $ref: '#/components/schemas/cameracalibrationFloat3'
-        trackedZoom:
-          format: float
-          type: number
-        trackedFocus:
-          format: float
-          type: number
-        isEnabled:
-          type: boolean
-        isPrimary:
-          type: boolean
-      type: object
-    cameracalibrationResetAllObservationsRequest:
-      properties:
-        cameraUid:
-          format: uint64
-          title: Camera UID
-          type: string
-      type: object
-    cameracalibrationResetAllObservationsResponse:
-      type: object
-    SetIndirectionsRequestAssignment:
-      properties:
-        uid:
-          format: uint64
-          type: string
-        resourceIndex:
-          format: int64
-          title: oneof field. index of resource for list indirection (0 based)
-          type: integer
-        resourceUid:
-          format: uint64
-          title: oneof field. uid of resource for manual indirection
-          type: string
-      type: object
-    SetIndirectionsResponseFailedAssignment:
-      example:
-        uid: uid
-        resourceUid: resourceUid
-        error: error
-        resourceIndex: 0
-      properties:
-        uid:
-          format: uint64
-          title: uid of indirection
-          type: string
-        resourceIndex:
-          format: int64
-          title: oneof field. index of resource for list indirection (0 based)
-          type: integer
-        resourceUid:
-          format: uint64
-          title: oneof field. uid of resource for manual indirection
-          type: string
-        error:
-          title: reason for failure
-          type: string
-      type: object
-    indirectionsGetIndirectionResponse:
-      example:
-        result:
-          uid: uid
-          listIndirection:
-            resourceUids:
-            - resourceUids
-            - resourceUids
-            resourceIndex: 0
-          name: name
-          manualIndirection:
-            resourceUid: resourceUid
-          resourceType: resourceType
-      properties:
-        result:
-          $ref: '#/components/schemas/indirectionsIndirection'
-      type: object
-    indirectionsIndirection:
-      example:
-        uid: uid
-        listIndirection:
-          resourceUids:
-          - resourceUids
-          - resourceUids
-          resourceIndex: 0
         name: name
-        manualIndirection:
-          resourceUid: resourceUid
+      properties:
+        uid:
+          format: uint64
+          title: Unique identifier of the camera
+          type: string
+        name:
+          title: Name of the the camera
+          type: string
+      type: object
+    mixedrealityCameraInfo:
+      example:
+        uid: uid
+        name: name
+        spatialCalibration:
+          uid: uid
+          name: name
+      properties:
+        uid:
+          format: uint64
+          title: Unique identifier of the camera
+          type: string
+        name:
+          title: Name of the camera
+          type: string
+        spatialCalibration:
+          $ref: '#/components/schemas/mixedrealitySpatialCalibrationInfo'
+      type: object
+    mixedrealityCaptureObservationRequest:
+      properties:
+        camera:
+          $ref: '#/components/schemas/d3apiLocator'
+        spatialCalibration:
+          $ref: '#/components/schemas/d3apiLocator'
+      type: object
+    mixedrealityDeleteAllObservationsRequest:
+      properties:
+        spatialCalibration:
+          $ref: '#/components/schemas/d3apiLocator'
+      type: object
+    mixedrealityDeleteObservationsRequest:
+      properties:
+        observations:
+          items:
+            format: uint64
+            type: string
+          title: The observation UID is required
+          type: array
+      type: object
+    mixedrealityEnableObservationParams:
+      properties:
+        uid:
+          format: uint64
+          title: UID of the observation is required
+          type: string
+        enable:
+          title: Enable or disable the observation
+          type: boolean
+      type: object
+    mixedrealityEnableObservationsRequest:
+      properties:
+        observations:
+          items:
+            $ref: '#/components/schemas/mixedrealityEnableObservationParams'
+          title: The observation UID is required
+          type: array
+      type: object
+    mixedrealityGetCamerasResponse:
+      example:
+        result:
+        - uid: uid
+          name: name
+          spatialCalibration:
+            uid: uid
+            name: name
+        - uid: uid
+          name: name
+          spatialCalibration:
+            uid: uid
+            name: name
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/mixedrealityCameraInfo'
+          title: Current MR Cameras in use
+          type: array
+      type: object
+    mixedrealityGetMRSetsResponse:
+      example:
+        result:
+        - uid: uid
+          currentCamera:
+            uid: uid
+            name: name
+          name: name
+          isCameraOverride: true
+        - uid: uid
+          currentCamera:
+            uid: uid
+            name: name
+          name: name
+          isCameraOverride: true
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/mixedrealityMRSet'
+          title: Current mr sets
+          type: array
+      type: object
+    mixedrealityListSpatialCalibrationsResponse:
+      example:
+        result:
+        - uid: uid
+          observations:
+          - uid: uid
+            isEnabled: true
+            name: name
+            trackedPose:
+              rotation:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              position:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+            focus: 6.0274563
+            zoom: 0.8008282
+            rmsError: 1.4658129805029452
+            solvedPose:
+              rotation:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              position:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+          - uid: uid
+            isEnabled: true
+            name: name
+            trackedPose:
+              rotation:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              position:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+            focus: 6.0274563
+            zoom: 0.8008282
+            rmsError: 1.4658129805029452
+            solvedPose:
+              rotation:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              position:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+          name: name
+          mrsets:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+        - uid: uid
+          observations:
+          - uid: uid
+            isEnabled: true
+            name: name
+            trackedPose:
+              rotation:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              position:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+            focus: 6.0274563
+            zoom: 0.8008282
+            rmsError: 1.4658129805029452
+            solvedPose:
+              rotation:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              position:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+          - uid: uid
+            isEnabled: true
+            name: name
+            trackedPose:
+              rotation:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              position:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+            focus: 6.0274563
+            zoom: 0.8008282
+            rmsError: 1.4658129805029452
+            solvedPose:
+              rotation:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+              position:
+                x: 0.8008282
+                y: 6.0274563
+                z: 1.4658129
+          name: name
+          mrsets:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/mixedrealitySpatialCalibrationDetailed'
+          title: UID and name of the spatial calibrations and UID and name of the
+            MR Sets they include
+          type: array
+      type: object
+    mixedrealityMRSet:
+      example:
+        uid: uid
+        currentCamera:
+          uid: uid
+          name: name
+        name: name
+        isCameraOverride: true
+      properties:
+        uid:
+          format: uint64
+          title: Unique identifier of the mr set
+          type: string
+        name:
+          title: Name of the the mr set
+          type: string
+        currentCamera:
+          $ref: '#/components/schemas/mixedrealityCameraIdentityInfo'
+        isCameraOverride:
+          title: Is the current camera set using camera override
+          type: boolean
+      type: object
+    mixedrealityMRSetInfo:
+      example:
+        uid: uid
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: Unique identifier of the mr set
+          type: string
+        name:
+          title: Name of the the mr set
+          type: string
+      type: object
+    mixedrealityObservationInfo:
+      example:
+        uid: uid
+        isEnabled: true
+        name: name
+        trackedPose:
+          rotation:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+          position:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+        focus: 6.0274563
+        zoom: 0.8008282
+        rmsError: 1.4658129805029452
+        solvedPose:
+          rotation:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+          position:
+            x: 0.8008282
+            y: 6.0274563
+            z: 1.4658129
+      properties:
+        uid:
+          format: uint64
+          title: Unique identifier of the observation
+          type: string
+        name:
+          title: Name of the observation
+          type: string
+        trackedPose:
+          $ref: '#/components/schemas/mixedrealityPose'
+        solvedPose:
+          $ref: '#/components/schemas/mixedrealityPose'
+        isEnabled:
+          title: Whether this observation will be used in the current calibration
+          type: boolean
+        zoom:
+          format: float
+          title: Camera zoom at time of taking observation
+          type: number
+        focus:
+          format: float
+          title: Camera focus at time of taking observation
+          type: number
+        type:
+          $ref: '#/components/schemas/mixedrealityObservationType'
+        rmsError:
+          format: double
+          title: RMS error compared to the other observations in this calibration
+          type: number
+      type: object
+    mixedrealityObservationType:
+      default: Primary
+      enum:
+      - Primary
+      - Secondary
+      type: string
+    mixedrealityPose:
+      example:
+        rotation:
+          x: 0.8008282
+          y: 6.0274563
+          z: 1.4658129
+        position:
+          x: 0.8008282
+          y: 6.0274563
+          z: 1.4658129
+      properties:
+        position:
+          $ref: '#/components/schemas/d3apiVec3Float'
+        rotation:
+          $ref: '#/components/schemas/d3apiVec3Float'
+      type: object
+    mixedrealitySelectCameraRequest:
+      properties:
+        mrSet:
+          $ref: '#/components/schemas/d3apiLocator'
+        cameraOverride:
+          $ref: '#/components/schemas/d3apiLocator'
+      type: object
+    mixedrealitySelectSpatialCalibrationRequest:
+      properties:
+        camera:
+          $ref: '#/components/schemas/d3apiLocator'
+        spatialCalibration:
+          $ref: '#/components/schemas/d3apiLocator'
+      type: object
+    mixedrealitySpatialCalibrationDetailed:
+      example:
+        uid: uid
+        observations:
+        - uid: uid
+          isEnabled: true
+          name: name
+          trackedPose:
+            rotation:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+            position:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+          focus: 6.0274563
+          zoom: 0.8008282
+          rmsError: 1.4658129805029452
+          solvedPose:
+            rotation:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+            position:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+        - uid: uid
+          isEnabled: true
+          name: name
+          trackedPose:
+            rotation:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+            position:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+          focus: 6.0274563
+          zoom: 0.8008282
+          rmsError: 1.4658129805029452
+          solvedPose:
+            rotation:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+            position:
+              x: 0.8008282
+              y: 6.0274563
+              z: 1.4658129
+        name: name
+        mrsets:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+      properties:
+        uid:
+          format: uint64
+          title: Unique identifier of the spatial calibration
+          type: string
+        name:
+          title: Name of the spatial calibration
+          type: string
+        mrsets:
+          items:
+            $ref: '#/components/schemas/mixedrealityMRSetInfo'
+          title: UID of MR Sets to include in spatial calibration
+          type: array
+        observations:
+          items:
+            $ref: '#/components/schemas/mixedrealityObservationInfo'
+          title: Calibration observations
+          type: array
+      type: object
+    mixedrealitySpatialCalibrationInfo:
+      example:
+        uid: uid
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: Unique identifier of the spatial calibration
+          type: string
+        name:
+          title: Name of the spatial calibration
+          type: string
+      type: object
+    d3apiVec2Float:
+      properties:
+        x:
+          format: float
+          title: X
+          type: number
+        y:
+          format: float
+          title: "Y"
+          type: number
+      type: object
+    quickcalLineUpCurrentPoseRequest:
+      properties:
+        projector:
+          $ref: '#/components/schemas/d3apiLocator'
+        referencePoint:
+          $ref: '#/components/schemas/d3apiLocator'
+        position:
+          $ref: '#/components/schemas/d3apiVec2Float'
+      type: object
+    quickcalListReferencePointsResponse:
+      example:
+        result:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/quickcalReferencePointInfo'
+          title: All reference points on the current stage
+          type: array
+      type: object
+    quickcalReferencePointInfo:
+      example:
+        uid: uid
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: Unique identifier of reference point
+          type: string
+        name:
+          title: Name of reference point
+          type: string
+      type: object
+    quickcalResetLineUpRequest:
+      properties:
+        projector:
+          $ref: '#/components/schemas/d3apiLocator'
+      type: object
+    renderstreamAdapterInfo:
+      example:
+        subnet: subnet
+        name: name
+        ipAddress: ipAddress
+      properties:
+        name:
+          title: Network adapter name
+          type: string
+        ipAddress:
+          title: IP address
+          type: string
+        subnet:
+          title: Subnet
+          type: string
+      type: object
+    renderstreamAsset:
+      example:
+        uid: uid
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: UID of the Asset
+          type: string
+        name:
+          title: Name of the Asset
+          type: string
+      type: object
+    renderstreamAssigner:
+      example:
+        uid: uid
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: UID of the Assigner
+          type: string
+        name:
+          title: Name of the Assigner
+          type: string
+      type: object
+    renderstreamAssignerInfo:
+      example:
+        preferredNetwork:
+          ip: ip
+          name: name
+        uid: uid
+        alpha: true
+        name: name
+        transport:
+          bitDepth: 0
+          format: format
+          type: type
+        overlapPixels: 6
+        paddingPixels: 1
+      properties:
+        uid:
+          format: uint64
+          title: UID of the Assigner
+          type: string
+        name:
+          title: Name of the Assigner
+          type: string
+        transport:
+          $ref: '#/components/schemas/renderstreamTransportInfo'
+        alpha:
+          title: Alpha flag
+          type: boolean
+        overlapPixels:
+          format: int32
+          title: Splitting overlap pixels
+          type: integer
+        paddingPixels:
+          format: int32
+          title: Splitting overlap padding
+          type: integer
+        preferredNetwork:
+          $ref: '#/components/schemas/renderstreamNetworkInfo'
+      type: object
+    renderstreamChannelMappingInfo:
+      example:
+        mapping:
+          uid: uid
+          name: name
+        channel: channel
+        assigner:
+          uid: uid
+          name: name
+      properties:
+        channel:
+          title: channel name
+          type: string
+        mapping:
+          $ref: '#/components/schemas/renderstreamMapping'
+        assigner:
+          $ref: '#/components/schemas/renderstreamAssigner'
+      type: object
+    renderstreamFailoverRequest:
+      properties:
+        machine:
+          $ref: '#/components/schemas/d3apiLocator'
+      type: object
+    renderstreamGetAssignersResponse:
+      example:
+        result:
+        - preferredNetwork:
+            ip: ip
+            name: name
+          uid: uid
+          alpha: true
+          name: name
+          transport:
+            bitDepth: 0
+            format: format
+            type: type
+          overlapPixels: 6
+          paddingPixels: 1
+        - preferredNetwork:
+            ip: ip
+            name: name
+          uid: uid
+          alpha: true
+          name: name
+          transport:
+            bitDepth: 0
+            format: format
+            type: type
+          overlapPixels: 6
+          paddingPixels: 1
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/renderstreamAssignerInfo'
+          title: List of the RenderStream assigners
+          type: array
+      type: object
+    renderstreamGetLayerConfigResponse:
+      example:
+        result:
+          defaultAssigner:
+            uid: uid
+            name: name
+          channelMappings:
+          - mapping:
+              uid: uid
+              name: name
+            channel: channel
+            assigner:
+              uid: uid
+              name: name
+          - mapping:
+              uid: uid
+              name: name
+            channel: channel
+            assigner:
+              uid: uid
+              name: name
+          pool:
+            uid: uid
+            name: name
+          framerateFractionDivisor: 0
+          asset:
+            uid: uid
+            name: name
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          $ref: '#/components/schemas/renderstreamGetLayerConfigResult'
+      type: object
+    renderstreamGetLayerConfigResult:
+      example:
+        defaultAssigner:
+          uid: uid
+          name: name
+        channelMappings:
+        - mapping:
+            uid: uid
+            name: name
+          channel: channel
+          assigner:
+            uid: uid
+            name: name
+        - mapping:
+            uid: uid
+            name: name
+          channel: channel
+          assigner:
+            uid: uid
+            name: name
+        pool:
+          uid: uid
+          name: name
+        framerateFractionDivisor: 0
+        asset:
+          uid: uid
+          name: name
+      properties:
+        framerateFractionDivisor:
+          format: int32
+          title: Framerate fraction divisor, values 1, 2, and 3 are allowed
+          type: integer
+        asset:
+          $ref: '#/components/schemas/renderstreamAsset'
+        pool:
+          $ref: '#/components/schemas/renderstreamPool'
+        channelMappings:
+          items:
+            $ref: '#/components/schemas/renderstreamChannelMappingInfo'
+          title: Channel mapping list
+          type: array
+        defaultAssigner:
+          $ref: '#/components/schemas/renderstreamAssigner'
+      type: object
+    renderstreamGetLayerStatusResponse:
+      example:
+        result:
+          reference:
+            tNow: 0.8008281904610115
+          streams:
+          - uid: uid
+            receiverMachine: receiverMachine
+            statusString: statusString
+            name: name
+            sourceMachine: sourceMachine
+            status:
+              tLastError: 1.4658129805029452
+              lastErrorMessage: lastErrorMessage
+              subscribeSuccessful: true
+              subscriptionWanted: true
+              tLastDropped: 6.027456183070403
+          - uid: uid
+            receiverMachine: receiverMachine
+            statusString: statusString
+            name: name
+            sourceMachine: sourceMachine
+            status:
+              tLastError: 1.4658129805029452
+              lastErrorMessage: lastErrorMessage
+              subscribeSuccessful: true
+              subscriptionWanted: true
+              tLastDropped: 6.027456183070403
+          workload:
+            uid: uid
+            instances:
+            - machineUid: machineUid
+              healthDetails: healthDetails
+              state: state
+              machineName: machineName
+              healthMessage: healthMessage
+            - machineUid: machineUid
+              healthDetails: healthDetails
+              state: state
+              machineName: machineName
+              healthMessage: healthMessage
+            name: name
+          assetErrors:
+          - assetErrors
+          - assetErrors
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          $ref: '#/components/schemas/renderstreamGetLayerStatusResult'
+      type: object
+    renderstreamGetLayerStatusResult:
+      example:
+        reference:
+          tNow: 0.8008281904610115
+        streams:
+        - uid: uid
+          receiverMachine: receiverMachine
+          statusString: statusString
+          name: name
+          sourceMachine: sourceMachine
+          status:
+            tLastError: 1.4658129805029452
+            lastErrorMessage: lastErrorMessage
+            subscribeSuccessful: true
+            subscriptionWanted: true
+            tLastDropped: 6.027456183070403
+        - uid: uid
+          receiverMachine: receiverMachine
+          statusString: statusString
+          name: name
+          sourceMachine: sourceMachine
+          status:
+            tLastError: 1.4658129805029452
+            lastErrorMessage: lastErrorMessage
+            subscribeSuccessful: true
+            subscriptionWanted: true
+            tLastDropped: 6.027456183070403
+        workload:
+          uid: uid
+          instances:
+          - machineUid: machineUid
+            healthDetails: healthDetails
+            state: state
+            machineName: machineName
+            healthMessage: healthMessage
+          - machineUid: machineUid
+            healthDetails: healthDetails
+            state: state
+            machineName: machineName
+            healthMessage: healthMessage
+          name: name
+        assetErrors:
+        - assetErrors
+        - assetErrors
+      properties:
+        reference:
+          $ref: '#/components/schemas/renderstreamReferenceInfo'
+        workload:
+          $ref: '#/components/schemas/renderstreamWorkloadInfo'
+        streams:
+          items:
+            $ref: '#/components/schemas/renderstreamStreamInfo'
+          title: StreamInfo list
+          type: array
+        assetErrors:
+          items:
+            type: string
+          title: Asset error list
+          type: array
+      type: object
+    renderstreamGetLayersResponse:
+      example:
+        result:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/renderstreamRenderStreamInfo'
+          title: List of the RenderStream layers
+          type: array
+      type: object
+    renderstreamGetPoolsResponse:
+      example:
+        result:
+        - uid: uid
+          understudies:
+          - preferredSyncAdapter: preferredSyncAdapter
+            uid: uid
+            adapters:
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            name: name
+          - preferredSyncAdapter: preferredSyncAdapter
+            uid: uid
+            adapters:
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            name: name
+          name: name
+          machines:
+          - preferredSyncAdapter: preferredSyncAdapter
+            uid: uid
+            adapters:
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            name: name
+          - preferredSyncAdapter: preferredSyncAdapter
+            uid: uid
+            adapters:
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            name: name
+        - uid: uid
+          understudies:
+          - preferredSyncAdapter: preferredSyncAdapter
+            uid: uid
+            adapters:
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            name: name
+          - preferredSyncAdapter: preferredSyncAdapter
+            uid: uid
+            adapters:
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            name: name
+          name: name
+          machines:
+          - preferredSyncAdapter: preferredSyncAdapter
+            uid: uid
+            adapters:
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            name: name
+          - preferredSyncAdapter: preferredSyncAdapter
+            uid: uid
+            adapters:
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            - subnet: subnet
+              name: name
+              ipAddress: ipAddress
+            name: name
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/renderstreamPoolInfo'
+          title: List of the RenderStream pools
+          type: array
+      type: object
+    renderstreamMachineInfo:
+      example:
+        preferredSyncAdapter: preferredSyncAdapter
+        uid: uid
+        adapters:
+        - subnet: subnet
+          name: name
+          ipAddress: ipAddress
+        - subnet: subnet
+          name: name
+          ipAddress: ipAddress
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: UID of the machine
+          type: string
+        name:
+          title: Name of the machine
+          type: string
+        preferredSyncAdapter:
+          title: Preferred sync adapter
+          type: string
+        adapters:
+          items:
+            $ref: '#/components/schemas/renderstreamAdapterInfo'
+          title: List of adapters
+          type: array
+      type: object
+    renderstreamMapping:
+      example:
+        uid: uid
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: UID of the mapping
+          type: string
+        name:
+          title: Name of the mapping
+          type: string
+      type: object
+    renderstreamNetworkInfo:
+      example:
+        ip: ip
+        name: name
+      properties:
+        ip:
+          title: Network IP
+          type: string
+        name:
+          title: Network name
+          type: string
+      type: object
+    renderstreamPool:
+      example:
+        uid: uid
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: UID of the Pool
+          type: string
+        name:
+          title: Name of the Pool
+          type: string
+      type: object
+    renderstreamPoolInfo:
+      example:
+        uid: uid
+        understudies:
+        - preferredSyncAdapter: preferredSyncAdapter
+          uid: uid
+          adapters:
+          - subnet: subnet
+            name: name
+            ipAddress: ipAddress
+          - subnet: subnet
+            name: name
+            ipAddress: ipAddress
+          name: name
+        - preferredSyncAdapter: preferredSyncAdapter
+          uid: uid
+          adapters:
+          - subnet: subnet
+            name: name
+            ipAddress: ipAddress
+          - subnet: subnet
+            name: name
+            ipAddress: ipAddress
+          name: name
+        name: name
+        machines:
+        - preferredSyncAdapter: preferredSyncAdapter
+          uid: uid
+          adapters:
+          - subnet: subnet
+            name: name
+            ipAddress: ipAddress
+          - subnet: subnet
+            name: name
+            ipAddress: ipAddress
+          name: name
+        - preferredSyncAdapter: preferredSyncAdapter
+          uid: uid
+          adapters:
+          - subnet: subnet
+            name: name
+            ipAddress: ipAddress
+          - subnet: subnet
+            name: name
+            ipAddress: ipAddress
+          name: name
+      properties:
+        uid:
+          format: uint64
+          title: UID of the pool selector
+          type: string
+        name:
+          title: Name of the pool selector
+          type: string
+        machines:
+          items:
+            $ref: '#/components/schemas/renderstreamMachineInfo'
+          title: Machine list
+          type: array
+        understudies:
+          items:
+            $ref: '#/components/schemas/renderstreamMachineInfo'
+          title: Understudy list
+          type: array
+      type: object
+    renderstreamReferenceInfo:
+      example:
+        tNow: 0.8008281904610115
+      properties:
+        tNow:
+          format: double
+          title: Currebt time
+          type: number
+      type: object
+    renderstreamRenderStreamInfo:
+      example:
+        uid: uid
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: UID of the RenderStream
+          type: string
+        name:
+          title: Name of the RenderStream
+          type: string
+      type: object
+    renderstreamRestartLayersRequest:
+      properties:
+        layers:
+          items:
+            $ref: '#/components/schemas/d3apiLocator'
+          title: Selector of the layer to be restarted
+          type: array
+      type: object
+    renderstreamStartLayersRequest:
+      properties:
+        layers:
+          items:
+            $ref: '#/components/schemas/d3apiLocator'
+          title: List of Layer identifier to start
+          type: array
+      type: object
+    renderstreamStopLayersRequest:
+      properties:
+        layers:
+          items:
+            $ref: '#/components/schemas/d3apiLocator'
+          title: Selector of the layer to be stopped
+          type: array
+      type: object
+    renderstreamStreamInfo:
+      example:
+        uid: uid
+        receiverMachine: receiverMachine
+        statusString: statusString
+        name: name
+        sourceMachine: sourceMachine
+        status:
+          tLastError: 1.4658129805029452
+          lastErrorMessage: lastErrorMessage
+          subscribeSuccessful: true
+          subscriptionWanted: true
+          tLastDropped: 6.027456183070403
+      properties:
+        uid:
+          format: uint64
+          title: Stream identifier
+          type: string
+        name:
+          title: Stream name
+          type: string
+        sourceMachine:
+          title: Source machine name
+          type: string
+        receiverMachine:
+          title: Source machine name
+          type: string
+        status:
+          $ref: '#/components/schemas/renderstreamStreamStatus'
+        statusString:
+          title: Status string
+          type: string
+      type: object
+    renderstreamStreamStatus:
+      example:
+        tLastError: 1.4658129805029452
+        lastErrorMessage: lastErrorMessage
+        subscribeSuccessful: true
+        subscriptionWanted: true
+        tLastDropped: 6.027456183070403
+      properties:
+        subscriptionWanted:
+          title: subscription wanted flag
+          type: boolean
+        subscribeSuccessful:
+          title: subscribe successful flag
+          type: boolean
+        tLastDropped:
+          format: double
+          title: Last dropped time
+          type: number
+        tLastError:
+          format: double
+          title: Last error time
+          type: number
+        lastErrorMessage:
+          title: Last error message
+          type: string
+      type: object
+    renderstreamSyncLayersRequest:
+      properties:
+        layers:
+          items:
+            $ref: '#/components/schemas/d3apiLocator'
+          title: Selector of the layer to be sync
+          type: array
+      type: object
+    renderstreamTransportInfo:
+      example:
+        bitDepth: 0
+        format: format
+        type: type
+      properties:
+        type:
+          title: transport type
+          type: string
+        format:
+          title: transport format
+          type: string
+        bitDepth:
+          format: int32
+          title: transport depth
+          type: integer
+      type: object
+    renderstreamWorkloadInfo:
+      example:
+        uid: uid
+        instances:
+        - machineUid: machineUid
+          healthDetails: healthDetails
+          state: state
+          machineName: machineName
+          healthMessage: healthMessage
+        - machineUid: machineUid
+          healthDetails: healthDetails
+          state: state
+          machineName: machineName
+          healthMessage: healthMessage
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: UID of the Workload selector
+          type: string
+        name:
+          title: Name of the Workload selector
+          type: string
+        instances:
+          items:
+            $ref: '#/components/schemas/renderstreamWorkloadInstanceInfo'
+          title: Workload instance info list
+          type: array
+      type: object
+    renderstreamWorkloadInstanceInfo:
+      example:
+        machineUid: machineUid
+        healthDetails: healthDetails
+        state: state
+        machineName: machineName
+        healthMessage: healthMessage
+      properties:
+        machineUid:
+          format: uint64
+          title: UID of the machine
+          type: string
+        machineName:
+          title: Name of the machine
+          type: string
+        state:
+          title: State
+          type: string
+        healthMessage:
+          title: Health message
+          type: string
+        healthDetails:
+          title: Health details
+          type: string
+      type: object
+    sequencingChangeIndirectionsRequest:
+      properties:
+        changes:
+          items:
+            $ref: '#/components/schemas/sequencingIndirectionChangeAssignment'
+          title: List of changes to make
+          type: array
+      type: object
+    sequencingIndirectionChangeAssignment:
+      properties:
+        indirection:
+          $ref: '#/components/schemas/d3apiLocator'
+        resource:
+          $ref: '#/components/schemas/d3apiLocator'
+      type: object
+    sequencingIndirectionResource:
+      example:
+        uid: uid
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: Resource UID
+          type: string
+        name:
+          title: Resource name
+          type: string
+      type: object
+    sequencingListAvailableResourcesResponse:
+      example:
+        result:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/sequencingIndirectionResource'
+          title: List of resources availabel for use in this indirection
+          type: array
+      type: object
+    sequencingListIndirectionItem:
+      example:
+        uid: uid
+        name: name
+        currentResource:
+          uid: uid
+          name: name
         resourceType: resourceType
       properties:
         uid:
           format: uint64
-          title: uid of indirection
+          title: Indirection UID
+          type: string
+        name:
+          title: Indirection name
           type: string
         resourceType:
-          title: resource type that indirection can be assigned to
+          title: Indirection accepts resource type
           type: string
-        name:
-          title: unqualified name in d3
-          type: string
-        manualIndirection:
-          $ref: '#/components/schemas/indirectionsManualIndirection'
-        listIndirection:
-          $ref: '#/components/schemas/indirectionsListIndirection'
+        currentResource:
+          $ref: '#/components/schemas/sequencingIndirectionResource'
       type: object
-    indirectionsListIndirection:
-      example:
-        resourceUids:
-        - resourceUids
-        - resourceUids
-        resourceIndex: 0
-      properties:
-        resourceIndex:
-          format: int64
-          title: index of selected resource
-          type: integer
-        resourceUids:
-          items:
-            format: uint64
-            type: string
-          title: uids of selectable resources
-          type: array
-      type: object
-    indirectionsListIndirectionsResponse:
+    sequencingListIndirectionsResponse:
       example:
         result:
         - uid: uid
-          listIndirection:
-            resourceUids:
-            - resourceUids
-            - resourceUids
-            resourceIndex: 0
           name: name
-          manualIndirection:
-            resourceUid: resourceUid
+          currentResource:
+            uid: uid
+            name: name
           resourceType: resourceType
         - uid: uid
-          listIndirection:
-            resourceUids:
-            - resourceUids
-            - resourceUids
-            resourceIndex: 0
           name: name
-          manualIndirection:
-            resourceUid: resourceUid
+          currentResource:
+            uid: uid
+            name: name
           resourceType: resourceType
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
       properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
         result:
           items:
-            $ref: '#/components/schemas/indirectionsIndirection'
+            $ref: '#/components/schemas/sequencingListIndirectionItem'
+          title: List of indirections
           type: array
       type: object
-    indirectionsManualIndirection:
+    MachineInfoMachineType:
+      default: Unknown
+      enum:
+      - Unknown
+      - Designer
+      - V2_5
+      - Pro4x2
+      - Pro4x4
+      - Plus2x2
+      - Pro4x4NoVfcs
+      - Node
+      - Pro2x4
+      - Gx1
+      - Gx2
+      - SoloV1
+      - Vx4
+      - Gx2c
+      - Rx
+      - RxII
+      - Vx1
+      - Vx2
+      - Vx4Plus
+      - Gx3
+      type: string
+    statusD3VersionInfo:
       example:
-        resourceUid: resourceUid
+        hotfix: 1
+        major: 0
+        minor: 6
+        revision: 5
       properties:
-        resourceUid:
-          format: uint64
-          title: uid of selected resource. pass 0 if you want to set ManualIndirection
-            to None
-          type: string
-      type: object
-    indirectionsSetIndirectionsRequest:
-      properties:
-        assignments:
-          items:
-            $ref: '#/components/schemas/SetIndirectionsRequestAssignment'
-          title: list of indirection assignments
-          type: array
-      type: object
-    indirectionsSetIndirectionsResponse:
-      example:
-        failedAssignments:
-        - uid: uid
-          resourceUid: resourceUid
-          error: error
-          resourceIndex: 0
-        - uid: uid
-          resourceUid: resourceUid
-          error: error
-          resourceIndex: 0
-      properties:
-        failedAssignments:
-          items:
-            $ref: '#/components/schemas/SetIndirectionsResponseFailedAssignment'
-          title: indirection assignments which failed
-          type: array
-      type: object
-    contentAudioMetadata:
-      example:
-        codecInfo: codecInfo
-        nChannels: 9
-        nSamples: 3
-        codecName: codecName
-        sampleRate: 7
-      properties:
-        sampleRate:
+        major:
           format: int64
+          title: Major version
           type: integer
-        nChannels:
+        minor:
           format: int64
+          title: Minor version
           type: integer
-        nSamples:
+        hotfix:
           format: int64
+          title: Hotfix (AKA double-dot)
           type: integer
-        codecName:
-          type: string
-        codecInfo:
-          type: string
+        revision:
+          format: int64
+          title: Revision
+          type: integer
       type: object
-    contentGetMediaMetadataResponse:
+    statusGetProjectResponse:
       example:
         result:
+          projectPath: projectPath
+          version:
+            hotfix: 1
+            major: 0
+            minor: 6
+            revision: 5
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          $ref: '#/components/schemas/statusGetProjectResult'
+      type: object
+    statusGetProjectResult:
+      example:
+        projectPath: projectPath
+        version:
+          hotfix: 1
+          major: 0
+          minor: 6
+          revision: 5
+      properties:
+        projectPath:
+          title: Path to the project
+          type: string
+        version:
+          $ref: '#/components/schemas/statusD3VersionInfo'
+      type: object
+    statusGetSessionResponse:
+      example:
+        result:
+          actors:
+          - uid: uid
+            hostname: hostname
+            name: name
+          - uid: uid
+            hostname: hostname
+            name: name
+          isDirectorDedicated: true
+          director:
+            uid: uid
+            hostname: hostname
+            name: name
+          understudies:
+          - uid: uid
+            hostname: hostname
+            name: name
+          - uid: uid
+            hostname: hostname
+            name: name
+          isRunningSolo: true
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          $ref: '#/components/schemas/statusGetSessionResult'
+      type: object
+    statusGetSessionResult:
+      example:
+        actors:
+        - uid: uid
+          hostname: hostname
+          name: name
+        - uid: uid
+          hostname: hostname
+          name: name
+        isDirectorDedicated: true
+        director:
           uid: uid
-          audioMetadata:
-            codecInfo: codecInfo
-            nChannels: 9
-            nSamples: 3
-            codecName: codecName
-            sampleRate: 7
-          meshMetadata:
-            extentsMin:
-              x: 7.386282
-              y: 1.2315135
-              z: 1.0246457
-            extentsMax:
-              x: 7.386282
-              y: 1.2315135
-              z: 1.0246457
-            nTriangles: 4
-            centroid:
-              x: 7.386282
-              y: 1.2315135
-              z: 1.0246457
-            nVertices: 2
-          videoMetadata:
-            hasAudio: true
-            audioBigEndian: true
-            imageSequenceMetadata:
-              nFrames: 5
-              imageMetadata:
-                codec: codec
-                bitsPerPixel: 1
-                resolution:
-                  width: 0
-                  height: 6
-                hasAlpha: true
-              fps: 5.962134
-            audioSampleRate: 2.302136
+          hostname: hostname
+          name: name
+        understudies:
+        - uid: uid
+          hostname: hostname
+          name: name
+        - uid: uid
+          hostname: hostname
+          name: name
+        isRunningSolo: true
       properties:
-        result:
-          $ref: '#/components/schemas/contentMediaMetadata'
-      type: object
-    contentImageMetadata:
-      example:
-        codec: codec
-        bitsPerPixel: 1
-        resolution:
-          width: 0
-          height: 6
-        hasAlpha: true
-      properties:
-        resolution:
-          $ref: '#/components/schemas/contentResolution'
-        bitsPerPixel:
-          format: int64
-          type: integer
-        codec:
-          type: string
-        hasAlpha:
+        isRunningSolo:
+          description: |-
+            Is machine is running in the solo mode.
+            Solo mode means that project is running on a standalone machine (not director set), so not as part of a wider session.
           type: boolean
+        isDirectorDedicated:
+          description: |-
+            Is a director machine is set as dedicated or not
+            Dedicated means that the machine controls Actors but is not intended to output video to the stage; it is used only for visualisation.
+            It if is not dedicated then that means the machine controls all other Actors in the network but also outputs video through its remaining outputs.
+          type: boolean
+        director:
+          $ref: '#/components/schemas/statusMachineInfo'
+        actors:
+          items:
+            $ref: '#/components/schemas/statusMachineInfo'
+          title: List of actors in the network
+          type: array
+        understudies:
+          items:
+            $ref: '#/components/schemas/statusMachineInfo'
+          title: List of understudies in the network
+          type: array
       type: object
-    contentImageSequenceMetadata:
+    statusHealthReport:
       example:
-        nFrames: 5
-        imageMetadata:
-          codec: codec
-          bitsPerPixel: 1
-          resolution:
-            width: 0
-            height: 6
-          hasAlpha: true
-        fps: 5.962134
+        runningAsMachine:
+          uid: uid
+          hostname: hostname
+          name: name
+        machine:
+          uid: uid
+          hostname: hostname
+          name: name
+        status:
+          averageFPS: 0.8008282
+          videoMissedFrames: 1.4658129
+          videoDroppedFrames: 6.0274563
+          states:
+          - severity: severity
+            name: name
+            detail: detail
+            category: category
+          - severity: severity
+            name: name
+            detail: detail
+            category: category
       properties:
-        imageMetadata:
-          $ref: '#/components/schemas/contentImageMetadata'
-        fps:
+        machine:
+          $ref: '#/components/schemas/statusd3Machine'
+        runningAsMachine:
+          $ref: '#/components/schemas/statusd3Machine'
+        status:
+          $ref: '#/components/schemas/statusHealthStatus'
+      type: object
+    statusHealthStates:
+      example:
+        severity: severity
+        name: name
+        detail: detail
+        category: category
+      properties:
+        name:
+          type: string
+        detail:
+          type: string
+        category:
+          type: string
+        severity:
+          type: string
+      type: object
+    statusHealthStatus:
+      example:
+        averageFPS: 0.8008282
+        videoMissedFrames: 1.4658129
+        videoDroppedFrames: 6.0274563
+        states:
+        - severity: severity
+          name: name
+          detail: detail
+          category: category
+        - severity: severity
+          name: name
+          detail: detail
+          category: category
+      properties:
+        averageFPS:
           format: float
           type: number
-        nFrames:
-          format: int64
-          type: integer
-      type: object
-    contentListMediaMetadataResponse:
-      example:
-        result:
-        - uid: uid
-          audioMetadata:
-            codecInfo: codecInfo
-            nChannels: 9
-            nSamples: 3
-            codecName: codecName
-            sampleRate: 7
-          meshMetadata:
-            extentsMin:
-              x: 7.386282
-              y: 1.2315135
-              z: 1.0246457
-            extentsMax:
-              x: 7.386282
-              y: 1.2315135
-              z: 1.0246457
-            nTriangles: 4
-            centroid:
-              x: 7.386282
-              y: 1.2315135
-              z: 1.0246457
-            nVertices: 2
-          videoMetadata:
-            hasAudio: true
-            audioBigEndian: true
-            imageSequenceMetadata:
-              nFrames: 5
-              imageMetadata:
-                codec: codec
-                bitsPerPixel: 1
-                resolution:
-                  width: 0
-                  height: 6
-                hasAlpha: true
-              fps: 5.962134
-            audioSampleRate: 2.302136
-        - uid: uid
-          audioMetadata:
-            codecInfo: codecInfo
-            nChannels: 9
-            nSamples: 3
-            codecName: codecName
-            sampleRate: 7
-          meshMetadata:
-            extentsMin:
-              x: 7.386282
-              y: 1.2315135
-              z: 1.0246457
-            extentsMax:
-              x: 7.386282
-              y: 1.2315135
-              z: 1.0246457
-            nTriangles: 4
-            centroid:
-              x: 7.386282
-              y: 1.2315135
-              z: 1.0246457
-            nVertices: 2
-          videoMetadata:
-            hasAudio: true
-            audioBigEndian: true
-            imageSequenceMetadata:
-              nFrames: 5
-              imageMetadata:
-                codec: codec
-                bitsPerPixel: 1
-                resolution:
-                  width: 0
-                  height: 6
-                hasAlpha: true
-              fps: 5.962134
-            audioSampleRate: 2.302136
-      properties:
-        result:
+        videoDroppedFrames:
+          format: float
+          type: number
+        videoMissedFrames:
+          format: float
+          type: number
+        states:
           items:
-            $ref: '#/components/schemas/contentMediaMetadata'
+            $ref: '#/components/schemas/statusHealthStates'
           type: array
       type: object
-    contentMediaMetadata:
+    statusListHealthResponse:
+      example:
+        result:
+        - runningAsMachine:
+            uid: uid
+            hostname: hostname
+            name: name
+          machine:
+            uid: uid
+            hostname: hostname
+            name: name
+          status:
+            averageFPS: 0.8008282
+            videoMissedFrames: 1.4658129
+            videoDroppedFrames: 6.0274563
+            states:
+            - severity: severity
+              name: name
+              detail: detail
+              category: category
+            - severity: severity
+              name: name
+              detail: detail
+              category: category
+        - runningAsMachine:
+            uid: uid
+            hostname: hostname
+            name: name
+          machine:
+            uid: uid
+            hostname: hostname
+            name: name
+          status:
+            averageFPS: 0.8008282
+            videoMissedFrames: 1.4658129
+            videoDroppedFrames: 6.0274563
+            states:
+            - severity: severity
+              name: name
+              detail: detail
+              category: category
+            - severity: severity
+              name: name
+              detail: detail
+              category: category
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/statusHealthReport'
+          type: array
+      type: object
+    statusListNotificationsResponse:
+      example:
+        result:
+        - machine:
+            uid: uid
+            hostname: hostname
+            name: name
+          notifications:
+          - summary: summary
+            detail: detail
+          - summary: summary
+            detail: detail
+        - machine:
+            uid: uid
+            hostname: hostname
+            name: name
+          notifications:
+          - summary: summary
+            detail: detail
+          - summary: summary
+            detail: detail
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/statusNotificationsReport'
+          type: array
+      type: object
+    statusMachineInfo:
       example:
         uid: uid
-        audioMetadata:
-          codecInfo: codecInfo
-          nChannels: 9
-          nSamples: 3
-          codecName: codecName
-          sampleRate: 7
-        meshMetadata:
-          extentsMin:
-            x: 7.386282
-            y: 1.2315135
-            z: 1.0246457
-          extentsMax:
-            x: 7.386282
-            y: 1.2315135
-            z: 1.0246457
-          nTriangles: 4
-          centroid:
-            x: 7.386282
-            y: 1.2315135
-            z: 1.0246457
-          nVertices: 2
-        videoMetadata:
-          hasAudio: true
-          audioBigEndian: true
-          imageSequenceMetadata:
-            nFrames: 5
-            imageMetadata:
-              codec: codec
-              bitsPerPixel: 1
-              resolution:
-                width: 0
-                height: 6
-              hasAlpha: true
-            fps: 5.962134
-          audioSampleRate: 2.302136
+        hostname: hostname
+        name: name
       properties:
         uid:
           format: uint64
-          type: string
-        videoMetadata:
-          $ref: '#/components/schemas/contentVideoMetadata'
-        audioMetadata:
-          $ref: '#/components/schemas/contentAudioMetadata'
-        meshMetadata:
-          $ref: '#/components/schemas/contentMeshMetadata'
-      type: object
-    contentMeshMetadata:
-      example:
-        extentsMin:
-          x: 7.386282
-          y: 1.2315135
-          z: 1.0246457
-        extentsMax:
-          x: 7.386282
-          y: 1.2315135
-          z: 1.0246457
-        nTriangles: 4
-        centroid:
-          x: 7.386282
-          y: 1.2315135
-          z: 1.0246457
-        nVertices: 2
-      properties:
-        nVertices:
-          format: int64
-          type: integer
-        nTriangles:
-          format: int64
-          type: integer
-        centroid:
-          $ref: '#/components/schemas/contentVector3'
-        extentsMin:
-          $ref: '#/components/schemas/contentVector3'
-        extentsMax:
-          $ref: '#/components/schemas/contentVector3'
-      type: object
-    contentResolution:
-      example:
-        width: 0
-        height: 6
-      properties:
-        width:
-          format: int64
-          type: integer
-        height:
-          format: int64
-          type: integer
-      type: object
-    contentVector3:
-      example:
-        x: 7.386282
-        y: 1.2315135
-        z: 1.0246457
-      properties:
-        x:
-          format: float
-          type: number
-        y:
-          format: float
-          type: number
-        z:
-          format: float
-          type: number
-      type: object
-    contentVideoMetadata:
-      example:
-        hasAudio: true
-        audioBigEndian: true
-        imageSequenceMetadata:
-          nFrames: 5
-          imageMetadata:
-            codec: codec
-            bitsPerPixel: 1
-            resolution:
-              width: 0
-              height: 6
-            hasAlpha: true
-          fps: 5.962134
-        audioSampleRate: 2.302136
-      properties:
-        imageSequenceMetadata:
-          $ref: '#/components/schemas/contentImageSequenceMetadata'
-        hasAudio:
-          type: boolean
-        audioBigEndian:
-          type: boolean
-        audioSampleRate:
-          format: float
-          type: number
-      type: object
-    RenderMachineInfoStatus:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - OFFLINE
-      - OK
-      - STANDBY
-      - FAILED
-      type: string
-    StreamInfoStreamStatus:
-      default: None
-      enum:
-      - None
-      - Good
-      - DroppingFrames
-      - BadStream
-      - NoStream
-      - Offline
-      type: string
-    WorkloadInstanceInfoWorkloadInstanceStatus:
-      default: UNKNOWN
-      enum:
-      - UNKNOWN
-      - CRASHED
-      - ERROR
-      - STOPPING
-      - STOPPED
-      - LAUNCHING
-      - STARTING
-      - READY
-      - STANDBY
-      - RUNNING
-      type: string
-    renderstreamAdapterInfo:
-      example:
-        name: name
-        ipAddress: ipAddress
-        subnetMask: subnetMask
-      properties:
-        name:
-          title: Adapter name
-          type: string
-        ipAddress:
-          title: IP Address
-          type: string
-        subnetMask:
-          title: Subnet mask
-          type: string
-      type: object
-    renderstreamAssetInfo:
-      example:
-        name: name
-        contentSourceMachineName: contentSourceMachineName
-      properties:
-        name:
-          title: Asset name
-          type: string
-        contentSourceMachineName:
-          title: Single Content Source machine
-          type: string
-      title: NB name is the only field shared between RenderStreamAsset and RenderStream::AssetInfo
-      type: object
-    renderstreamClippingRegion:
-      example:
-        top: 5.962134
-        left: 6.0274563
-        bottom: 5.637377
-        right: 1.4658129
-      properties:
-        left:
-          format: float
-          type: number
-        right:
-          format: float
-          type: number
-        top:
-          format: float
-          type: number
-        bottom:
-          format: float
-          type: number
-      type: object
-    renderstreamClusterInfo:
-      example:
-        renderMachines:
-        - assets:
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          loadFactor: 0.8008282
-          preferredAdapter: preferredAdapter
-          statusString: statusString
-          networkAdapters:
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          streams:
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          name: name
-          online: true
-        - assets:
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          loadFactor: 0.8008282
-          preferredAdapter: preferredAdapter
-          statusString: statusString
-          networkAdapters:
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          streams:
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          name: name
-          online: true
-        understudies:
-        - assets:
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          loadFactor: 0.8008282
-          preferredAdapter: preferredAdapter
-          statusString: statusString
-          networkAdapters:
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          streams:
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          name: name
-          online: true
-        - assets:
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          loadFactor: 0.8008282
-          preferredAdapter: preferredAdapter
-          statusString: statusString
-          networkAdapters:
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          streams:
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          name: name
-          online: true
-        contentSourceMachine:
-          assets:
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          loadFactor: 0.8008282
-          preferredAdapter: preferredAdapter
-          statusString: statusString
-          networkAdapters:
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          streams:
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          name: name
-          online: true
-        name: name
-      properties:
-        name:
-          title: Unique cluster name
-          type: string
-        renderMachines:
-          items:
-            $ref: '#/components/schemas/renderstreamRenderMachineInfo'
-          title: List of render machines currently in use
-          type: array
-        contentSourceMachine:
-          $ref: '#/components/schemas/renderstreamRenderMachineInfo'
-        understudies:
-          items:
-            $ref: '#/components/schemas/renderstreamRenderMachineInfo'
-          title: List of render machines currently acting as understudies
-          type: array
-      type: object
-    renderstreamFailoverInfo:
-      example:
-        coveringMachineName: coveringMachineName
-        failedInstanceIndex: 0
-        errorString: errorString
-        coveringInstanceIndex: 6
-        workloadID: workloadID
-        streams:
-        - clipping:
-            top: 5.962134
-            left: 6.0274563
-            bottom: 5.637377
-            right: 1.4658129
-          workloadID: workloadID
-          name: name
-          machineName: machineName
-          receivingLocally: true
-        - clipping:
-            top: 5.962134
-            left: 6.0274563
-            bottom: 5.637377
-            right: 1.4658129
-          workloadID: workloadID
-          name: name
-          machineName: machineName
-          receivingLocally: true
-      properties:
-        workloadID:
-          format: uint64
-          type: string
-        failedInstanceIndex:
-          format: int64
-          type: integer
-        coveringInstanceIndex:
-          format: int64
-          type: integer
-        coveringMachineName:
-          type: string
-        errorString:
-          type: string
-        streams:
-          items:
-            $ref: '#/components/schemas/renderstreamStreamInfo'
-          title: Failed-over streams
-          type: array
-      type: object
-    renderstreamFailoverRenderMachineResponse:
-      example:
-        failoverMappings:
-        - coveringMachineName: coveringMachineName
-          failedInstanceIndex: 0
-          errorString: errorString
-          coveringInstanceIndex: 6
-          workloadID: workloadID
-          streams:
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-        - coveringMachineName: coveringMachineName
-          failedInstanceIndex: 0
-          errorString: errorString
-          coveringInstanceIndex: 6
-          workloadID: workloadID
-          streams:
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-        allInstancesFailedover: true
-      properties:
-        allInstancesFailedover:
-          title: Whether or not failover occurred successfully for every instance
-          type: boolean
-        failoverMappings:
-          items:
-            $ref: '#/components/schemas/renderstreamFailoverInfo'
-          title: Information about the understudies taking over
-          type: array
-      type: object
-    renderstreamFailoverWorkloadInstanceResponse:
-      example:
-        failoverMapping:
-          coveringMachineName: coveringMachineName
-          failedInstanceIndex: 0
-          errorString: errorString
-          coveringInstanceIndex: 6
-          workloadID: workloadID
-          streams:
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-      properties:
-        failoverMapping:
-          $ref: '#/components/schemas/renderstreamFailoverInfo'
-      type: object
-    renderstreamGetClusterResponse:
-      example:
-        result:
-          renderMachines:
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          understudies:
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          contentSourceMachine:
-            assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          name: name
-      properties:
-        result:
-          $ref: '#/components/schemas/renderstreamClusterInfo'
-      type: object
-    renderstreamGetRenderMachineResponse:
-      example:
-        result:
-          assets:
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          loadFactor: 0.8008282
-          preferredAdapter: preferredAdapter
-          statusString: statusString
-          networkAdapters:
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          streams:
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          name: name
-          online: true
-      properties:
-        result:
-          $ref: '#/components/schemas/renderstreamRenderMachineInfo'
-      type: object
-    renderstreamGetWorkloadInstanceResponse:
-      example:
-        result:
-          instanceid: 0
-          workloadid: workloadid
-          droppingFrames: true
-          droppingInputFrames: true
-          processRunning: true
-      properties:
-        result:
-          $ref: '#/components/schemas/renderstreamWorkloadInstanceInfo'
-      type: object
-    renderstreamGetWorkloadResponse:
-      example:
-        result:
-          instances:
-          - instanceid: 0
-            workloadid: workloadid
-            droppingFrames: true
-            droppingInputFrames: true
-            processRunning: true
-          - instanceid: 0
-            workloadid: workloadid
-            droppingFrames: true
-            droppingInputFrames: true
-            processRunning: true
-          layerUID: layerUID
-          locationDescription: locationDescription
-          engineSync: true
-          id: id
-          asset:
-            name: name
-            contentSourceMachineName: contentSourceMachineName
-          friendlyName: friendlyName
-      properties:
-        result:
-          $ref: '#/components/schemas/renderstreamWorkloadInfo'
-      type: object
-    renderstreamListClustersResponse:
-      example:
-        clusters:
-        - renderMachines:
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          understudies:
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          contentSourceMachine:
-            assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          name: name
-        - renderMachines:
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          understudies:
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          - assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          contentSourceMachine:
-            assets:
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            - name: name
-              contentSourceMachineName: contentSourceMachineName
-            loadFactor: 0.8008282
-            preferredAdapter: preferredAdapter
-            statusString: statusString
-            networkAdapters:
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            - name: name
-              ipAddress: ipAddress
-              subnetMask: subnetMask
-            streams:
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            - clipping:
-                top: 5.962134
-                left: 6.0274563
-                bottom: 5.637377
-                right: 1.4658129
-              workloadID: workloadID
-              name: name
-              machineName: machineName
-              receivingLocally: true
-            name: name
-            online: true
-          name: name
-      properties:
-        clusters:
-          items:
-            $ref: '#/components/schemas/renderstreamClusterInfo'
-          type: array
-      type: object
-    renderstreamListRenderMachinesResponse:
-      example:
-        machines:
-        - assets:
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          loadFactor: 0.8008282
-          preferredAdapter: preferredAdapter
-          statusString: statusString
-          networkAdapters:
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          streams:
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          name: name
-          online: true
-        - assets:
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          - name: name
-            contentSourceMachineName: contentSourceMachineName
-          loadFactor: 0.8008282
-          preferredAdapter: preferredAdapter
-          statusString: statusString
-          networkAdapters:
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          - name: name
-            ipAddress: ipAddress
-            subnetMask: subnetMask
-          streams:
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          - clipping:
-              top: 5.962134
-              left: 6.0274563
-              bottom: 5.637377
-              right: 1.4658129
-            workloadID: workloadID
-            name: name
-            machineName: machineName
-            receivingLocally: true
-          name: name
-          online: true
-      properties:
-        machines:
-          items:
-            $ref: '#/components/schemas/renderstreamRenderMachineInfo'
-          type: array
-      type: object
-    renderstreamListWorkloadsResponse:
-      example:
-        workloads:
-        - instances:
-          - instanceid: 0
-            workloadid: workloadid
-            droppingFrames: true
-            droppingInputFrames: true
-            processRunning: true
-          - instanceid: 0
-            workloadid: workloadid
-            droppingFrames: true
-            droppingInputFrames: true
-            processRunning: true
-          layerUID: layerUID
-          locationDescription: locationDescription
-          engineSync: true
-          id: id
-          asset:
-            name: name
-            contentSourceMachineName: contentSourceMachineName
-          friendlyName: friendlyName
-        - instances:
-          - instanceid: 0
-            workloadid: workloadid
-            droppingFrames: true
-            droppingInputFrames: true
-            processRunning: true
-          - instanceid: 0
-            workloadid: workloadid
-            droppingFrames: true
-            droppingInputFrames: true
-            processRunning: true
-          layerUID: layerUID
-          locationDescription: locationDescription
-          engineSync: true
-          id: id
-          asset:
-            name: name
-            contentSourceMachineName: contentSourceMachineName
-          friendlyName: friendlyName
-      properties:
-        workloads:
-          items:
-            $ref: '#/components/schemas/renderstreamWorkloadInfo'
-          type: array
-      type: object
-    renderstreamRenderMachineInfo:
-      example:
-        assets:
-        - name: name
-          contentSourceMachineName: contentSourceMachineName
-        - name: name
-          contentSourceMachineName: contentSourceMachineName
-        loadFactor: 0.8008282
-        preferredAdapter: preferredAdapter
-        statusString: statusString
-        networkAdapters:
-        - name: name
-          ipAddress: ipAddress
-          subnetMask: subnetMask
-        - name: name
-          ipAddress: ipAddress
-          subnetMask: subnetMask
-        streams:
-        - clipping:
-            top: 5.962134
-            left: 6.0274563
-            bottom: 5.637377
-            right: 1.4658129
-          workloadID: workloadID
-          name: name
-          machineName: machineName
-          receivingLocally: true
-        - clipping:
-            top: 5.962134
-            left: 6.0274563
-            bottom: 5.637377
-            right: 1.4658129
-          workloadID: workloadID
-          name: name
-          machineName: machineName
-          receivingLocally: true
-        name: name
-        online: true
-      properties:
-        name:
-          title: Unique machine name
-          type: string
-        statusString:
-          title: Machine status as a human readable string
-          type: string
-        status:
-          $ref: '#/components/schemas/RenderMachineInfoStatus'
-        online:
-          title: Whether the machine is online or not
-          type: boolean
-        loadFactor:
-          format: float
-          title: Load factor relative to other render nodes
-          type: number
-        preferredAdapter:
-          title: Preferred synchronisation adapter
-          type: string
-        networkAdapters:
-          items:
-            $ref: '#/components/schemas/renderstreamAdapterInfo'
-          title: Available network adapters
-          type: array
-        streams:
-          items:
-            $ref: '#/components/schemas/renderstreamStreamInfo'
-          title: Running streams
-          type: array
-        assets:
-          items:
-            $ref: '#/components/schemas/renderstreamAssetInfo'
-          title: Available assets
-          type: array
-      type: object
-    renderstreamStartWorkloadResponse:
-      type: object
-    renderstreamStopWorkloadResponse:
-      type: object
-    renderstreamStreamInfo:
-      example:
-        clipping:
-          top: 5.962134
-          left: 6.0274563
-          bottom: 5.637377
-          right: 1.4658129
-        workloadID: workloadID
-        name: name
-        machineName: machineName
-        receivingLocally: true
-      properties:
-        name:
-          title: Stream name
-          type: string
-        workloadID:
-          format: uint64
-          title: Workload that this stream forms part of
-          type: string
-        machineName:
-          title: Source machine of the Stream
-          type: string
-        status:
-          $ref: '#/components/schemas/StreamInfoStreamStatus'
-        receivingLocally:
-          title: Did the stream receive frames locally in the last 0.5s
-          type: boolean
-        clipping:
-          $ref: '#/components/schemas/renderstreamClippingRegion'
-      type: object
-    renderstreamSyncWorkloadResponse:
-      type: object
-    renderstreamWorkloadInfo:
-      example:
-        instances:
-        - instanceid: 0
-          workloadid: workloadid
-          droppingFrames: true
-          droppingInputFrames: true
-          processRunning: true
-        - instanceid: 0
-          workloadid: workloadid
-          droppingFrames: true
-          droppingInputFrames: true
-          processRunning: true
-        layerUID: layerUID
-        locationDescription: locationDescription
-        engineSync: true
-        id: id
-        asset:
-          name: name
-          contentSourceMachineName: contentSourceMachineName
-        friendlyName: friendlyName
-      properties:
-        id:
-          format: uint64
-          title: UID of the workload; matches that of the RenderStreamCluster
-          type: string
-        friendlyName:
-          title: '''Friendly'' human readable unique name'
-          type: string
-        asset:
-          $ref: '#/components/schemas/renderstreamAssetInfo'
-        status:
-          $ref: '#/components/schemas/WorkloadInstanceInfoWorkloadInstanceStatus'
-        instances:
-          items:
-            $ref: '#/components/schemas/renderstreamWorkloadInstanceInfo'
-          title: Rendering instances, including understudies
-          type: array
-        engineSync:
-          title: Is engine synchronisation enabled?
-          type: boolean
-        layerUID:
-          description: The UID of the Layer the workload is started from.
-          format: uint64
-          type: string
-        locationDescription:
-          description: Description of the location of the workload.
-          type: string
-      type: object
-    renderstreamWorkloadInstanceInfo:
-      example:
-        instanceid: 0
-        workloadid: workloadid
-        droppingFrames: true
-        droppingInputFrames: true
-        processRunning: true
-      properties:
-        workloadid:
-          format: uint64
-          title: ID of the workload this instance belongs to
-          type: string
-        instanceid:
-          format: int64
-          title: ID in the workload's array of instances
-          type: integer
-        processRunning:
-          title: Is the process running
-          type: boolean
-        droppingFrames:
-          title: Is the process dropping frames
-          type: boolean
-        status:
-          $ref: '#/components/schemas/WorkloadInstanceInfoWorkloadInstanceStatus'
-        droppingInputFrames:
-          title: Is the process dropping input frames
-          type: boolean
-      type: object
-    resourcesGetResourceResponse:
-      example:
-        result:
-          uid: uid
-          path: path
-          name: name
-          type: type
-      properties:
-        result:
-          $ref: '#/components/schemas/resourcesResourceInfo'
-      type: object
-    resourcesListResourcesResponse:
-      example:
-        result:
-        - uid: uid
-          path: path
-          name: name
-          type: type
-        - uid: uid
-          path: path
-          name: name
-          type: type
-      properties:
-        result:
-          items:
-            $ref: '#/components/schemas/resourcesResourceInfo'
-          type: array
-      type: object
-    resourcesResourceInfo:
-      example:
-        uid: uid
-        path: path
-        name: name
-        type: type
-      properties:
-        uid:
-          format: uint64
-          title: unique identifier; treat as string in javascript
+          title: Unique identifier of the machine in the network
           type: string
         name:
-          title: unqualified name in d3
+          title: Name of the machine in the network
           type: string
-        path:
-          title: internal resource path e.g /object/videoclip/someVideo.mov
+        hostname:
+          title: Hostname
           type: string
         type:
-          title: internal type name
+          $ref: '#/components/schemas/MachineInfoMachineType'
+      type: object
+    statusNotification:
+      example:
+        summary: summary
+        detail: detail
+      properties:
+        summary:
+          type: string
+        detail:
           type: string
       type: object
-    thumbnailsGetThumbnailResponse:
+    statusNotificationsReport:
       example:
-        path: path
+        machine:
+          uid: uid
+          hostname: hostname
+          name: name
+        notifications:
+        - summary: summary
+          detail: detail
+        - summary: summary
+          detail: detail
       properties:
-        path:
-          title: path of thumbnail
+        machine:
+          $ref: '#/components/schemas/statusd3Machine'
+        notifications:
+          items:
+            $ref: '#/components/schemas/statusNotification'
+          type: array
+      type: object
+    statusd3Machine:
+      example:
+        uid: uid
+        hostname: hostname
+        name: name
+      properties:
+        uid:
           type: string
+        name:
+          type: string
+        hostname:
+          type: string
+      type: object
+    TrackInfoCrossfadeMode:
+      default: Unknown
+      enum:
+      - Unknown
+      - "Off"
+      - Fade
+      - TrackSection
+      type: string
+    transportAPIPlayMode:
+      default: NotSet
+      enum:
+      - NotSet
+      - Play
+      - PlaySection
+      - Loop
+      - Stop
+      - Unknown
+      title: PlayMode already exists, so call it APIPlayMode so the compiler doesn't
+        get confused
+      type: string
+    transportAnnotationInfo:
+      example:
+        notes:
+        - time: 0.8008281904610115
+          text: text
+        - time: 0.8008281904610115
+          text: text
+        sections:
+        - index: index
+          time: 1.4658129805029452
+        - index: index
+          time: 1.4658129805029452
+        tags:
+        - time: 6.027456183070403
+          value: value
+        - time: 6.027456183070403
+          value: value
+      properties:
+        notes:
+          items:
+            $ref: '#/components/schemas/transportNoteInfo'
+          title: List of all the Note in the project, in the correct order
+          type: array
+        tags:
+          items:
+            $ref: '#/components/schemas/transportTagInfo'
+          title: List of all the Tag in the project, in the correct order
+          type: array
+        sections:
+          items:
+            $ref: '#/components/schemas/transportSectionInfo'
+          title: List of all the Section in the project, in the correct order
+          type: array
+      type: object
+    transportGetActiveTransportResponse:
+      example:
+        result:
+        - engaged: true
+          volume: 0.8008281904610115
+          uid: uid
+          brightness: 6.027456183070403
+          name: name
+        - engaged: true
+          volume: 0.8008281904610115
+          uid: uid
+          brightness: 6.027456183070403
+          name: name
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/transportTransportInfo'
+          title: Current active transport(s)
+          type: array
+      type: object
+    transportGoToFrameInfo:
+      properties:
+        transport:
+          $ref: '#/components/schemas/d3apiLocator'
+        frame:
+          format: int64
+          title: frame number
+          type: integer
+        playmode:
+          $ref: '#/components/schemas/transportAPIPlayMode'
+      type: object
+    transportGoToFrameRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportGoToFrameInfo'
+          title: Jump to a specific frame
+          type: array
+      type: object
+    transportGoToNextPrevInfo:
+      properties:
+        transport:
+          $ref: '#/components/schemas/d3apiLocator'
+        playmode:
+          $ref: '#/components/schemas/transportAPIPlayMode'
+      type: object
+    transportGoToNextSectionRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportGoToNextPrevInfo'
+          title: Jump to next section on the selected transport(s)
+          type: array
+      type: object
+    transportGoToNextTrackRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportGoToNextPrevInfo'
+          title: Jump to next track on the selected transport(s)
+          type: array
+      type: object
+    transportGoToNoteRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportGotoNoteInfo'
+          title: Specifics of the note(s) to go to
+          type: array
+      type: object
+    transportGoToPrevSectionRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportGoToNextPrevInfo'
+          title: Jump to previous section on the selected transport(s)
+          type: array
+      type: object
+    transportGoToPrevTrackRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportGoToNextPrevInfo'
+          title: Jump to previous track on the selected transport(s)
+          type: array
+      type: object
+    transportGoToSectionInfo:
+      properties:
+        transport:
+          $ref: '#/components/schemas/d3apiLocator'
+        section:
+          format: uint64
+          title: Section to jump to
+          type: string
+        playmode:
+          $ref: '#/components/schemas/transportAPIPlayMode'
+      type: object
+    transportGoToSectionRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportGoToSectionInfo'
+          title: Jump to previous track on the selected transport(s)
+          type: array
+      type: object
+    transportGoToTagInfo:
+      properties:
+        transport:
+          $ref: '#/components/schemas/d3apiLocator'
+        type:
+          $ref: '#/components/schemas/transportTagType'
+        value:
+          title: Tag to jump to
+          type: string
+        allowGlobalJump:
+          title: Search for a tag in all active tracks, not just the current one
+          type: boolean
+        playmode:
+          $ref: '#/components/schemas/transportAPIPlayMode'
+      type: object
+    transportGoToTagRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportGoToTagInfo'
+          title: Specifics of the tag(s) to go to
+          type: array
+      type: object
+    transportGoToTimeCodeInfo:
+      properties:
+        transport:
+          $ref: '#/components/schemas/d3apiLocator'
+        timecode:
+          title: HH:MM:SS.FF formatted time string to jump to
+          type: string
+        ignoreTags:
+          title: Bool to ignore the timecode tags on the track and jump to a timecode
+            point relative to the start of the track
+          type: boolean
+        playmode:
+          $ref: '#/components/schemas/transportAPIPlayMode'
+      type: object
+    transportGoToTimeCodeRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportGoToTimeCodeInfo'
+          title: Specifics of the timecode signature(s) to go to
+          type: array
+      type: object
+    transportGoToTimeInfo:
+      properties:
+        transport:
+          $ref: '#/components/schemas/d3apiLocator'
+        time:
+          format: double
+          title: in seconds
+          type: number
+        playmode:
+          $ref: '#/components/schemas/transportAPIPlayMode'
+      type: object
+    transportGoToTimeRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportGoToTimeInfo'
+          title: Jump to a specific time
+          type: array
+      type: object
+    transportGoToTrackInfo:
+      properties:
+        transport:
+          $ref: '#/components/schemas/d3apiLocator'
+        track:
+          $ref: '#/components/schemas/d3apiLocator'
+        playmode:
+          $ref: '#/components/schemas/transportAPIPlayMode'
+      type: object
+    transportGoToTrackRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportGoToTrackInfo'
+          title: Jump to a specified track on the selected transport(s)
+          type: array
+      type: object
+    transportGotoNoteInfo:
+      properties:
+        transport:
+          $ref: '#/components/schemas/d3apiLocator'
+        note:
+          title: Note to jump to
+          type: string
+        playmode:
+          $ref: '#/components/schemas/transportAPIPlayMode'
+      type: object
+    transportListAnnotationsResponse:
+      example:
+        result:
+          uid: uid
+          name: name
+          annotations:
+            notes:
+            - time: 0.8008281904610115
+              text: text
+            - time: 0.8008281904610115
+              text: text
+            sections:
+            - index: index
+              time: 1.4658129805029452
+            - index: index
+              time: 1.4658129805029452
+            tags:
+            - time: 6.027456183070403
+              value: value
+            - time: 6.027456183070403
+              value: value
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          $ref: '#/components/schemas/transportListAnnotationsResult'
+      type: object
+    transportListAnnotationsResult:
+      example:
+        uid: uid
+        name: name
+        annotations:
+          notes:
+          - time: 0.8008281904610115
+            text: text
+          - time: 0.8008281904610115
+            text: text
+          sections:
+          - index: index
+            time: 1.4658129805029452
+          - index: index
+            time: 1.4658129805029452
+          tags:
+          - time: 6.027456183070403
+            value: value
+          - time: 6.027456183070403
+            value: value
+      properties:
+        uid:
+          format: uint64
+          title: UID of the Track
+          type: string
+        name:
+          title: Name of the Track
+          type: string
+        annotations:
+          $ref: '#/components/schemas/transportAnnotationInfo'
+      type: object
+    transportListSetListsResponse:
+      example:
+        result:
+        - uid: uid
+          name: name
+          tracks:
+          - uid: uid
+            name: name
+            length: 0.8008281904610115
+          - uid: uid
+            name: name
+            length: 0.8008281904610115
+        - uid: uid
+          name: name
+          tracks:
+          - uid: uid
+            name: name
+            length: 0.8008281904610115
+          - uid: uid
+            name: name
+            length: 0.8008281904610115
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/transportSetListInfo'
+          title: List of all the SetLists in the project
+          type: array
+      type: object
+    transportListTracksResponse:
+      example:
+        result:
+        - uid: uid
+          name: name
+          length: 0.8008281904610115
+        - uid: uid
+          name: name
+          length: 0.8008281904610115
+        status:
+          code: 0
+          details:
+          - value: value
+            type_url: type_url
+          - value: value
+            type_url: type_url
+          message: message
+      properties:
+        status:
+          $ref: '#/components/schemas/rpcStatus'
+        result:
+          items:
+            $ref: '#/components/schemas/transportTrackInfo'
+          title: List of all the tracks in the project
+          type: array
+      type: object
+    transportNoteInfo:
+      example:
+        time: 0.8008281904610115
+        text: text
+      properties:
+        time:
+          format: double
+          title: Time in seconds of the Note
+          type: number
+        text:
+          title: Note value (may be empty if there is no note)
+          type: string
+      type: object
+    transportPlayLoopSectionRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/d3apiLocator'
+          title: Transport UID or name can be specified, if neither is specified act
+            on the current transport
+          type: array
+      type: object
+    transportPlayRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/d3apiLocator'
+          title: Transport UID or name can be specified, if neither is specified act
+            on the current transport
+          type: array
+      type: object
+    transportPlaySectionRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/d3apiLocator'
+          title: Transport UID or name can be specified, if neither is specified act
+            on the current transport
+          type: array
+      type: object
+    transportReturnToStartRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/d3apiLocator'
+          title: Transport UID or name can be specified, if neither is specified act
+            on the current transport
+          type: array
+      type: object
+    transportSectionInfo:
+      example:
+        index: index
+        time: 1.4658129805029452
+      properties:
+        time:
+          format: double
+          title: Time in the seconds of the Section
+          type: number
+        index:
+          format: uint64
+          title: Index of section
+          type: string
+      type: object
+    transportSetBrightnessInfo:
+      properties:
+        transport:
+          $ref: '#/components/schemas/d3apiLocator'
+        brightness:
+          format: double
+          title: 0-1 brightness to set the Transport to
+          type: number
+      type: object
+    transportSetBrightnessRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportSetBrightnessInfo'
+          title: Set the volume of the specified transport managers current transport
+          type: array
+      type: object
+    transportSetEngagedInfo:
+      properties:
+        transport:
+          $ref: '#/components/schemas/d3apiLocator'
+        engaged:
+          title: bool to set Transport engaged
+          type: boolean
+      type: object
+    transportSetEngagedRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportSetEngagedInfo'
+          title: Set the volume of the specified transport managers current transport
+          type: array
+      type: object
+    transportSetListInfo:
+      example:
+        uid: uid
+        name: name
+        tracks:
+        - uid: uid
+          name: name
+          length: 0.8008281904610115
+        - uid: uid
+          name: name
+          length: 0.8008281904610115
+      properties:
+        uid:
+          format: uint64
+          title: UID of the SetList
+          type: string
+        name:
+          title: Name of the SetList
+          type: string
+        tracks:
+          items:
+            $ref: '#/components/schemas/transportTrackInfo'
+          title: List of all of the SetList's Tracks, in the correct order
+          type: array
+      type: object
+    transportSetVolumeInfo:
+      properties:
+        transport:
+          $ref: '#/components/schemas/d3apiLocator'
+        volume:
+          format: double
+          title: 0-1 volume of the transport
+          type: number
+      type: object
+    transportSetVolumeRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/transportSetVolumeInfo'
+          title: Set the volume of the specified transport managers current transport
+          type: array
+      type: object
+    transportStopRequest:
+      properties:
+        transports:
+          items:
+            $ref: '#/components/schemas/d3apiLocator'
+          title: Transport UID or name can be specified, if neither is specified act
+            on the current transport
+          type: array
+      type: object
+    transportTagInfo:
+      example:
+        time: 6.027456183070403
+        value: value
+      properties:
+        time:
+          format: double
+          title: Time in seconds of the Tag
+          type: number
+        type:
+          $ref: '#/components/schemas/transportTagType'
+        value:
+          title: Note value (may be empty if there is no note)
+          type: string
+      type: object
+    transportTagType:
+      default: TagType_Unknown
+      enum:
+      - TagType_Unknown
+      - TC
+      - MIDI
+      - CUE
+      type: string
+    transportTrackInfo:
+      example:
+        uid: uid
+        name: name
+        length: 0.8008281904610115
+      properties:
+        uid:
+          format: uint64
+          title: UID of the Track
+          type: string
+        name:
+          title: Name of the Track
+          type: string
+        length:
+          format: double
+          title: Length in seconds of the Track
+          type: number
+        crossfade:
+          $ref: '#/components/schemas/TrackInfoCrossfadeMode'
+      type: object
+    transportTransportInfo:
+      example:
+        engaged: true
+        volume: 0.8008281904610115
+        uid: uid
+        brightness: 6.027456183070403
+        name: name
+      properties:
+        uid:
+          format: uint64
+          title: UID of the Transport
+          type: string
+        name:
+          title: Name of the transport
+          type: string
+        engaged:
+          title: Whether the Transport is engaged
+          type: boolean
+        volume:
+          format: double
+          title: 0-1 volume of the Transport
+          type: number
+        brightness:
+          format: double
+          title: 0-1 brightness of the Transport
+          type: number
+        playmode:
+          $ref: '#/components/schemas/transportAPIPlayMode'
       type: object
 x-original-swagger-version: "2.0"

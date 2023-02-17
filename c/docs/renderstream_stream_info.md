@@ -3,12 +3,12 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**uid** | **char \*** |  | [optional] 
 **name** | **char \*** |  | [optional] 
-**workload_id** | **char \*** |  | [optional] 
-**machine_name** | **char \*** |  | [optional] 
-**status** |  |  | [optional] 
-**receiving_locally** | **int** |  | [optional] 
-**clipping** | [**renderstream_clipping_region_t**](renderstream_clipping_region.md) \* |  | [optional] 
+**source_machine** | **char \*** |  | [optional] 
+**receiver_machine** | **char \*** |  | [optional] 
+**status** | [**renderstream_stream_status_t**](renderstream_stream_status.md) \* |  | [optional] 
+**status_string** | **char \*** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

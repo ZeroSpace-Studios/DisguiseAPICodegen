@@ -8,7 +8,7 @@
 renderstream_adapter_info_t *renderstream_adapter_info_create(
     char *name,
     char *ip_address,
-    char *subnet_mask
+    char *subnet
     ) {
     renderstream_adapter_info_t *renderstream_adapter_info_local_var = malloc(sizeof(renderstream_adapter_info_t));
     if (!renderstream_adapter_info_local_var) {
@@ -16,7 +16,7 @@ renderstream_adapter_info_t *renderstream_adapter_info_create(
     }
     renderstream_adapter_info_local_var->name = name;
     renderstream_adapter_info_local_var->ip_address = ip_address;
-    renderstream_adapter_info_local_var->subnet_mask = subnet_mask;
+    renderstream_adapter_info_local_var->subnet = subnet;
 
     return renderstream_adapter_info_local_var;
 }
@@ -35,9 +35,9 @@ void renderstream_adapter_info_free(renderstream_adapter_info_t *renderstream_ad
         free(renderstream_adapter_info->ip_address);
         renderstream_adapter_info->ip_address = NULL;
     }
-    if (renderstream_adapter_info->subnet_mask) {
-        free(renderstream_adapter_info->subnet_mask);
-        renderstream_adapter_info->subnet_mask = NULL;
+    if (renderstream_adapter_info->subnet) {
+        free(renderstream_adapter_info->subnet);
+        renderstream_adapter_info->subnet = NULL;
     }
     free(renderstream_adapter_info);
 }
@@ -61,9 +61,9 @@ cJSON *renderstream_adapter_info_convertToJSON(renderstream_adapter_info_t *rend
      } 
 
 
-    // renderstream_adapter_info->subnet_mask
-    if(renderstream_adapter_info->subnet_mask) { 
-    if(cJSON_AddStringToObject(item, "subnetMask", renderstream_adapter_info->subnet_mask) == NULL) {
+    // renderstream_adapter_info->subnet
+    if(renderstream_adapter_info->subnet) { 
+    if(cJSON_AddStringToObject(item, "subnet", renderstream_adapter_info->subnet) == NULL) {
     goto fail; //String
     }
      } 
@@ -98,10 +98,10 @@ renderstream_adapter_info_t *renderstream_adapter_info_parseFromJSON(cJSON *rend
     }
     }
 
-    // renderstream_adapter_info->subnet_mask
-    cJSON *subnet_mask = cJSON_GetObjectItemCaseSensitive(renderstream_adapter_infoJSON, "subnetMask");
-    if (subnet_mask) { 
-    if(!cJSON_IsString(subnet_mask))
+    // renderstream_adapter_info->subnet
+    cJSON *subnet = cJSON_GetObjectItemCaseSensitive(renderstream_adapter_infoJSON, "subnet");
+    if (subnet) { 
+    if(!cJSON_IsString(subnet))
     {
     goto end; //String
     }
@@ -111,7 +111,7 @@ renderstream_adapter_info_t *renderstream_adapter_info_parseFromJSON(cJSON *rend
     renderstream_adapter_info_local_var = renderstream_adapter_info_create (
         name ? strdup(name->valuestring) : NULL,
         ip_address ? strdup(ip_address->valuestring) : NULL,
-        subnet_mask ? strdup(subnet_mask->valuestring) : NULL
+        subnet ? strdup(subnet->valuestring) : NULL
         );
 
     return renderstream_adapter_info_local_var;

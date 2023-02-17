@@ -1,0 +1,11 @@
+# mixedreality_select_camera_request_t
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**mr_set** | [**d3api_locator_t**](d3api_locator.md) \* |  | [optional] 
+**camera_override** | [**d3api_locator_t**](d3api_locator.md) \* |  | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

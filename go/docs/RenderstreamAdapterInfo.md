@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** |  | [optional] 
 **IpAddress** | Pointer to **string** |  | [optional] 
-**SubnetMask** | Pointer to **string** |  | [optional] 
+**Subnet** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -77,30 +77,30 @@ SetIpAddress sets IpAddress field to given value.
 
 HasIpAddress returns a boolean if a field has been set.
 
-### GetSubnetMask
+### GetSubnet
 
-`func (o *RenderstreamAdapterInfo) GetSubnetMask() string`
+`func (o *RenderstreamAdapterInfo) GetSubnet() string`
 
-GetSubnetMask returns the SubnetMask field if non-nil, zero value otherwise.
+GetSubnet returns the Subnet field if non-nil, zero value otherwise.
 
-### GetSubnetMaskOk
+### GetSubnetOk
 
-`func (o *RenderstreamAdapterInfo) GetSubnetMaskOk() (*string, bool)`
+`func (o *RenderstreamAdapterInfo) GetSubnetOk() (*string, bool)`
 
-GetSubnetMaskOk returns a tuple with the SubnetMask field if it's non-nil, zero value otherwise
+GetSubnetOk returns a tuple with the Subnet field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSubnetMask
+### SetSubnet
 
-`func (o *RenderstreamAdapterInfo) SetSubnetMask(v string)`
+`func (o *RenderstreamAdapterInfo) SetSubnet(v string)`
 
-SetSubnetMask sets SubnetMask field to given value.
+SetSubnet sets Subnet field to given value.
 
-### HasSubnetMask
+### HasSubnet
 
-`func (o *RenderstreamAdapterInfo) HasSubnetMask() bool`
+`func (o *RenderstreamAdapterInfo) HasSubnet() bool`
 
-HasSubnetMask returns a boolean if a field has been set.
+HasSubnet returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

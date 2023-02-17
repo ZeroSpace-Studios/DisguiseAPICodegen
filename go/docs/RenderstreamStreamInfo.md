@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Uid** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
-**WorkloadID** | Pointer to **string** |  | [optional] 
-**MachineName** | Pointer to **string** |  | [optional] 
-**Status** | Pointer to [**StreamInfoStreamStatus**](StreamInfoStreamStatus.md) |  | [optional] [default to NONE]
-**ReceivingLocally** | Pointer to **bool** |  | [optional] 
-**Clipping** | Pointer to [**RenderstreamClippingRegion**](RenderstreamClippingRegion.md) |  | [optional] 
+**SourceMachine** | Pointer to **string** |  | [optional] 
+**ReceiverMachine** | Pointer to **string** |  | [optional] 
+**Status** | Pointer to [**RenderstreamStreamStatus**](RenderstreamStreamStatus.md) |  | [optional] 
+**StatusString** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -29,6 +29,31 @@ will change when the set of required properties is changed
 NewRenderstreamStreamInfoWithDefaults instantiates a new RenderstreamStreamInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetUid
+
+`func (o *RenderstreamStreamInfo) GetUid() string`
+
+GetUid returns the Uid field if non-nil, zero value otherwise.
+
+### GetUidOk
+
+`func (o *RenderstreamStreamInfo) GetUidOk() (*string, bool)`
+
+GetUidOk returns a tuple with the Uid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUid
+
+`func (o *RenderstreamStreamInfo) SetUid(v string)`
+
+SetUid sets Uid field to given value.
+
+### HasUid
+
+`func (o *RenderstreamStreamInfo) HasUid() bool`
+
+HasUid returns a boolean if a field has been set.
 
 ### GetName
 
@@ -55,72 +80,72 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
-### GetWorkloadID
+### GetSourceMachine
 
-`func (o *RenderstreamStreamInfo) GetWorkloadID() string`
+`func (o *RenderstreamStreamInfo) GetSourceMachine() string`
 
-GetWorkloadID returns the WorkloadID field if non-nil, zero value otherwise.
+GetSourceMachine returns the SourceMachine field if non-nil, zero value otherwise.
 
-### GetWorkloadIDOk
+### GetSourceMachineOk
 
-`func (o *RenderstreamStreamInfo) GetWorkloadIDOk() (*string, bool)`
+`func (o *RenderstreamStreamInfo) GetSourceMachineOk() (*string, bool)`
 
-GetWorkloadIDOk returns a tuple with the WorkloadID field if it's non-nil, zero value otherwise
+GetSourceMachineOk returns a tuple with the SourceMachine field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetWorkloadID
+### SetSourceMachine
 
-`func (o *RenderstreamStreamInfo) SetWorkloadID(v string)`
+`func (o *RenderstreamStreamInfo) SetSourceMachine(v string)`
 
-SetWorkloadID sets WorkloadID field to given value.
+SetSourceMachine sets SourceMachine field to given value.
 
-### HasWorkloadID
+### HasSourceMachine
 
-`func (o *RenderstreamStreamInfo) HasWorkloadID() bool`
+`func (o *RenderstreamStreamInfo) HasSourceMachine() bool`
 
-HasWorkloadID returns a boolean if a field has been set.
+HasSourceMachine returns a boolean if a field has been set.
 
-### GetMachineName
+### GetReceiverMachine
 
-`func (o *RenderstreamStreamInfo) GetMachineName() string`
+`func (o *RenderstreamStreamInfo) GetReceiverMachine() string`
 
-GetMachineName returns the MachineName field if non-nil, zero value otherwise.
+GetReceiverMachine returns the ReceiverMachine field if non-nil, zero value otherwise.
 
-### GetMachineNameOk
+### GetReceiverMachineOk
 
-`func (o *RenderstreamStreamInfo) GetMachineNameOk() (*string, bool)`
+`func (o *RenderstreamStreamInfo) GetReceiverMachineOk() (*string, bool)`
 
-GetMachineNameOk returns a tuple with the MachineName field if it's non-nil, zero value otherwise
+GetReceiverMachineOk returns a tuple with the ReceiverMachine field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMachineName
+### SetReceiverMachine
 
-`func (o *RenderstreamStreamInfo) SetMachineName(v string)`
+`func (o *RenderstreamStreamInfo) SetReceiverMachine(v string)`
 
-SetMachineName sets MachineName field to given value.
+SetReceiverMachine sets ReceiverMachine field to given value.
 
-### HasMachineName
+### HasReceiverMachine
 
-`func (o *RenderstreamStreamInfo) HasMachineName() bool`
+`func (o *RenderstreamStreamInfo) HasReceiverMachine() bool`
 
-HasMachineName returns a boolean if a field has been set.
+HasReceiverMachine returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *RenderstreamStreamInfo) GetStatus() StreamInfoStreamStatus`
+`func (o *RenderstreamStreamInfo) GetStatus() RenderstreamStreamStatus`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *RenderstreamStreamInfo) GetStatusOk() (*StreamInfoStreamStatus, bool)`
+`func (o *RenderstreamStreamInfo) GetStatusOk() (*RenderstreamStreamStatus, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *RenderstreamStreamInfo) SetStatus(v StreamInfoStreamStatus)`
+`func (o *RenderstreamStreamInfo) SetStatus(v RenderstreamStreamStatus)`
 
 SetStatus sets Status field to given value.
 
@@ -130,55 +155,30 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
-### GetReceivingLocally
+### GetStatusString
 
-`func (o *RenderstreamStreamInfo) GetReceivingLocally() bool`
+`func (o *RenderstreamStreamInfo) GetStatusString() string`
 
-GetReceivingLocally returns the ReceivingLocally field if non-nil, zero value otherwise.
+GetStatusString returns the StatusString field if non-nil, zero value otherwise.
 
-### GetReceivingLocallyOk
+### GetStatusStringOk
 
-`func (o *RenderstreamStreamInfo) GetReceivingLocallyOk() (*bool, bool)`
+`func (o *RenderstreamStreamInfo) GetStatusStringOk() (*string, bool)`
 
-GetReceivingLocallyOk returns a tuple with the ReceivingLocally field if it's non-nil, zero value otherwise
+GetStatusStringOk returns a tuple with the StatusString field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetReceivingLocally
+### SetStatusString
 
-`func (o *RenderstreamStreamInfo) SetReceivingLocally(v bool)`
+`func (o *RenderstreamStreamInfo) SetStatusString(v string)`
 
-SetReceivingLocally sets ReceivingLocally field to given value.
+SetStatusString sets StatusString field to given value.
 
-### HasReceivingLocally
+### HasStatusString
 
-`func (o *RenderstreamStreamInfo) HasReceivingLocally() bool`
+`func (o *RenderstreamStreamInfo) HasStatusString() bool`
 
-HasReceivingLocally returns a boolean if a field has been set.
-
-### GetClipping
-
-`func (o *RenderstreamStreamInfo) GetClipping() RenderstreamClippingRegion`
-
-GetClipping returns the Clipping field if non-nil, zero value otherwise.
-
-### GetClippingOk
-
-`func (o *RenderstreamStreamInfo) GetClippingOk() (*RenderstreamClippingRegion, bool)`
-
-GetClippingOk returns a tuple with the Clipping field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetClipping
-
-`func (o *RenderstreamStreamInfo) SetClipping(v RenderstreamClippingRegion)`
-
-SetClipping sets Clipping field to given value.
-
-### HasClipping
-
-`func (o *RenderstreamStreamInfo) HasClipping() bool`
-
-HasClipping returns a boolean if a field has been set.
+HasStatusString returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,12 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Workloadid** | Pointer to **string** |  | [optional] 
-**Instanceid** | Pointer to **int64** |  | [optional] 
-**ProcessRunning** | Pointer to **bool** |  | [optional] 
-**DroppingFrames** | Pointer to **bool** |  | [optional] 
-**Status** | Pointer to [**WorkloadInstanceInfoWorkloadInstanceStatus**](WorkloadInstanceInfoWorkloadInstanceStatus.md) |  | [optional] [default to UNKNOWN]
-**DroppingInputFrames** | Pointer to **bool** |  | [optional] 
+**MachineUid** | Pointer to **string** |  | [optional] 
+**MachineName** | Pointer to **string** |  | [optional] 
+**State** | Pointer to **string** |  | [optional] 
+**HealthMessage** | Pointer to **string** |  | [optional] 
+**HealthDetails** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -30,155 +29,130 @@ NewRenderstreamWorkloadInstanceInfoWithDefaults instantiates a new RenderstreamW
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetWorkloadid
+### GetMachineUid
 
-`func (o *RenderstreamWorkloadInstanceInfo) GetWorkloadid() string`
+`func (o *RenderstreamWorkloadInstanceInfo) GetMachineUid() string`
 
-GetWorkloadid returns the Workloadid field if non-nil, zero value otherwise.
+GetMachineUid returns the MachineUid field if non-nil, zero value otherwise.
 
-### GetWorkloadidOk
+### GetMachineUidOk
 
-`func (o *RenderstreamWorkloadInstanceInfo) GetWorkloadidOk() (*string, bool)`
+`func (o *RenderstreamWorkloadInstanceInfo) GetMachineUidOk() (*string, bool)`
 
-GetWorkloadidOk returns a tuple with the Workloadid field if it's non-nil, zero value otherwise
+GetMachineUidOk returns a tuple with the MachineUid field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetWorkloadid
+### SetMachineUid
 
-`func (o *RenderstreamWorkloadInstanceInfo) SetWorkloadid(v string)`
+`func (o *RenderstreamWorkloadInstanceInfo) SetMachineUid(v string)`
 
-SetWorkloadid sets Workloadid field to given value.
+SetMachineUid sets MachineUid field to given value.
 
-### HasWorkloadid
+### HasMachineUid
 
-`func (o *RenderstreamWorkloadInstanceInfo) HasWorkloadid() bool`
+`func (o *RenderstreamWorkloadInstanceInfo) HasMachineUid() bool`
 
-HasWorkloadid returns a boolean if a field has been set.
+HasMachineUid returns a boolean if a field has been set.
 
-### GetInstanceid
+### GetMachineName
 
-`func (o *RenderstreamWorkloadInstanceInfo) GetInstanceid() int64`
+`func (o *RenderstreamWorkloadInstanceInfo) GetMachineName() string`
 
-GetInstanceid returns the Instanceid field if non-nil, zero value otherwise.
+GetMachineName returns the MachineName field if non-nil, zero value otherwise.
 
-### GetInstanceidOk
+### GetMachineNameOk
 
-`func (o *RenderstreamWorkloadInstanceInfo) GetInstanceidOk() (*int64, bool)`
+`func (o *RenderstreamWorkloadInstanceInfo) GetMachineNameOk() (*string, bool)`
 
-GetInstanceidOk returns a tuple with the Instanceid field if it's non-nil, zero value otherwise
+GetMachineNameOk returns a tuple with the MachineName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetInstanceid
+### SetMachineName
 
-`func (o *RenderstreamWorkloadInstanceInfo) SetInstanceid(v int64)`
+`func (o *RenderstreamWorkloadInstanceInfo) SetMachineName(v string)`
 
-SetInstanceid sets Instanceid field to given value.
+SetMachineName sets MachineName field to given value.
 
-### HasInstanceid
+### HasMachineName
 
-`func (o *RenderstreamWorkloadInstanceInfo) HasInstanceid() bool`
+`func (o *RenderstreamWorkloadInstanceInfo) HasMachineName() bool`
 
-HasInstanceid returns a boolean if a field has been set.
+HasMachineName returns a boolean if a field has been set.
 
-### GetProcessRunning
+### GetState
 
-`func (o *RenderstreamWorkloadInstanceInfo) GetProcessRunning() bool`
+`func (o *RenderstreamWorkloadInstanceInfo) GetState() string`
 
-GetProcessRunning returns the ProcessRunning field if non-nil, zero value otherwise.
+GetState returns the State field if non-nil, zero value otherwise.
 
-### GetProcessRunningOk
+### GetStateOk
 
-`func (o *RenderstreamWorkloadInstanceInfo) GetProcessRunningOk() (*bool, bool)`
+`func (o *RenderstreamWorkloadInstanceInfo) GetStateOk() (*string, bool)`
 
-GetProcessRunningOk returns a tuple with the ProcessRunning field if it's non-nil, zero value otherwise
+GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetProcessRunning
+### SetState
 
-`func (o *RenderstreamWorkloadInstanceInfo) SetProcessRunning(v bool)`
+`func (o *RenderstreamWorkloadInstanceInfo) SetState(v string)`
 
-SetProcessRunning sets ProcessRunning field to given value.
+SetState sets State field to given value.
 
-### HasProcessRunning
+### HasState
 
-`func (o *RenderstreamWorkloadInstanceInfo) HasProcessRunning() bool`
+`func (o *RenderstreamWorkloadInstanceInfo) HasState() bool`
 
-HasProcessRunning returns a boolean if a field has been set.
+HasState returns a boolean if a field has been set.
 
-### GetDroppingFrames
+### GetHealthMessage
 
-`func (o *RenderstreamWorkloadInstanceInfo) GetDroppingFrames() bool`
+`func (o *RenderstreamWorkloadInstanceInfo) GetHealthMessage() string`
 
-GetDroppingFrames returns the DroppingFrames field if non-nil, zero value otherwise.
+GetHealthMessage returns the HealthMessage field if non-nil, zero value otherwise.
 
-### GetDroppingFramesOk
+### GetHealthMessageOk
 
-`func (o *RenderstreamWorkloadInstanceInfo) GetDroppingFramesOk() (*bool, bool)`
+`func (o *RenderstreamWorkloadInstanceInfo) GetHealthMessageOk() (*string, bool)`
 
-GetDroppingFramesOk returns a tuple with the DroppingFrames field if it's non-nil, zero value otherwise
+GetHealthMessageOk returns a tuple with the HealthMessage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDroppingFrames
+### SetHealthMessage
 
-`func (o *RenderstreamWorkloadInstanceInfo) SetDroppingFrames(v bool)`
+`func (o *RenderstreamWorkloadInstanceInfo) SetHealthMessage(v string)`
 
-SetDroppingFrames sets DroppingFrames field to given value.
+SetHealthMessage sets HealthMessage field to given value.
 
-### HasDroppingFrames
+### HasHealthMessage
 
-`func (o *RenderstreamWorkloadInstanceInfo) HasDroppingFrames() bool`
+`func (o *RenderstreamWorkloadInstanceInfo) HasHealthMessage() bool`
 
-HasDroppingFrames returns a boolean if a field has been set.
+HasHealthMessage returns a boolean if a field has been set.
 
-### GetStatus
+### GetHealthDetails
 
-`func (o *RenderstreamWorkloadInstanceInfo) GetStatus() WorkloadInstanceInfoWorkloadInstanceStatus`
+`func (o *RenderstreamWorkloadInstanceInfo) GetHealthDetails() string`
 
-GetStatus returns the Status field if non-nil, zero value otherwise.
+GetHealthDetails returns the HealthDetails field if non-nil, zero value otherwise.
 
-### GetStatusOk
+### GetHealthDetailsOk
 
-`func (o *RenderstreamWorkloadInstanceInfo) GetStatusOk() (*WorkloadInstanceInfoWorkloadInstanceStatus, bool)`
+`func (o *RenderstreamWorkloadInstanceInfo) GetHealthDetailsOk() (*string, bool)`
 
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+GetHealthDetailsOk returns a tuple with the HealthDetails field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetStatus
+### SetHealthDetails
 
-`func (o *RenderstreamWorkloadInstanceInfo) SetStatus(v WorkloadInstanceInfoWorkloadInstanceStatus)`
+`func (o *RenderstreamWorkloadInstanceInfo) SetHealthDetails(v string)`
 
-SetStatus sets Status field to given value.
+SetHealthDetails sets HealthDetails field to given value.
 
-### HasStatus
+### HasHealthDetails
 
-`func (o *RenderstreamWorkloadInstanceInfo) HasStatus() bool`
+`func (o *RenderstreamWorkloadInstanceInfo) HasHealthDetails() bool`
 
-HasStatus returns a boolean if a field has been set.
-
-### GetDroppingInputFrames
-
-`func (o *RenderstreamWorkloadInstanceInfo) GetDroppingInputFrames() bool`
-
-GetDroppingInputFrames returns the DroppingInputFrames field if non-nil, zero value otherwise.
-
-### GetDroppingInputFramesOk
-
-`func (o *RenderstreamWorkloadInstanceInfo) GetDroppingInputFramesOk() (*bool, bool)`
-
-GetDroppingInputFramesOk returns a tuple with the DroppingInputFrames field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDroppingInputFrames
-
-`func (o *RenderstreamWorkloadInstanceInfo) SetDroppingInputFrames(v bool)`
-
-SetDroppingInputFrames sets DroppingInputFrames field to given value.
-
-### HasDroppingInputFrames
-
-`func (o *RenderstreamWorkloadInstanceInfo) HasDroppingInputFrames() bool`
-
-HasDroppingInputFrames returns a boolean if a field has been set.
+HasHealthDetails returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

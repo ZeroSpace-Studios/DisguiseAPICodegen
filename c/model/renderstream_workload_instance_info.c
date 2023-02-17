@@ -4,41 +4,23 @@
 #include "renderstream_workload_instance_info.h"
 
 
-char* statusrenderstream_workload_instance_info_ToString(d3_api_renderstream_workload_instance_info__e status) {
-    char* statusArray[] =  { "NULL", "UNKNOWN", "CRASHED", "ERROR", "STOPPING", "STOPPED", "LAUNCHING", "STARTING", "READY", "STANDBY", "RUNNING" };
-	return statusArray[status];
-}
-
-d3_api_renderstream_workload_instance_info__e statusrenderstream_workload_instance_info_FromString(char* status){
-    int stringToReturn = 0;
-    char *statusArray[] =  { "NULL", "UNKNOWN", "CRASHED", "ERROR", "STOPPING", "STOPPED", "LAUNCHING", "STARTING", "READY", "STANDBY", "RUNNING" };
-    size_t sizeofArray = sizeof(statusArray) / sizeof(statusArray[0]);
-    while(stringToReturn < sizeofArray) {
-        if(strcmp(status, statusArray[stringToReturn]) == 0) {
-            return stringToReturn;
-        }
-        stringToReturn++;
-    }
-    return 0;
-}
 
 renderstream_workload_instance_info_t *renderstream_workload_instance_info_create(
-    char *workloadid,
-    long instanceid,
-    int process_running,
-    int dropping_frames,
-    int dropping_input_frames
+    char *machine_uid,
+    char *machine_name,
+    char *state,
+    char *health_message,
+    char *health_details
     ) {
     renderstream_workload_instance_info_t *renderstream_workload_instance_info_local_var = malloc(sizeof(renderstream_workload_instance_info_t));
     if (!renderstream_workload_instance_info_local_var) {
         return NULL;
     }
-    renderstream_workload_instance_info_local_var->workloadid = workloadid;
-    renderstream_workload_instance_info_local_var->instanceid = instanceid;
-    renderstream_workload_instance_info_local_var->process_running = process_running;
-    renderstream_workload_instance_info_local_var->dropping_frames = dropping_frames;
-    renderstream_workload_instance_info_local_var->status = status;
-    renderstream_workload_instance_info_local_var->dropping_input_frames = dropping_input_frames;
+    renderstream_workload_instance_info_local_var->machine_uid = machine_uid;
+    renderstream_workload_instance_info_local_var->machine_name = machine_name;
+    renderstream_workload_instance_info_local_var->state = state;
+    renderstream_workload_instance_info_local_var->health_message = health_message;
+    renderstream_workload_instance_info_local_var->health_details = health_details;
 
     return renderstream_workload_instance_info_local_var;
 }
@@ -49,9 +31,25 @@ void renderstream_workload_instance_info_free(renderstream_workload_instance_inf
         return ;
     }
     listEntry_t *listEntry;
-    if (renderstream_workload_instance_info->workloadid) {
-        free(renderstream_workload_instance_info->workloadid);
-        renderstream_workload_instance_info->workloadid = NULL;
+    if (renderstream_workload_instance_info->machine_uid) {
+        free(renderstream_workload_instance_info->machine_uid);
+        renderstream_workload_instance_info->machine_uid = NULL;
+    }
+    if (renderstream_workload_instance_info->machine_name) {
+        free(renderstream_workload_instance_info->machine_name);
+        renderstream_workload_instance_info->machine_name = NULL;
+    }
+    if (renderstream_workload_instance_info->state) {
+        free(renderstream_workload_instance_info->state);
+        renderstream_workload_instance_info->state = NULL;
+    }
+    if (renderstream_workload_instance_info->health_message) {
+        free(renderstream_workload_instance_info->health_message);
+        renderstream_workload_instance_info->health_message = NULL;
+    }
+    if (renderstream_workload_instance_info->health_details) {
+        free(renderstream_workload_instance_info->health_details);
+        renderstream_workload_instance_info->health_details = NULL;
     }
     free(renderstream_workload_instance_info);
 }
@@ -59,47 +57,42 @@ void renderstream_workload_instance_info_free(renderstream_workload_instance_inf
 cJSON *renderstream_workload_instance_info_convertToJSON(renderstream_workload_instance_info_t *renderstream_workload_instance_info) {
     cJSON *item = cJSON_CreateObject();
 
-    // renderstream_workload_instance_info->workloadid
-    if(renderstream_workload_instance_info->workloadid) { 
-    if(cJSON_AddStringToObject(item, "workloadid", renderstream_workload_instance_info->workloadid) == NULL) {
+    // renderstream_workload_instance_info->machine_uid
+    if(renderstream_workload_instance_info->machine_uid) { 
+    if(cJSON_AddStringToObject(item, "machineUid", renderstream_workload_instance_info->machine_uid) == NULL) {
     goto fail; //String
     }
      } 
 
 
-    // renderstream_workload_instance_info->instanceid
-    if(renderstream_workload_instance_info->instanceid) { 
-    if(cJSON_AddNumberToObject(item, "instanceid", renderstream_workload_instance_info->instanceid) == NULL) {
-    goto fail; //Numeric
+    // renderstream_workload_instance_info->machine_name
+    if(renderstream_workload_instance_info->machine_name) { 
+    if(cJSON_AddStringToObject(item, "machineName", renderstream_workload_instance_info->machine_name) == NULL) {
+    goto fail; //String
     }
      } 
 
 
-    // renderstream_workload_instance_info->process_running
-    if(renderstream_workload_instance_info->process_running) { 
-    if(cJSON_AddBoolToObject(item, "processRunning", renderstream_workload_instance_info->process_running) == NULL) {
-    goto fail; //Bool
+    // renderstream_workload_instance_info->state
+    if(renderstream_workload_instance_info->state) { 
+    if(cJSON_AddStringToObject(item, "state", renderstream_workload_instance_info->state) == NULL) {
+    goto fail; //String
     }
      } 
 
 
-    // renderstream_workload_instance_info->dropping_frames
-    if(renderstream_workload_instance_info->dropping_frames) { 
-    if(cJSON_AddBoolToObject(item, "droppingFrames", renderstream_workload_instance_info->dropping_frames) == NULL) {
-    goto fail; //Bool
+    // renderstream_workload_instance_info->health_message
+    if(renderstream_workload_instance_info->health_message) { 
+    if(cJSON_AddStringToObject(item, "healthMessage", renderstream_workload_instance_info->health_message) == NULL) {
+    goto fail; //String
     }
      } 
 
 
-    // renderstream_workload_instance_info->status
-    
-    
-
-
-    // renderstream_workload_instance_info->dropping_input_frames
-    if(renderstream_workload_instance_info->dropping_input_frames) { 
-    if(cJSON_AddBoolToObject(item, "droppingInputFrames", renderstream_workload_instance_info->dropping_input_frames) == NULL) {
-    goto fail; //Bool
+    // renderstream_workload_instance_info->health_details
+    if(renderstream_workload_instance_info->health_details) { 
+    if(cJSON_AddStringToObject(item, "healthDetails", renderstream_workload_instance_info->health_details) == NULL) {
+    goto fail; //String
     }
      } 
 
@@ -115,62 +108,58 @@ renderstream_workload_instance_info_t *renderstream_workload_instance_info_parse
 
     renderstream_workload_instance_info_t *renderstream_workload_instance_info_local_var = NULL;
 
-    // renderstream_workload_instance_info->workloadid
-    cJSON *workloadid = cJSON_GetObjectItemCaseSensitive(renderstream_workload_instance_infoJSON, "workloadid");
-    if (workloadid) { 
-    if(!cJSON_IsString(workloadid))
+    // renderstream_workload_instance_info->machine_uid
+    cJSON *machine_uid = cJSON_GetObjectItemCaseSensitive(renderstream_workload_instance_infoJSON, "machineUid");
+    if (machine_uid) { 
+    if(!cJSON_IsString(machine_uid))
     {
     goto end; //String
     }
     }
 
-    // renderstream_workload_instance_info->instanceid
-    cJSON *instanceid = cJSON_GetObjectItemCaseSensitive(renderstream_workload_instance_infoJSON, "instanceid");
-    if (instanceid) { 
-    if(!cJSON_IsNumber(instanceid))
+    // renderstream_workload_instance_info->machine_name
+    cJSON *machine_name = cJSON_GetObjectItemCaseSensitive(renderstream_workload_instance_infoJSON, "machineName");
+    if (machine_name) { 
+    if(!cJSON_IsString(machine_name))
     {
-    goto end; //Numeric
+    goto end; //String
     }
     }
 
-    // renderstream_workload_instance_info->process_running
-    cJSON *process_running = cJSON_GetObjectItemCaseSensitive(renderstream_workload_instance_infoJSON, "processRunning");
-    if (process_running) { 
-    if(!cJSON_IsBool(process_running))
+    // renderstream_workload_instance_info->state
+    cJSON *state = cJSON_GetObjectItemCaseSensitive(renderstream_workload_instance_infoJSON, "state");
+    if (state) { 
+    if(!cJSON_IsString(state))
     {
-    goto end; //Bool
+    goto end; //String
     }
     }
 
-    // renderstream_workload_instance_info->dropping_frames
-    cJSON *dropping_frames = cJSON_GetObjectItemCaseSensitive(renderstream_workload_instance_infoJSON, "droppingFrames");
-    if (dropping_frames) { 
-    if(!cJSON_IsBool(dropping_frames))
+    // renderstream_workload_instance_info->health_message
+    cJSON *health_message = cJSON_GetObjectItemCaseSensitive(renderstream_workload_instance_infoJSON, "healthMessage");
+    if (health_message) { 
+    if(!cJSON_IsString(health_message))
     {
-    goto end; //Bool
+    goto end; //String
     }
     }
 
-    // renderstream_workload_instance_info->status
-    cJSON *status = cJSON_GetObjectItemCaseSensitive(renderstream_workload_instance_infoJSON, "status");
-    }
-
-    // renderstream_workload_instance_info->dropping_input_frames
-    cJSON *dropping_input_frames = cJSON_GetObjectItemCaseSensitive(renderstream_workload_instance_infoJSON, "droppingInputFrames");
-    if (dropping_input_frames) { 
-    if(!cJSON_IsBool(dropping_input_frames))
+    // renderstream_workload_instance_info->health_details
+    cJSON *health_details = cJSON_GetObjectItemCaseSensitive(renderstream_workload_instance_infoJSON, "healthDetails");
+    if (health_details) { 
+    if(!cJSON_IsString(health_details))
     {
-    goto end; //Bool
+    goto end; //String
     }
     }
 
 
     renderstream_workload_instance_info_local_var = renderstream_workload_instance_info_create (
-        workloadid ? strdup(workloadid->valuestring) : NULL,
-        instanceid ? instanceid->valuedouble : 0,
-        process_running ? process_running->valueint : 0,
-        dropping_frames ? dropping_frames->valueint : 0,
-        dropping_input_frames ? dropping_input_frames->valueint : 0
+        machine_uid ? strdup(machine_uid->valuestring) : NULL,
+        machine_name ? strdup(machine_name->valuestring) : NULL,
+        state ? strdup(state->valuestring) : NULL,
+        health_message ? strdup(health_message->valuestring) : NULL,
+        health_details ? strdup(health_details->valuestring) : NULL
         );
 
     return renderstream_workload_instance_info_local_var;

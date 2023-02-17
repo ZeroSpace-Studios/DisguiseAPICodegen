@@ -15,34 +15,27 @@
 
 typedef struct renderstream_stream_info_t renderstream_stream_info_t;
 
-#include "renderstream_clipping_region.h"
-#include "stream_info_stream_status.h"
-
-// Enum  for renderstream_stream_info
-
-typedef enum  { d3_api_renderstream_stream_info__NULL = 0, d3_api_renderstream_stream_info__None, d3_api_renderstream_stream_info__Good, d3_api_renderstream_stream_info__DroppingFrames, d3_api_renderstream_stream_info__BadStream, d3_api_renderstream_stream_info__NoStream, d3_api_renderstream_stream_info__Offline } d3_api_renderstream_stream_info__e;
-
-char* renderstream_stream_info_status_ToString(d3_api_renderstream_stream_info__e status);
-
-d3_api_renderstream_stream_info__e renderstream_stream_info_status_FromString(char* status);
+#include "renderstream_stream_status.h"
 
 
 
 typedef struct renderstream_stream_info_t {
+    char *uid; // string
     char *name; // string
-    char *workload_id; // string
-    char *machine_name; // string
-    int receiving_locally; //boolean
-    struct renderstream_clipping_region_t *clipping; //model
+    char *source_machine; // string
+    char *receiver_machine; // string
+    struct renderstream_stream_status_t *status; //model
+    char *status_string; // string
 
 } renderstream_stream_info_t;
 
 renderstream_stream_info_t *renderstream_stream_info_create(
+    char *uid,
     char *name,
-    char *workload_id,
-    char *machine_name,
-    int receiving_locally,
-    renderstream_clipping_region_t *clipping
+    char *source_machine,
+    char *receiver_machine,
+    renderstream_stream_status_t *status,
+    char *status_string
 );
 
 void renderstream_stream_info_free(renderstream_stream_info_t *renderstream_stream_info);

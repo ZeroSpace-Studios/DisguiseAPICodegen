@@ -6,7 +6,7 @@
 # raise a `RecursionError`.
 # In order to avoid this, import only the API that you directly need like:
 #
-#   from .api.camera_calibration_api import CameraCalibrationApi
+#   from .api.colour_api import ColourApi
 #
 # or import this package, but before doing it, use:
 #
@@ -14,9 +14,10 @@
 #   sys.setrecursionlimit(n)
 
 # Import APIs into API package:
-from openapi_client.api.camera_calibration_api import CameraCalibrationApi
-from openapi_client.api.content_api import ContentApi
-from openapi_client.api.indirections_api import IndirectionsApi
-from openapi_client.api.renderstream_api import RenderstreamApi
-from openapi_client.api.resources_api import ResourcesApi
-from openapi_client.api.thumbnails_api import ThumbnailsApi
+from openapi_client.api.colour_api import ColourApi
+from openapi_client.api.mixed_reality_api import MixedRealityApi
+from openapi_client.api.quickcal_api import QuickcalApi
+from openapi_client.api.render_stream_api import RenderStreamApi
+from openapi_client.api.sequencing_api import SequencingApi
+from openapi_client.api.status_api import StatusApi
+from openapi_client.api.transport_api import TransportApi

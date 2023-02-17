@@ -21,14 +21,14 @@ typedef struct renderstream_adapter_info_t renderstream_adapter_info_t;
 typedef struct renderstream_adapter_info_t {
     char *name; // string
     char *ip_address; // string
-    char *subnet_mask; // string
+    char *subnet; // string
 
 } renderstream_adapter_info_t;
 
 renderstream_adapter_info_t *renderstream_adapter_info_create(
     char *name,
     char *ip_address,
-    char *subnet_mask
+    char *subnet
 );
 
 void renderstream_adapter_info_free(renderstream_adapter_info_t *renderstream_adapter_info);

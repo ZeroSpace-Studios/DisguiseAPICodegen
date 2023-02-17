@@ -4,41 +4,25 @@
 #include "renderstream_stream_info.h"
 
 
-char* statusrenderstream_stream_info_ToString(d3_api_renderstream_stream_info__e status) {
-    char* statusArray[] =  { "NULL", "None", "Good", "DroppingFrames", "BadStream", "NoStream", "Offline" };
-	return statusArray[status];
-}
-
-d3_api_renderstream_stream_info__e statusrenderstream_stream_info_FromString(char* status){
-    int stringToReturn = 0;
-    char *statusArray[] =  { "NULL", "None", "Good", "DroppingFrames", "BadStream", "NoStream", "Offline" };
-    size_t sizeofArray = sizeof(statusArray) / sizeof(statusArray[0]);
-    while(stringToReturn < sizeofArray) {
-        if(strcmp(status, statusArray[stringToReturn]) == 0) {
-            return stringToReturn;
-        }
-        stringToReturn++;
-    }
-    return 0;
-}
 
 renderstream_stream_info_t *renderstream_stream_info_create(
+    char *uid,
     char *name,
-    char *workload_id,
-    char *machine_name,
-    int receiving_locally,
-    renderstream_clipping_region_t *clipping
+    char *source_machine,
+    char *receiver_machine,
+    renderstream_stream_status_t *status,
+    char *status_string
     ) {
     renderstream_stream_info_t *renderstream_stream_info_local_var = malloc(sizeof(renderstream_stream_info_t));
     if (!renderstream_stream_info_local_var) {
         return NULL;
     }
+    renderstream_stream_info_local_var->uid = uid;
     renderstream_stream_info_local_var->name = name;
-    renderstream_stream_info_local_var->workload_id = workload_id;
-    renderstream_stream_info_local_var->machine_name = machine_name;
+    renderstream_stream_info_local_var->source_machine = source_machine;
+    renderstream_stream_info_local_var->receiver_machine = receiver_machine;
     renderstream_stream_info_local_var->status = status;
-    renderstream_stream_info_local_var->receiving_locally = receiving_locally;
-    renderstream_stream_info_local_var->clipping = clipping;
+    renderstream_stream_info_local_var->status_string = status_string;
 
     return renderstream_stream_info_local_var;
 }
@@ -49,27 +33,43 @@ void renderstream_stream_info_free(renderstream_stream_info_t *renderstream_stre
         return ;
     }
     listEntry_t *listEntry;
+    if (renderstream_stream_info->uid) {
+        free(renderstream_stream_info->uid);
+        renderstream_stream_info->uid = NULL;
+    }
     if (renderstream_stream_info->name) {
         free(renderstream_stream_info->name);
         renderstream_stream_info->name = NULL;
     }
-    if (renderstream_stream_info->workload_id) {
-        free(renderstream_stream_info->workload_id);
-        renderstream_stream_info->workload_id = NULL;
+    if (renderstream_stream_info->source_machine) {
+        free(renderstream_stream_info->source_machine);
+        renderstream_stream_info->source_machine = NULL;
     }
-    if (renderstream_stream_info->machine_name) {
-        free(renderstream_stream_info->machine_name);
-        renderstream_stream_info->machine_name = NULL;
+    if (renderstream_stream_info->receiver_machine) {
+        free(renderstream_stream_info->receiver_machine);
+        renderstream_stream_info->receiver_machine = NULL;
     }
-    if (renderstream_stream_info->clipping) {
-        renderstream_clipping_region_free(renderstream_stream_info->clipping);
-        renderstream_stream_info->clipping = NULL;
+    if (renderstream_stream_info->status) {
+        renderstream_stream_status_free(renderstream_stream_info->status);
+        renderstream_stream_info->status = NULL;
+    }
+    if (renderstream_stream_info->status_string) {
+        free(renderstream_stream_info->status_string);
+        renderstream_stream_info->status_string = NULL;
     }
     free(renderstream_stream_info);
 }
 
 cJSON *renderstream_stream_info_convertToJSON(renderstream_stream_info_t *renderstream_stream_info) {
     cJSON *item = cJSON_CreateObject();
+
+    // renderstream_stream_info->uid
+    if(renderstream_stream_info->uid) { 
+    if(cJSON_AddStringToObject(item, "uid", renderstream_stream_info->uid) == NULL) {
+    goto fail; //String
+    }
+     } 
+
 
     // renderstream_stream_info->name
     if(renderstream_stream_info->name) { 
@@ -79,44 +79,39 @@ cJSON *renderstream_stream_info_convertToJSON(renderstream_stream_info_t *render
      } 
 
 
-    // renderstream_stream_info->workload_id
-    if(renderstream_stream_info->workload_id) { 
-    if(cJSON_AddStringToObject(item, "workloadID", renderstream_stream_info->workload_id) == NULL) {
+    // renderstream_stream_info->source_machine
+    if(renderstream_stream_info->source_machine) { 
+    if(cJSON_AddStringToObject(item, "sourceMachine", renderstream_stream_info->source_machine) == NULL) {
     goto fail; //String
     }
      } 
 
 
-    // renderstream_stream_info->machine_name
-    if(renderstream_stream_info->machine_name) { 
-    if(cJSON_AddStringToObject(item, "machineName", renderstream_stream_info->machine_name) == NULL) {
+    // renderstream_stream_info->receiver_machine
+    if(renderstream_stream_info->receiver_machine) { 
+    if(cJSON_AddStringToObject(item, "receiverMachine", renderstream_stream_info->receiver_machine) == NULL) {
     goto fail; //String
     }
      } 
 
 
     // renderstream_stream_info->status
-    
-    
-
-
-    // renderstream_stream_info->receiving_locally
-    if(renderstream_stream_info->receiving_locally) { 
-    if(cJSON_AddBoolToObject(item, "receivingLocally", renderstream_stream_info->receiving_locally) == NULL) {
-    goto fail; //Bool
+    if(renderstream_stream_info->status) { 
+    cJSON *status_local_JSON = renderstream_stream_status_convertToJSON(renderstream_stream_info->status);
+    if(status_local_JSON == NULL) {
+    goto fail; //model
+    }
+    cJSON_AddItemToObject(item, "status", status_local_JSON);
+    if(item->child == NULL) {
+    goto fail;
     }
      } 
 
 
-    // renderstream_stream_info->clipping
-    if(renderstream_stream_info->clipping) { 
-    cJSON *clipping_local_JSON = renderstream_clipping_region_convertToJSON(renderstream_stream_info->clipping);
-    if(clipping_local_JSON == NULL) {
-    goto fail; //model
-    }
-    cJSON_AddItemToObject(item, "clipping", clipping_local_JSON);
-    if(item->child == NULL) {
-    goto fail;
+    // renderstream_stream_info->status_string
+    if(renderstream_stream_info->status_string) { 
+    if(cJSON_AddStringToObject(item, "statusString", renderstream_stream_info->status_string) == NULL) {
+    goto fail; //String
     }
      } 
 
@@ -132,6 +127,15 @@ renderstream_stream_info_t *renderstream_stream_info_parseFromJSON(cJSON *render
 
     renderstream_stream_info_t *renderstream_stream_info_local_var = NULL;
 
+    // renderstream_stream_info->uid
+    cJSON *uid = cJSON_GetObjectItemCaseSensitive(renderstream_stream_infoJSON, "uid");
+    if (uid) { 
+    if(!cJSON_IsString(uid))
+    {
+    goto end; //String
+    }
+    }
+
     // renderstream_stream_info->name
     cJSON *name = cJSON_GetObjectItemCaseSensitive(renderstream_stream_infoJSON, "name");
     if (name) { 
@@ -141,19 +145,19 @@ renderstream_stream_info_t *renderstream_stream_info_parseFromJSON(cJSON *render
     }
     }
 
-    // renderstream_stream_info->workload_id
-    cJSON *workload_id = cJSON_GetObjectItemCaseSensitive(renderstream_stream_infoJSON, "workloadID");
-    if (workload_id) { 
-    if(!cJSON_IsString(workload_id))
+    // renderstream_stream_info->source_machine
+    cJSON *source_machine = cJSON_GetObjectItemCaseSensitive(renderstream_stream_infoJSON, "sourceMachine");
+    if (source_machine) { 
+    if(!cJSON_IsString(source_machine))
     {
     goto end; //String
     }
     }
 
-    // renderstream_stream_info->machine_name
-    cJSON *machine_name = cJSON_GetObjectItemCaseSensitive(renderstream_stream_infoJSON, "machineName");
-    if (machine_name) { 
-    if(!cJSON_IsString(machine_name))
+    // renderstream_stream_info->receiver_machine
+    cJSON *receiver_machine = cJSON_GetObjectItemCaseSensitive(renderstream_stream_infoJSON, "receiverMachine");
+    if (receiver_machine) { 
+    if(!cJSON_IsString(receiver_machine))
     {
     goto end; //String
     }
@@ -161,38 +165,35 @@ renderstream_stream_info_t *renderstream_stream_info_parseFromJSON(cJSON *render
 
     // renderstream_stream_info->status
     cJSON *status = cJSON_GetObjectItemCaseSensitive(renderstream_stream_infoJSON, "status");
+    renderstream_stream_status_t *status_local_nonprim = NULL;
+    if (status) { 
+    status_local_nonprim = renderstream_stream_status_parseFromJSON(status); //nonprimitive
     }
 
-    // renderstream_stream_info->receiving_locally
-    cJSON *receiving_locally = cJSON_GetObjectItemCaseSensitive(renderstream_stream_infoJSON, "receivingLocally");
-    if (receiving_locally) { 
-    if(!cJSON_IsBool(receiving_locally))
+    // renderstream_stream_info->status_string
+    cJSON *status_string = cJSON_GetObjectItemCaseSensitive(renderstream_stream_infoJSON, "statusString");
+    if (status_string) { 
+    if(!cJSON_IsString(status_string))
     {
-    goto end; //Bool
+    goto end; //String
     }
-    }
-
-    // renderstream_stream_info->clipping
-    cJSON *clipping = cJSON_GetObjectItemCaseSensitive(renderstream_stream_infoJSON, "clipping");
-    renderstream_clipping_region_t *clipping_local_nonprim = NULL;
-    if (clipping) { 
-    clipping_local_nonprim = renderstream_clipping_region_parseFromJSON(clipping); //nonprimitive
     }
 
 
     renderstream_stream_info_local_var = renderstream_stream_info_create (
+        uid ? strdup(uid->valuestring) : NULL,
         name ? strdup(name->valuestring) : NULL,
-        workload_id ? strdup(workload_id->valuestring) : NULL,
-        machine_name ? strdup(machine_name->valuestring) : NULL,
-        receiving_locally ? receiving_locally->valueint : 0,
-        clipping ? clipping_local_nonprim : NULL
+        source_machine ? strdup(source_machine->valuestring) : NULL,
+        receiver_machine ? strdup(receiver_machine->valuestring) : NULL,
+        status ? status_local_nonprim : NULL,
+        status_string ? strdup(status_string->valuestring) : NULL
         );
 
     return renderstream_stream_info_local_var;
 end:
-    if (clipping_local_nonprim) {
-        renderstream_clipping_region_free(clipping_local_nonprim);
-        clipping_local_nonprim = NULL;
+    if (status_local_nonprim) {
+        renderstream_stream_status_free(status_local_nonprim);
+        status_local_nonprim = NULL;
     }
     return NULL;
 

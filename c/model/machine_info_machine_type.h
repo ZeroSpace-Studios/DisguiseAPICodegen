@@ -1,0 +1,32 @@
+/*
+ * machine_info_machine_type.h
+ *
+ * 
+ */
+
+#ifndef _machine_info_machine_type_H_
+#define _machine_info_machine_type_H_
+
+#include <string.h>
+#include "../external/cJSON.h"
+#include "../include/list.h"
+#include "../include/keyValuePair.h"
+#include "../include/binary.h"
+
+typedef struct machine_info_machine_type_t machine_info_machine_type_t;
+
+
+// Enum  for machine_info_machine_type
+
+typedef enum { d3_api_machine_info_machine_type__NULL = 0, d3_api_machine_info_machine_type__Unknown, d3_api_machine_info_machine_type__Designer, d3_api_machine_info_machine_type__V2_5, d3_api_machine_info_machine_type__Pro4x2, d3_api_machine_info_machine_type__Pro4x4, d3_api_machine_info_machine_type__Plus2x2, d3_api_machine_info_machine_type__Pro4x4NoVfcs, d3_api_machine_info_machine_type__Node, d3_api_machine_info_machine_type__Pro2x4, d3_api_machine_info_machine_type__Gx1, d3_api_machine_info_machine_type__Gx2, d3_api_machine_info_machine_type__SoloV1, d3_api_machine_info_machine_type__Vx4, d3_api_machine_info_machine_type__Gx2c, d3_api_machine_info_machine_type__Rx, d3_api_machine_info_machine_type__RxII, d3_api_machine_info_machine_type__Vx1, d3_api_machine_info_machine_type__Vx2, d3_api_machine_info_machine_type__Vx4Plus, d3_api_machine_info_machine_type__Gx3 } d3_api_machine_info_machine_type__e;
+
+char* machine_info_machine_type_machine_info_machine_type_ToString(d3_api_machine_info_machine_type__e machine_info_machine_type);
+
+d3_api_machine_info_machine_type__e machine_info_machine_type_machine_info_machine_type_FromString(char* machine_info_machine_type);
+
+//cJSON *machine_info_machine_type_machine_info_machine_type_convertToJSON(d3_api_machine_info_machine_type__e machine_info_machine_type);
+
+//d3_api_machine_info_machine_type__e machine_info_machine_type_machine_info_machine_type_parseFromJSON(cJSON *machine_info_machine_typeJSON);
+
+#endif /* _machine_info_machine_type_H_ */
+
