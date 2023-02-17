@@ -13,6 +13,9 @@ jobs:
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "67:41:88:19:c6:fd:0f:aa:69:45:aa:58:7e:ad:9f:2a"
       - checkout
       - run:
           name: "Install Dependencies" 
